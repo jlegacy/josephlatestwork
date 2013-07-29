@@ -1,0 +1,532 @@
+/*globals $App */
+(function ($) {
+	$App.Controller('Selection', {
+		// ------------------------------------------------------------
+		// -
+		// ------------------------------------------------------------
+		initialize: function () {
+			this.view = $App.View('Selection');
+			this.model = $App.Model('Selection');
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		openSelection: function (data) {
+
+			var _this = this,
+				target,
+				needed_lists = [
+				'states',
+				'status',
+				'reference_hdrs',
+				'reference_dtls',
+				'jobinfo_hdrs',
+				'jobinfo_dtls',
+				'date_hdrs',
+				'restrictioncodes',
+				'roomtypes',
+				'roomareas',
+				'pricecodes'
+			];
+
+
+			$App.Utils.saveInProcess({showBlanket : true});
+			
+			$App.Model("Cache").getCacheData(needed_lists, 
+					// Callback
+					function (cachedResults) {
+						_this.model.getSelectionHeader(data, 
+							//Callback
+							function (results) {
+								$.extend(results, cachedResults);
+								target = $App.View('Application').get_app_container();
+								_this.view.init(target, data);
+								_this.view.renderSelection(target, results, data);
+								$App.Utils.saveComplete();
+							},
+							// ErrorCallback
+							function (errorResults) {
+								$App.Fire("ajax_errors", errorResults);
+								$App.Utils.saveComplete();
+							}
+						);
+					},
+					// ErrorCallback
+					function (errorResults) {
+						$App.Fire("ajax_errors", errorResults);
+						$App.Utils.saveComplete();
+					} 
+			);
+
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		openSelectionDetail: function (data) {
+			var _this = this;
+			_this.view.openSelectionDetail(data);
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		statusOptions: function (data) {
+			var _this = this;
+			_this.view.statusOptions();
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		openLastSelection: function (data) {
+			alert('Selection.openLastSelection() not yet implemented');
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setSelectionCustomer_ReopenSelection: function (data) {
+			var _this = this;
+			_this.model.setSelectionCustomer(data, function (results) {
+				data.ssm_id = data.ssm_SelectionId;
+				_this.openSelection(data);
+			}, function (errors) {
+				$App.Fire("ajax_errors", errors, function (errors) {
+					_this.view.set_error(errors);
+				})
+				_this.view.saveComplete();
+			});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setSelectionCustomerField: function (data) {
+			var _this = this;
+			_this.view.saveInProcess();
+			_this.model.setSelectionCustomerField(data, function (results) {
+				_this.view.saveComplete();
+			}, function (errors) {
+				$App.Fire("ajax_errors", errors, function (errors) {
+					_this.view.set_error(errors);
+				})
+				_this.view.saveComplete();
+			});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setSelectionNotes: function (data) {
+			var _this = this;
+			_this.view.saveInProcess();
+			_this.model.setSelectionNotes(data,
+				function (results) {
+					_this.view.saveComplete();
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+					_this.view.saveComplete();
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setSelectionAltAddr: function (data) {
+			var _this = this;
+			_this.view.saveInProcess();
+			_this.model.setSelectionAltAddr(data,
+				function (results) {
+					_this.view.saveComplete();
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+					_this.view.saveComplete();
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setSelectionJobInfo: function (data) {
+			var _this = this;
+			_this.view.saveInProcess();
+			_this.model.setSelectionJobInfo(data,
+				function (results) {
+					_this.view.saveComplete();
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+					_this.view.saveComplete();
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setSelectionReference: function (data) {
+			var _this = this;
+			_this.view.saveInProcess();
+			_this.model.setSelectionReference(data,
+				function (results) {
+					_this.view.saveComplete();
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+					_this.view.saveComplete();
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setSelectionDate: function (data) {
+			var _this = this;
+			_this.view.saveInProcess();
+			_this.model.setSelectionDate(data,
+				function (results) {
+					_this.view.saveComplete();
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+					_this.view.saveComplete();
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setSelectionStatus: function (data) {
+			var _this = this;
+			_this.view.saveInProcess();
+			_this.model.setSelectionStatus(data,
+				function (results) {
+					_this.view.saveComplete();
+					_this.view.renderStatus();
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+					_this.view.saveComplete();
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		loadDates: function (data) {
+			var _this = this,
+				needed_lists = [ 'date_hdrs' ];
+
+
+			$App.Model("Cache").getCacheData(needed_lists, function (cachedResults) {
+				_this.model.getSelectionDates(data, function (results) {
+					$.extend(results, cachedResults);
+					_this.view.renderSelectionDates(results, data);
+				},
+					function (errors) {
+						$App.Fire("ajax_errors", errors,
+							function (errors) {
+								_this.view.set_error(errors);
+							});
+					});
+			});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		promptBuyerAccountLookup: function (data) {
+			var _this = this,
+				needed_lists = [ 'reference_hdrs' ];
+
+			// -- If a preSearchFilterId was passed, and the field has a value, the prepare for a pre-search for contents...	
+			if (data.preSearchFilterId  && $('#' + data.preSearchFilterId).val() != '') {
+				$.extend(data, { 
+					"ssm_keyword" : $('#' + data.preSearchFilterId).val() 
+				});
+			}
+			
+			$App.Model("Cache").getCacheData(needed_lists, function (cachedResults) {
+				_this.view.promptBuyerAccountInit(cachedResults, data);
+
+				// -- If a preSearchFilterId was passed, and the field has a value, the perform a pre-search for contents...	
+				if (data.preSearchFilterId  && $('#' + data.preSearchFilterId).val() != '') {
+					data2 = { "ssm_keyword" : $('#' + data.preSearchFilterId).val() };
+					_this.view.busy_SearchBuyerAcct();
+	            	_this.model.getBuyerAccounts(data2, function (results) {
+	            		_this.view.promptBuyerAccountDetail(results, data2);
+	    				_this.view.unbusy_SearchBuyerAcct();
+		            }, function(errors) {
+		                $App.Fire("ajax_errors", errors, function(errors) {
+		                    _this.view.set_error(errors);
+		                });
+		            });
+				}
+			});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		selectionSearchBuyerAccount: function (data) {
+			var _this = this, target;
+			_this.view.busy_SearchBuyerAcct();
+			_this.model.getBuyerAccounts(data, function (results) {
+				_this.view.selectionSearchBuyerAccountClear(target, results, data);
+				_this.view.promptBuyerAccountDetail(results, data);
+				_this.view.unbusy_SearchBuyerAcct();
+				$App.Utils.adjust_overlay();
+			}, function (errors) {
+				$App.Fire("ajax_errors", errors, function (errors) {
+					_this.view.set_error(errors);
+				});
+			});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		selectionSearchBuyerAccountMore: function (data) {
+			var _this = this, target;
+			_this.view.busy();
+			_this.model.getBuyerAccounts(data, function (results) {
+				_this.view.promptBuyerAccountDetail(results, data);
+				_this.view.unbusy();
+				$App.Utils.adjust_overlay();
+			}, function (errors) {
+				$App.Fire("ajax_errors", errors, function (errors) {
+					_this.view.set_error(errors);
+				});
+			});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		selectionSearchBuyerAccountSort: function (data) {
+			var _this = this, target;
+			_this.view.busy();
+			_this.model.getBuyerAccounts(data, function (results) {
+				_this.view.promptBuyerAccountDetail(results, data);
+				_this.view.unbusy();
+			}, function (errors) {
+				$App.Fire("ajax_errors", errors, function (errors) {
+					_this.view.set_error(errors);
+				});
+			});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		loadReferences: function (data) {
+			var _this = this,
+				needed_lists = [
+				'reference_hdrs',
+				'reference_dtls'
+			];
+
+			_this.view.setBusy_References();
+
+			$App.Model("Cache").getCacheData(needed_lists, function (cachedResults) {
+				_this.model.getSelectionReferences(data, function (results) {
+					$.extend(results, cachedResults);
+					_this.view.renderSelectionReferences(results, data);
+				},
+					function (errors) {
+						$App.Fire("ajax_errors", errors, function (errors) {
+							_this.view.set_error(errors);
+						});
+					});
+			});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		loadNotes: function (data) {
+			var _this = this;
+
+			_this.model.getSelectionNotes(data, function (results) {
+				_this.view.renderSelectionNotes(results, data);
+			},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		loadJobInfo: function (data) {
+			var _this = this,
+				needed_lists = [
+				'jobinfo_hdrs',
+				'jobinfo_dtls'
+			];
+
+			_this.view.setBusy_JobInfo();
+
+			$App.Model("Cache").getCacheData(needed_lists, function (cachedResults) {
+				_this.model.getSelectionJobInfo(data, function (results) {
+					$.extend(results, cachedResults);
+					_this.view.renderSelectionJobInfo(results, data);
+				}, function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+				});
+			});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		loadLogs: function (data) {
+			var _this = this;
+			_this.model.getSelectionLogs(data,
+				function (results) {
+					_this.view.renderSelectionLogs(results, data);
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		refreshLogs: function (data) {
+			var _this = this;
+			_this.view.setBusy_Logs();
+			_this.model.getSelectionLogs(data,
+				function (results) {
+					_this.view.renderSelectionLogs(results, data);
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		loadNotepad: function (data) {
+			var _this = this;
+			_this.model.getSelectionNotePad(data,
+				function (results) {
+					_this.view.renderSelectionNotepad(results, data);
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		createSelection: function (data) {
+			var _this = this;
+
+			_this.model.createSelection(data,
+				function (results) {
+					_this.view.createSelection(results);
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors, function (errors) {
+						_this.view.set_error(errors);
+					});
+				});
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		clearSelectionReference: function (data, element) {
+			var _this = this;
+			_this.view.clearSelectionReference(data, element);
+		},
+		clearSelectionJobInfo: function (data, element) {
+			var _this = this;
+			_this.view.clearSelectionJobInfo(data, element);
+		},
+		clearSelectionDate: function (data, element) {
+			var _this = this;
+			_this.view.clearSelectionDate(element);
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setActiveSelectionTab: function (element) {
+			var _this = this;
+			_this.view.setActiveSelectionTab(element);
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		selectionToggleAltAddr: function () {
+			var _this = this;
+			_this.view.selectionToggleAltAddr();
+		},
+		// ------------------------------------------------------------
+		// -- Open the Print Dialog
+		// ------------------------------------------------------------
+		selectionPrint: function (data) {
+			var _this = this;
+
+			$App.Utils.saveInProcess({showBlanket: true});
+			
+			_this.model.getInitialLoad_PrintSelection(data,
+				function (results) {
+					_this.view.selectionPrint(results.data);
+					$App.Utils.saveComplete();
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors,
+						function (errors) {
+							_this.view.set_error(errors);
+						});
+					$App.Utils.saveComplete();
+				});
+
+
+		},
+		// ------------------------------------------------------------
+		// -- Submit the Print 
+		// ------------------------------------------------------------
+		printSelectionSubmit: function (data) {
+			this.view.printSelectionSubmit(data);
+		},
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		selectionPlaceOrder: function () {
+			this.view.selectionPlaceOrder();
+		},
+		
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		confirmSelectionCustomerSwap: function (data) {
+			this.view.confirmSelectionCustomerSwap(data);
+		},
+
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		addNotePad: function (data) {
+			var _this = this;
+
+			_this.model.addNotePad(data,
+				function (results) {
+					_this.view.addNotePad(results, data);
+					$App.Fire('info_message', 'Notepad Entry Added');
+				},
+				function (errors) {
+					$App.Fire("ajax_errors", errors,
+						function (errors) {
+							_this.view.set_error(errors);
+						});
+				});
+		}
+
+	});
+})(jQuery);

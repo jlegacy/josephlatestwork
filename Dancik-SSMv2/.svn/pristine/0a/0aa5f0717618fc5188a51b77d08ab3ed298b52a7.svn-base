@@ -1,0 +1,255 @@
+(function ($) {
+	$App.View('Jobs', {
+		config : {
+			row_template : $App.Template('jobs/job_row.ejs'),
+			loader : $("#ssm_job_editor .ssm_busy"),
+			default_select : 1
+		},
+		
+		initialRow : "",
+		
+		initialize_view : function(job_types, options) {
+			//console.log("VIEW - initialize_view:job_types - jobs.js", job_types);
+			//console.log("VIEW - initialize_view:options - jobs.js", options);			
+			var _this = this, option,
+			base_template = $App.Template('jobs/base.ejs'),	
+			container;
+			
+//			Hide content and replace with Jobs Editor
+			$("#ssm_job_editor").remove();
+			$(".surrounder, #ssm_SelectionCategories").hide();
+			container = $(base_template.render( {ssmId : $App.Model('Selection').currentSelectionId } ));			
+			$("#ssm_SelectionTabs > ul").after(container);
+			
+//			Create Job Type Selection Drop Down
+			$(job_types.jobinfo_hdrs).each(function(i, v) {
+				option += '<option value="' + v.id + '">' + v.description + '</option>';				
+			});			
+			container.find("#ssm_job_type_select").html(option);
+			
+			_this.initialRow = container.find("#ssm_edit_jobs_table > tbody > tr:eq(1)");
+			
+//			Open add job description interface
+			container.find(".putJobsIntoAddMode").click(function() {
+//				Disabled the job type selection box
+				container.find("#ssm_job_type_select").attr("disabled", "disabled");
+				
+//				Show the add Jobs interface
+				container.find("#ssm_job_add_mode").show();
+				container.find("#ssm_job_add_mode input[type=text]").val("");
+				
+//				Fade out the close Jobs interface button
+				container.find("a[href=#closeInterface]").fadeOut(200);
+				
+//				Put focus on the first input of the add jobs interface
+				setTimeout(
+					function() {
+						$("#focus").focus();
+					}, 500
+				);
+			});
+
+			
+//			Close add job description interface
+			container.find("#ssm_jobs_close_add_interface").click(function(e) {
+//				Enable the job type selection box
+				container.find("#ssm_job_type_select").removeAttr("disabled");				
+				$(this).closest("tr").hide();	
+				
+//				Fade back in the close Jobs interface button
+				container.find("a[href=#closeInterface]").fadeIn(200);
+				e.preventDefault();
+			});
+			
+//			IE8 and lower compatibility
+//			if I don't do a e.preventDefault, it submits the form
+			container.find("#addJobInfoRecord").submit(function(e) {
+				_this.saveInProcess();
+				
+//				Show the close Jobs interfaces button again
+				container.find("a[href=#closeInterface]").fadeIn(200);
+				
+				e.preventDefault();
+			});
+			
+//			Return to previous Screen
+			container.find("#return_to_jobs").click(function() {				
+				_this.close(container);
+			});
+			
+//			 Show Items Screen - Hide this screen
+			$("a[href=#ssm_SelectionItems]").click(function(){
+				container.hide();
+				$(".surrounder, #ssm_SelectionCategories").show();
+			});
+			
+//			Load jobs when selecton is changed
+			container.find("#ssm_job_type_select").change(function() {
+				var id = $(this).val(),
+					busyBox = container.find(".ssm_busy");
+				
+//				Change the Add title to reflect the current selection
+				container.find(".ssm-add-job-container .jobTitle")
+					.html("")
+					.html("Enter New "+$(this).find("option:selected").text()+" Information");				
+			
+				
+				busyBox.show();
+				$App.Fire("loadJobInfoDetails", {ssm_headerid : id});		
+			});
+			
+//			Toggle edit/collapse 
+			container.find("#ssm_edit_jobs_table > tbody").on('click', '.ssm-edit', function() {
+				var row = $(this).closest("tr"),
+				data;
+				
+				if($(this).hasClass("expand")) {
+					$(this).removeClass("expand").addClass("collapse");					
+					row.find("span.description").hide();
+					row.find("input").show();
+					
+//					Disabled the job type selection box
+					container.find("#ssm_job_type_select").attr("disabled", "disabled");
+				}else {
+					$(this).removeClass("collapse").addClass("expand");
+					row.find("span.description").show();
+					row.find("input").hide();
+					
+					data = {
+						ssm_id : $.data(row[0], "id"),
+						ssm_headerid : container.find("#ssm_job_type_select").val(),
+						existing_row : row
+					};
+//					Show the Loading bar
+					_this.saveInProcess();
+					
+//					Reload job information
+					$App.Fire("getJobInfoDetail", data);
+				}
+			});
+			
+			container.find("#ssm_edit_jobs_table > tbody").on('blur', 'tr:gt(1) input', function() {
+				var input = $(this),
+				row = input.closest("tr"),
+				ssm_Name = input.attr('name'),
+				ssm_Data = input.val(),
+				ssm_id = $.data(row[0], "id"),
+				ssm_headerid = container.find("#ssm_job_type_select").val(),
+				data = {
+					ssm_Name : ssm_Name,
+					ssm_Data : ssm_Data,
+					ssm_id : ssm_id,
+					ssm_headerid : ssm_headerid,
+					existing_row : row
+				};
+//				Show the Loading bar
+				_this.saveInProcess();
+				
+//				Update the Description
+				$App.Fire("setJobInfo", data);								
+			});
+			
+//			Add borders to the table
+			$App.Utils.applySsmTableStyles({
+				table : $(".ssmTableWrapper"),
+				evenOdd : "odd"
+			});
+
+//			Load Initial Job Type Data
+			_this.load_default_rows(options);
+		},
+		
+		close : function(container){
+			var ssm_id = $App.Model("Selection").currentSelectionId;
+			container.hide();
+			$(".surrounder, #ssm_SelectionCategories").show();
+			
+//			Refresh Selection's References
+//			Clear the Cache so any changes will be reflected
+			$App.Controller("Cache").remove('jobinfo_hdrs');
+			$App.Controller("Cache").remove('jobinfo_dtls');
+			$App.Fire("loadSelectionJobInfo", {ssm_id : ssm_id});		
+		},
+		
+		load_default_rows : function(options) {
+			var _this = this,
+				container = $("#ssm_job_editor"),
+				busyBox = container.find(".ssm_busy");
+			
+			//console.log("VIEW - load_default_rows:options - jobs.js", options);
+			
+			busyBox.show();
+			container.find("#ssm_job_type_select option").removeAttr("selected");
+			container.find("#ssm_job_type_select option:eq(" + options.index + ")").attr("selected", "selected");
+			$App.Fire("loadJobInfoDetails", {ssm_headerid : options.jobId});
+		},
+		
+		render_rows : function(data) {
+			var _this = this,
+				row_template = _this.config.row_template,
+				container = $("#ssm_job_editor"),
+				busyBox = container.find(".ssm_busy"),
+				row;		
+			
+			
+			
+//			Remove existing rows
+			$("#ssm_edit_jobs_table tbody tr:gt(0)").remove();
+			
+//			Show the Add Button
+			$(".putJobsIntoAddMode").show();
+			
+//			Add the populated rows
+			$(data.details).each(function(i, row_data) {
+				row = $(row_template.render(row_data));
+//				Append the id of this job item to the row for later use
+				$.data(row[0], 'id', row_data.id);				
+				container.find("#ssm_edit_jobs_table tbody tr:last-child").after(row);				
+			});		
+			
+//			Enable the job type selection box
+			container.find("#ssm_job_type_select").removeAttr("disabled");			
+			
+//			Add borders to the table
+			$App.Utils.applySsmTableStyles({
+				table : $(".ssmTableWrapper"),
+				evenOdd : "even"
+			});			
+			
+			busyBox.hide();
+		},
+		
+		update_row : function(row_data, existing_row) {
+			var _this = this,
+			row = $(_this.config.row_template.render( row_data.detail ));
+			
+//			Append the id of this job item to the row for later use
+			$.data(row[0], 'id', row_data.detail.id);	
+			
+//			Insert the new row after the old one, remove the old one
+			existing_row.after(row);
+			existing_row.remove();
+			
+//			Enable the job type selection box
+			$("#ssm_job_type_select").removeAttr("disabled");
+			
+//			Add borders to the table
+			$App.Utils.applySsmTableStyles({
+				table : $(".ssmTableWrapper"),
+				evenOdd : "even"
+			});
+			
+//			Hide the loading box
+			_this.saveComplete();
+		},
+		
+//		Toggle Saving Indicator
+		saveInProcess: function () {
+			$('#ssm_Selection .savingIndicator').addClass('save-inprocess');
+		},		
+		saveComplete: function () {
+			$('#ssm_Selection .savingIndicator').removeClass('save-inprocess');
+		}
+	});
+})(jQuery);
+

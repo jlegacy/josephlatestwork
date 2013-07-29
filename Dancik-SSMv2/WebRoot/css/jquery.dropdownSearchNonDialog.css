@@ -1,0 +1,337 @@
+/* input wrapper styling*/
+.ssm-dropdown-wrapper {
+	display: inline-block;
+	position: relative;
+	*vertical-align: top;
+	border-radius:4px;
+	
+}
+
+.ssm-dropdown-wrapper input {
+	margin-right: 0px !important;
+	padding-right: 18px;
+	width:75px;
+	border-radius:4px;
+}
+
+img.ssm-dropdown-handle,
+img.ssm-calendar-handle {
+	padding:8px;
+	right: 0px;
+	border-radius:4px;
+	position: absolute;
+	top: 1px;
+	 
+	vertical-align: top;
+	cursor:pointer;
+}
+
+input[disabled]+img.ssm-dropdown-handle,
+input[disabled]+img.ssm-calendar-handle {
+	background-color: #EDEDED;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+
+/* dropdown styling */
+.ssm-dropdown {
+	border: 1px solid #000;
+	background-color: #FFF;
+/*	overflow: hidden;*/
+	position: absolute;
+	z-index: 10000;
+	font-family: Arial,Verdana,sans-serif;
+	font-size: 10pt;
+        /*IE7 will set the width to the whole page with out a width defined*/
+        *width: 400px;
+}
+
+
+.ssm-dropdown .ssm-dropdown-list {
+	overflow-x: hidden;
+	overflow-y: auto;
+	max-height: 250px;
+}
+
+.ssm-dropdown .ssm-dropdown-list table {
+	cursor: pointer;
+	cursor: hand;
+	white-space: normal;
+	width: 100%;
+}
+.ssm-dropdown .ssm-dropdown-list .no-records {
+	text-align: center;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+.ssm-dropdown .ssm-dropdown-list td {
+	border: 1px solid #CFCFCF;
+	padding: 3px .5em;
+}
+
+.ssm-dropdown .ssm-dropdown-list td.ssm-dropdown-id {
+	text-align: center;
+	min-width: 36px;
+}
+.ssm-dropdown .ssm-dropdown-list td.ssm-dropdown-description {
+	min-width: 50px;
+}
+
+/* Searchable dropdown styles */
+.ssm-dropdown.searchable {
+	width: 300px; /*searchable needs fixed width*/
+}
+.ssm-dropdown.searchable .ssm-dropdown-list {
+	height:250px;
+}
+
+.ssm-dropdown .ssm-dropdown-title {
+	background: url("../images/bkgds/ltBlue_gradient_bkgd.gif") repeat-x scroll 0 0;
+	color: #003366;
+	font-size: 10pt;
+	font-weight: bold;
+	height: 22px;
+	line-height: 22px;
+	padding-left: 5px;
+	position: relative;
+}
+
+.ssm-dropdown .ssm-dropdown-title .ssm-dropdown-close {
+	background: url("../images/close.png") no-repeat scroll center center transparent;
+	height: 22px;
+	position: absolute;
+	right: 3px;
+	width: 16px;
+}
+
+.ssm-dropdown .ssm-dropdown-title .ssm-dropdown-close,
+.ssm-dropdown th.ssm-dropdown-description a {
+	text-indent: -99999px;
+}
+
+.ssm-dropdown .ssm-dropdown-header {
+	width: 100%;
+	border-bottom: 1px solid #CFCFCF;
+}
+
+.ssm-dropdown .ssm-dropdown-header th {
+	background-color: #F0F0F0;
+	border: 1px solid #F0F0F0; /*so total width will match with td in list*/
+	cursor: pointer;
+	cursor: hand;
+	font-size: 10pt;
+	font-weight: bold;
+	height: 22px;
+	padding-bottom: 1px;
+}
+
+.ssm-dropdown.searchable .ssm-dropdown-id {
+	width: 50px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.ssm-dropdown tr.ssm-dropdown-labels th {
+	cursor: pointer;
+	cursor: hand;
+	text-align: center;
+}
+
+.ssm-dropdown th span.ssm-dropdown-sort-dir {
+	display: inline-block;
+	height: 16px;
+	margin: 0 -21px 0 5px;
+	width: 16px;
+	vertical-align: middle;
+}
+
+.ssm-dropdown th.ascending span.ssm-dropdown-sort-dir {
+	background: url("../images/arrow_asc.png") no-repeat scroll center center transparent;
+}
+
+.ssm-dropdown th.descending span.ssm-dropdown-sort-dir {
+	background: url("../images/arrow_desc.png") no-repeat scroll center center transparent;
+}
+
+.ssm-dropdown input {
+	font-weight: normal;
+}
+
+.ssm-dropdown th.ssm-dropdown-id input {
+	width: 75%;
+}
+
+.ssm-dropdown th.ssm-dropdown-description {
+	text-align: left;
+	padding-left: .1em;
+	position: relative;
+}
+
+.ssm-dropdown th.ssm-dropdown-description a,
+.ssm-dropdown th.ssm-itemSearch-keyword a,
+.ssm-dropdown th.ssm-customerSearch-keyword a {
+	background: url("../images/refresh.png") no-repeat scroll center center transparent;
+	height: 16px;
+	position: absolute;
+	right: 3px;
+	margin-top: 2px;
+	width: 16px;
+}
+
+.ssm-dropdown.working th.ssm-dropdown-description a,
+.ssm-dropdown.working th.ssm-itemSearch-keyword a,
+.ssm-dropdown.working th.ssm-customerSearch-keyword a,
+.ssm-dropdown.working .working {
+	background: url("../images/loading.gif") no-repeat scroll center center transparent;
+}
+
+.ssm-dropdown.working .working {
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	height: 16px;
+	width: 100%;
+}
+
+.ssm-dropdown th.ssm-dropdown-description input {
+	width: 86%;
+}
+
+.ssm-dropdown.searchable .ssm-dropdown-list {
+	max-height: 170px;
+}
+
+.ssm-dropdown tr.ssm-dropdown-message td {
+	font-size: 12pt;
+	text-align: center;
+	border-color:white;
+}
+
+.ssm-dropdown .ssm-dropdown-footer {
+	background: url("../images/footer_bkgd.gif") repeat-x scroll 0 0;
+	border-top: 1px solid black;
+	font-size: 10pt;
+	height: 22px;
+	line-height: 22px;
+	position: relative;
+	text-align: center;
+}
+
+.ssm-dropdown .ssm-dropdown-footer button {
+	line-height: 1;
+	position: absolute;
+	right: 3px;
+	margin-top:0px;
+	font-weight: 600;
+        color: #666;
+        font-size: 10pt;
+        text-shadow: none;
+        height: 22px;
+	
+}
+
+/* Item Search Styles */
+.ssm-dropdown .ssm-itemSearch-header,
+.ssm-dropdown .ssm-customerSearch-header {
+	width: 100%;
+	border-bottom: 1px solid #CFCFCF;
+}
+.ssm-dropdown .ssm-itemSearch-header th,
+.ssm-dropdown .ssm-customerSearch-header th {
+	background-color: #F0F0F0;
+	border: 1px solid #F0F0F0; /*so total width will match with td in list*/
+	font-size: 10pt;
+	font-weight: bold;
+	height: 22px;
+	padding-bottom: 1px;
+}
+
+.ssm-dropdown th.ssm-itemSearch-keyword,
+.ssm-dropdown th.ssm-customerSearch-keyword {
+	text-align:right;
+	padding-right: 22px;
+}
+.ssm-dropdown th.ssm-itemSearch-keyword a,
+.ssm-dropdown th.ssm-customerSearch-keyword a {
+	text-indent: 99999px;
+}
+.ssm-dropdown th.ssm-itemSearch-keyword input,
+.ssm-dropdown th.ssm-customerSearch-keyword input[type=text] {
+	width: 200px;
+}
+.ssm-dropdown th.ssm-itemSearch-keyword input,
+.ssm-dropdown th.ssm-customerSearch-keyword input {
+	vertical-align:middle;
+}
+.ssm-dropdown .ssm-itemSearch-list {
+	width: 765px;
+}
+.ssm-dropdown .ssm-itemSearch-list .header,
+.ssm-dropdown .ssm-customerSearch-list .header,
+.ssm-dropdown .ssm-searchIndex .header {
+	height: 19px;	
+}
+.ssm-dropdown .ssm-itemSearch-list .body,
+.ssm-dropdown .ssm-customerSearch-list .body {
+	top: 20px;
+	overflow:scroll;
+}
+.ssm-dropdown .ssm-searchIndex .body {
+	top:20px;
+	bottom: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.ssm-dropdown .body td {
+	cursor: pointer;
+	cursor: hand;
+}
+.ssm-dropdown .ssm-itemSearch-list .body .cellFill th,
+.ssm-dropdown .ssm-customerSearch-list .body .cellFill th {
+	border-color:white;
+	background:transparent;
+	color:white;
+}
+.ssm-dropdown .ssm-itemSearch-list .body td {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.ssm-dropdown .ssm-itemSearch-list .itemNumber {
+	font-weight:bold;
+}
+
+.ssm-dropdown .ssm-itemSearch-list .secondaryDescription {
+	margin-left: 5px;
+}
+.ssm-dropdown .ssm-searchIndex {
+	position: absolute;
+	left: -117px;
+	width:115px;
+	border: 1px solid black;
+	top: 45px;
+	bottom: 24px;
+}
+.ssm-dropdown .ssm-searchIndex .selected td {
+	background: #ACCBD8;
+	font-weight:bold;
+}
+.ssm-dropdown .ssm-searchIndex table {
+	width:100%;
+}
+
+.ssm-dropdown .ssm-customerSearch-list {
+	width: 1009px;
+}
+.ssm-dropdown.retail .ssm-customerSearch-list {
+	width: 732px;
+}
+
+.ssm-customerSearch-list .customerAccount {
+	width: 70px;
+	min-width: 70px;
+}
+.ssm-customerSearch-list .customerCity {
+	width: 200px;
+	min-width:200px;
+}

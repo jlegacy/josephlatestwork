@@ -1,0 +1,33 @@
+<div class='id-box'>	
+    <span class="title">Selection#:</span>
+    <span class="content"> <%= ssm_id %> </span>
+    
+	<div class='ssm-styled-select w120 float-right'>
+		<select name="ssm_status" id="ssm_status">
+			<% 
+				var len = 0, sts;
+				len = status.length;
+				for (var i = 0; i < len; i++) {
+					sts = status[i];
+					if ( header.sts_id === sts.id) { 
+			%>
+						<option value="<%= sts.id %>" selected='selected'><%= sts.description %></option>				
+				<% } else { %>
+						<option value="<%= sts.id %>"><%= sts.description %></option>				
+				<%  } %>
+			<%  } %>
+		</select>
+	</div>
+   	<span class="title float-right">Status:</span>
+	<div class="savingIndicator float-right"></div>
+</div>
+
+<div class='info'>
+	<span id='ssm_SelectionCustomerName'><%= header.rtl_name %></span>
+</div>			
+
+<div class='header-options'>
+    <span class="commandButton">
+        <a class="ssm-print" href="#showSelectionPrintOptions/<%= ssm_id %>" title="Print Selection"></a>
+    </span>
+</div>

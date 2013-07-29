@@ -1,0 +1,6 @@
+<tr>
+	<td><%= item %></td>
+	<td><%= description %></td>
+	<td><%= color_description %></td>
+	<td><%= pattern_description %></td>
+</tr>

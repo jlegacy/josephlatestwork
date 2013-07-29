@@ -1,0 +1,8 @@
+appServer=spiff.dancik.com
+appPath=/int/ssm2
+srvUser=dancik
+srvPass=abc123
+sshUser=dancik
+salLib=DESA02IO
+
+

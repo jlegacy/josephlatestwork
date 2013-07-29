@@ -1,0 +1,57 @@
+<tr class="smm_kitRow">
+	<td valign="top" class="ssm_center colWidth-40">		
+		<input type="checkbox" checked="checked" class="relProdCheck" name="relProdCheck"/>		
+	</td>
+	<td class="ssmItemDetails padding10">	
+
+		<div class="float-left">
+		
+			<div class="containerRow">
+				<a href="#"><%= item %></a>
+				<input type="hidden" class="ssm_item" name='ssm_Item' value='<%= item %>'/>
+			</div>
+				
+			<div class="containerRow itemDetail-line-3"><%= description1 %></div>
+		
+		
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Room Type:</label>
+					<div class="ssm-styled-select w250 editable">
+						<select class="ssm_room_type_select" class="editable" name="ssm_RoomTypeId"/>		
+					</div>
+				</div>								
+				<div class="labelInputBlock">
+					<label>Room Area:</label>
+					<div class="ssm-styled-select w250 editable">
+						<select class="ssm_room_area_select" class="editable" name="ssm_RoomAreaId"/>
+					</div>
+				</div>
+			</div>			
+			
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Quantity:</label>
+					<div>
+						<input type="text" maxlength="30" value="0" class="quantity mid" name="ssm_Qty" />
+					</div>
+				</div>
+				<div class="labelInputBlock">
+					<label>UM:</label>
+					<div class="ssm-styled-select w85">
+						<select class="ssm_unit_of_measure_select" class="um editable" name="ssm_UOM"></select>
+					</div>
+				</div>
+			</div>
+		
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Notes:</label>
+					<div>
+						<input type="text" maxlength="100" value="" class="notes editable upper longer" name="ssm_Note">
+					</div>
+				</div>
+			</div>	
+		</div>
+	</td>	
+</tr>

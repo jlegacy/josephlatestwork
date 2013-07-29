@@ -1,0 +1,6 @@
+appServer=susie.local
+appPath=/prod/ssm2
+srvUser=dancik
+srvPass=abc123
+sshUser=dancik
+salLib=DESA02PO

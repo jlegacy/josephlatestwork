@@ -1,0 +1,23 @@
+<table>
+	<tr>
+		<th class="ssm-subTitleBar_2 ssm-border-right"> No. </th>
+		<th class="ssm-subTitleBar_2"> Customer Name </th>
+	</tr>
+				
+	<% 
+		var len = selections.length;
+		for (var i=0; i<len; i++) {
+			var o = selections[i];
+	%>
+	
+	<tr>
+		<td>
+		    <a href="#openSelection/<%= o.s_id %>" class = "ssm-link"><%= o.s_id %></a>
+		</td>
+		<td>
+			<%= o.c_name %>
+		</td>
+	</tr>
+	
+	<%}%>
+</table>

@@ -1,0 +1,12 @@
+<div class="problemDetails">
+	<div class="commandButton icon problemIcon">
+		<a class="warning"></a>
+	</div>
+	<div class="problemDetail_col1">
+		<div class="problemLabel">Item#:</div> <%= item %>
+	</div>
+	<div class="problemDetail_col2">
+		<div class="problemLabel">Quantity:</div><%= quantity %>
+	</div>
+	<div><div class="problemLabel">Message:</div> <%= message%></div>
+</div>

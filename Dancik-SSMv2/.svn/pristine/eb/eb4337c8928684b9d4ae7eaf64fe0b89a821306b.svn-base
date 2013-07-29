@@ -1,0 +1,49 @@
+<div id="ssm_Dashboard">
+
+	<div id="newSelectionButtons" class='ssm-Box_A bttn-section'>
+		<div class="widthControl">
+			<label>Create a new:</label>
+			<form action="#openCustomerSearch">
+				<input type="submit" value="Selection" class='greenButton float-left ssm-newselection-bttn-position' />
+			</form>
+			<form action="#openNewReminder">
+				<input type="submit" value="Reminder" class='greenButton float-left ssm-newreminder-bttn-position' />
+			</form>
+		</div>
+	</div>
+
+	<div id="ssm_lower_body" style="text-align: center;">
+		<div class="dashboardTop">
+			<div id="ssm_Dashboard_SelectionSection">
+				<div class='ssm-Box_B'>
+					<div class='ssm-titleBar '>Recently Viewed</div>
+				</div>
+				<div id="ssm_Dashboard_SelectionsListing">
+				
+					<div class="ssm_busy">
+						<div class="ssm_load_indicator_text">Loading results</div>
+						<div class="ssm_load_indicator"></div>
+					</div>
+				
+				</div>
+			</div>
+
+			<div id="ssm_Dashboard_CalendarSection" class='ssm-Box_B'>
+				<div class='ssm-titleBar'>Day At A Glance (Reminders)</div>
+
+				<div id="ssm_Dashboard_DayListing">					
+					<%= view({url: "app/template/dashboard/dayReminders.ejs"}) %>
+				</div>
+
+				<div id="ssm_Dashboard_CalendarSection_1">
+					<div id='ssm_Dashboard_Calendar'></div>
+					<div class='options'>
+						<a href="#openRemindersMonth/reset" class='mini-calendar calendar-31'></a>
+						<a href="#openRemindersWeek/reset" class='mini-calendar calendar-7'></a>
+						<a href="#openRemindersDay/reset" class='mini-calendar calendar-1'></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

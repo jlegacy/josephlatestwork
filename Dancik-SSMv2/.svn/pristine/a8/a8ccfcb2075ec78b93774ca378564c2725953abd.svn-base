@@ -1,0 +1,75 @@
+<form id="ssm_addCustomer_form" action="#dynamic" autocomplete="off">
+	<input type='hidden' name='ssm_SelectionId' value='<%= this.ssm_id || '' %>'/>
+	
+	<div class='input-form'>
+		<div class="pos">
+		    <div class="title underlined_title">
+                 <span>Enter new customer information</span>
+            </div>
+        </div>
+
+		<div class="margin-top">
+			<label class="ssm-input-labels">Name:</label>
+			<input type="text" name="ssm_firstname" class="editable upper mid" maxlength='12'/>
+			<input type="text" name="ssm_lastname" class="editable upper mid-plus" maxlength='18'/>
+		</div>
+		<div class="margin-top">
+			<label class="ssm-input-labels">Address:</label>
+			<input type="text" name="ssm_address1" class="editable upper long" maxlength='30'/>
+		</div>
+		<div class="margin-top">
+			<label class="ssm-input-labels">&nbsp;</label>
+			<input type="text" name="ssm_address2" class="editable upper long" maxlength='30'/>
+		</div>
+		<div class="margin-top">
+			<label class="ssm-input-labels">City:</label>
+			<input type="text" name="ssm_city" class="editable upper long" maxlength='30'/>
+		</div>
+		<div class="float-left margin-top">
+			<label class="ssm-input-labels float-left">State:</label>
+	          <div class="ssm-styled-select float-left">
+				<select class="select" name="ssm_state">
+					<option value=""></option>				
+					<% for (var j = 0; j < states.length; j++) { %>
+						<option value="<%= states[j].id %>"><%= states[j].id %> - <%= states[j].description %></option>				
+					<%  } %>
+				</select>
+			</div>
+		</div>
+		<div class="clear-both margin-top">
+			<label class="ssm-input-labels">Zip Code:</label>
+			<input type="text" id="ssm_zip5" name="ssm_zip5" class="editable small5" maxlength='5' />
+			<label class='ssm-input-symbols'>-</label>
+			<input type="text" id="ssm_zip4" name="ssm_zip4" class="editable small4" maxlength='4' />
+		</div>
+		<div class="margin-top">
+			<label class="ssm-input-labels">Phone:</label>
+			<label class='ssm-input-symbols'>(</label>
+			<input type="text" name="ssm_areacode" id="ssm_areacode" class="editable small3" maxlength='3' />
+			<label class='ssm-input-symbols'>)</label>
+			<input type="text" name="ssm_phone" id="ssm_phone" class="editable small7" maxlength='7' />
+		</div>
+		<div class="margin-top">
+			<label class="ssm-input-labels">Email:</label>
+			<input type="text" name="ssm_email" class="editable long" maxlength='64'/>
+		</div>
+	
+		<div class="float-left margin-top">
+			<label class="ssm-input-labels float-left">Customer Type:</label>
+			<div class="ssm-styled-select float-left">
+				<select class="select" name="ssm_type">
+					<option value=""></option>				
+					<% for (var j = 0; j < customertypes.length; j++) { %>
+						<option value="<%= customertypes[j].id %>"><%= customertypes[j].id %> - <%= customertypes[j].description %></option>				
+					<%  } %>
+				</select>
+			</div>
+		</div>
+	</div>
+        
+	<div class="button-section clear-both">
+	    <input type="button" class ="greenButton create_and_select" value="Add to Selection"/>
+	    <input type="button" class ="greenButton create" value="Save"/>
+	    <input type="button" class ="greyButton cancel" value="Cancel"/>
+	</div>
+</form>

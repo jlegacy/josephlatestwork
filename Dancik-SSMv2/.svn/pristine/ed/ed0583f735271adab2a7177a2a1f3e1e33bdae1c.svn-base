@@ -1,0 +1,44 @@
+<div class="ssm_reference_table_info_wrapper">
+								<div class="ssm_reference_table_info_container">
+									<table>
+										<tbody>
+											<tr>
+												<td style="border:none;">Name:</td>
+												<td>Derek Carter International</td>
+											</tr>
+											<tr>
+												<td style="border:none;">Address:</td>
+												<td>
+													<div>
+														<ul class="reference_address_list">
+															<li>123 Test Lane</li>
+															<li>Unit 4</li>
+															<li>Cary NC, 275454</li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								
+								<div class="ssm_reference_table_info_container">
+									<table>
+										<tbody>
+											<tr>
+												<td>Phone:</td>
+												<td>555-555-5555</td>
+											</tr>
+											<tr>
+												<td>Fax:</td>
+												<td>555-555-5556</td>
+											</tr>
+											<tr>
+												<td>Email:</td>
+												<td>test@testco.com</td>
+											</tr>
+											
+										</tbody>
+									</table>
+								</div>
+							</div>

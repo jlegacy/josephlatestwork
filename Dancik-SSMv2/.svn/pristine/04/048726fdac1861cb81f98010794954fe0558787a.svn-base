@@ -1,0 +1,68 @@
+/*globals $App */
+(function ($) {
+	$App.Controller('EditLine', {
+		// ------------------------------------------------------------
+		// -
+		// ------------------------------------------------------------
+		initialize: function () {
+			this.view = $App.View('EditLine');
+			this.model = $App.Model('EditLine');
+			
+		},
+		// ------------------------------------------------------------
+		// -- 
+		// ------------------------------------------------------------
+		init: function (data) {
+//			console.log("Controller - init - EditLine.js");
+			var _this = this;	
+			_this.getSelectionItem(data);
+		},
+		
+		getSelectionItem : function(data){
+			var _this = this,
+			callback =function(results){
+				_this.view.init(results);
+				$App.Utils.saveComplete();
+			}; 
+			$App.Utils.saveInProcess({showBlanket:true});
+			_this.model.getSelectionItem(data,callback);			
+		},
+		
+		setSelectionItemField : function(dataset) {
+			var _this = this,
+			callback = function(){$App.Utils.saveComplete();}; 
+			$App.Utils.saveInProcess();
+			_this.model.setSelectionItemField(dataset,callback);
+		},
+		
+		clearMessageLine : function(data, obj) {
+			var _this = this;
+			$App.Fire('setSelectionItemField', data);
+			_this.view.clearMessageField(obj);
+		},
+		
+		
+		
+//		Open the Macro Messages interface
+		openMacroMessages : function(payload) {
+			_this = this,
+			ssm_id = $App.Model('Selection').currentSelectionId;			
+			$App.Utils.saveInProcess({showBlanket : true});
+			_this.model.openMacroMessages({ssm_id:ssm_id},
+					// Callback
+					function (results) {
+						$.extend(results, payload);							
+						_this.view.display_macro_messages(results);
+						$App.Utils.saveComplete();
+					},
+					// ErrorCallback
+					function (errorData){
+						$App.Fire("ajax_errors", errorData);
+						$App.Utils.saveComplete();
+					}
+			);			
+
+		}
+		
+	});
+})(jQuery);

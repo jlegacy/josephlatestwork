@@ -1,0 +1,11 @@
+<tr>
+	<td class="colWidth-30 tac">
+		<%= line%>
+	</td>
+	<td class="padding10">
+		<div class="bottom-spacer-5 itemDetail-line-2"><%= item %></div>
+	</td>
+	<td><%= qtyordered %></td>
+	<td><%= price %></td>
+	<td><%= extendedprice %></td>
+</tr>

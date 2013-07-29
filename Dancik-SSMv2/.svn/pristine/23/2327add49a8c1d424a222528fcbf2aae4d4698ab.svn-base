@@ -1,0 +1,27 @@
+<div id="ssm_lower_body"> 
+    <div class='dayViewTop widthControl'>
+        <div class="padding5"></div>
+        <!--<div class="ssm_mainPage_hdr">Search Results</div>-->
+        <div id = "ssm_searchResults_Section"class="ssm_interfaceSurrounder">
+        <div class="ssm_headerBarGray">
+                <div class="padding5">
+                    <span class="commandButton float-left ssm_headerIcon">
+                        <img class="search-doc" src="../images/clear.gif">
+                    </span>
+                    <div class="title float-left">Search Results</div>
+                    
+                </div>
+            </div>
+            <div class="ssm_busy">
+                <div class="ssm_load_indicator_text">Loading results...</div>
+                <div class="ssm_load_indicator"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

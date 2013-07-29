@@ -1,0 +1,58 @@
+<div id="ssm_kitsContainer" class="container">	
+    <form action="#addSelectionItems">
+	   <!-- Breadcrumb -->
+	   <div id="ssm_kitsCrumb" class="ssm_crumb float-left">
+		  <div class="activeCrumbLeft"/>
+		  <div class="activeCrumbBody"><a id="ssm_SelectionItemsLinks" href="#">Add Items</a></div>
+		  <div class="activeCrumbRight"/>
+
+		  <div class="inactiveCrumbBody"><%= ssm_Item%></div>
+		  <div class="inactiveCrumbRightPointed"></div>
+	   </div>
+
+	   <div class="ssm_interfaceSurrounder">
+
+		  <div class="ssm_interfacePadding">
+
+			 <!-- Header -->
+			 <div class="ssm_headerBarGray roundedBottom bottom-spacer-5">				
+				<div class="padding5">
+				    <div style="height:30px;" class="commandButton packaging float-left"><a class="packaging"/></div>
+				    <span class="ssmTitleText">Items: <%= ssm_Item.toUpperCase() %> and Related Products</span>																		
+				</div>			
+			 </div>
+
+			 <!-- Results Table -->
+			 <div id="ssm_kitSaveTable" style="width:100%;display:inline-block">
+				<div class="ssmTableWrapper">
+
+				    <input type="hidden" name='ssm_Selectionid' value='<%= ssm_Selectionid%>'/>
+
+				    <table class="ssmTable" width="100%" cellpadding="0" cellspacing="0">
+					   <thead>
+						  <tr>
+							 <th class="colWidth-40"><input type="checkbox" id="ssm_toggleAllItemsChecked" name="allItemsChecked" checked="checked"/></th>
+							 <th>Item Details</th>													
+						  </tr>
+					   </thead>
+
+					   <tbody>					
+					   </tbody>							
+
+				    </table>
+
+				</div>
+			 </div>		
+		  </div>					
+	   </div>
+
+	   <div class="detachedFooter roundedBottom">
+		  <span class="commandButton float-left"><a href="#Top" class="backToTop" title="Back to Top"></a></span>
+
+		  <div class="padding5 centered">
+			 <input type="submit" value="Add" class="greenButton" style="width:80px;"/>								
+		  </div>		
+	   </div>
+	   <div class="bottom-padding-footer clear-both"></div>
+    </form>	
+</div>

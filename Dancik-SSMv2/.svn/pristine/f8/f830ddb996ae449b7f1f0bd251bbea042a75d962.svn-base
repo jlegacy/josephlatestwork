@@ -1,0 +1,10 @@
+<div class="data <%= this.klassname %>">
+	<div>
+     	<span><%= this.date || '' %></span>
+     	<span><%= this.time || '' %></span>
+     	<span><%= this.user || '' %></span>
+	</div>
+	<div>
+		<%= this.data || '' %>
+	</div>
+</div>

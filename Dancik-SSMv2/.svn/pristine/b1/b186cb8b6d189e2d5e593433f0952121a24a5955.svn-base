@@ -1,0 +1,49 @@
+<div class="ssm_availableOptionsBody">
+    <div class="float-left spoolfileInfo inline-labels">
+        <div class="containerRow">
+            <div class="labelColumn"><label>Printer: </label></div>
+            <div class="inputsColumn"><%=printfile%></div>
+        </div>
+        <div class="containerRow">
+            <div class="labelColumn"><label>Job Name: </label></div>
+            <div class="inputsColumn"><%=jobname %></div>
+        </div>
+        <div class="containerRow">
+            <div class="labelColumn"><label>Job#: </label></div>
+            <div class="inputsColumn"><%=jobnumber %></div>
+        </div>
+        <div class="containerRow">
+            <div class="labelColumn"><label>Spoolfile: </label></div>
+            <div class="inputsColumn"><%=spoolfile %></div>
+        </div>
+    </div>
+	<div class="float-left" style="width:100%">
+		<div class="padding5 ssm_availableOptionsRow openPDF">
+			<div class="float-left commandButton"><a class="pdf"/></div> Open PDF
+		</div>
+	</div>
+	
+	<div class="float-left dashedTopBorder" style="width:100%">
+		<div class="padding5 ssm_availableOptionsRow openText">
+			<div class="float-left commandButton"><a class="doc"/></div> Open Text
+		</div>
+	</div>
+	
+	<div class="float-left dashedTopBorder" style="width:100%">
+		<div class="padding5 ssm_availableOptionsRow delete">
+			<div class="float-left commandButton"><a class="deleteMode-sm"/></div> Delete	
+		</div>
+	</div>
+
+	<div class="float-left dashedTopBorder" style="width:100%">
+		<div class="padding5 ssm_availableOptionsRow release">
+			<div class="float-left commandButton"><a class="greenSquare"/></div> Release	
+		</div>
+	</div>
+	
+	<div class="float-left dashedTopBorder" style="width:100%">
+		<div class="padding5 ssm_availableOptionsRow hold">
+			<div class="float-left commandButton"><a class="redSquare"/></div> Hold	
+		</div>
+	</div>
+</div>

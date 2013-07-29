@@ -1,0 +1,41 @@
+<div>
+	<div class='title underlined_title'>
+		<span>Dates</span>
+	</div>
+	
+	
+	<% 
+		var hdr, dtl, rec;
+		for (var i = 0; i < date_hdrs.length; i++) {
+			hdr = date_hdrs[i];
+			
+			// -- Pull the Selection Record for the current Job-Info header...
+			rec = { id : '', idvalue :'' };
+			for (var k = 0; k < dates.length; k++) {
+				if ( hdr.id == dates[k].dateid) {
+					rec = dates[k];
+					break;
+				}
+			} 
+		%>
+		
+		<div class='parent'>
+			<div class='labels'>
+				<span class='ssm-input-labels'><%= hdr.description %>:</span>
+			</div>
+			
+			
+			<div class='date-wrapper editable'>
+				<input type='text' name='hdrid_<%= hdr.id %>' class='editable' maxlength='10' value='<%= rec.date %>'/>
+				<img class='ssm-dates editable' src='../images/clear.gif'/>
+			</div>
+		    <div class='opts editable-hidable'>
+				<a href="#clearSelectionDate">
+				 	<img class="ssm-clear" src='../images/clear.gif' border='0'/>
+				 </a>		    
+		    </div>				
+		</div>
+	<%  } %>
+</div>	
+	
+</div>

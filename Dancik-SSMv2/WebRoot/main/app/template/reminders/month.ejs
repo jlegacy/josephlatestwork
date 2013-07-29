@@ -1,0 +1,356 @@
+<div id="ssm_lower_body">
+    <div id='ssm_Reminders'>
+        <div id='ssm_monthPage_reminders'>
+            <div class='widthControl'>
+                <div class="padding5"></div>
+                <div id = "ssm_Monthview_Section" class="ssm_interfaceSurrounder">
+                    <div class="ssm_headerBarGray">
+                        <div class="padding5">
+                            <span class="commandButton float-left ssm_headerIcon"> <img class="reminders" src="../images/clear.gif"> </span>
+                            <div class="title float-left">
+                                Reminders
+                            </div>
+                            <div class='options float-left' id='ssm_reminder_mainPage_links'>
+                                <a href="#openRemindersDay/reset" class='mini-calendar calendar-1'></a>
+                                <a href="#openRemindersWeek/reset" class='mini-calendar calendar-7'></a>
+                                <a href="#openRemindersMonth/reset" class='mini-calendar calendar-31'></a>
+                            </div>
+                            <div id="DateInfoButtonsContainer">
+                                <div id ='ssm_weekPage_date_buttons'>
+                                    <a href="#openRemindersMonth/forward" id="ssm_reminders_forward_week_link" class="ssm_reminders_jump_link float-right"></a>
+                                    <a href="#openRemindersMonth/backward" id="ssm_reminders_backward_week_link" class="ssm_reminders_jump_link float-left"></a>
+                                    <div id='ssm_weekPage_dateInfo'>
+                                        <label>date information</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ssm_weekPage_showWeekend" class="float-right">
+                                <form>
+                                    <input type="checkbox" class="ssm_show_weekend" name="showWeekend" value="Y" />
+                                    Show Weekends
+                                    <br />
+                                </form>
+                            </div>
+                            <div id='ssm_reminder_dayPage_today' class="float-right">
+                                <a href="#openRemindersMonth/reset" class="ssm_show_current_week">Current Month</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--
+                    <div  class="ssm_mainPage_hdr">Reminders</div>
+                    <div id='ssm_reminder_mainPage_links'>
+                    <div class='options'>
+                    <a href="#openRemindersDay/reset" class='mini-calendar calendar-1'></a>
+                    <a href="#openRemindersWeek/reset" class='mini-calendar calendar-7'></a>
+                    <a href="#openRemindersMonth/reset" class='mini-calendar calendar-31'></a>
+                    </div>
+                    <div id='ssm_weekPage_dateInfo'>
+                    <label>date information</label>
+                    </div>
+                    <div id ='ssm_weekPage_date_buttons'>
+                    <a href="#openRemindersMonth/forward" id="ssm_reminders_forward_week_link" class="ssm_reminders_jump_link"></a>
+                    <a href="#openRemindersMonth/backward" id="ssm_reminders_backward_week_link" class="ssm_reminders_jump_link"></a>
+                    </div>
+                    <div id='ssm_reminder_weekPage_currentWeek'>
+                    <a href="#openRemindersMonth/reset" class="ssm_show_current_week">Current Month</a>
+                    </div>
+                    <div id="ssm_weekPage_showWeekend">
+                    <form>
+                    <input type="checkbox" class="ssm_show_weekend" name="showWeekend" value="Y" /> Show Weekends<br />
+                    </form>
+                    </div>
+                    </div>
+                    -->
+
+                    <div id="ssm_dynamic_resize">
+                        <div>
+                            <div id="<%=weekdayName[0]%>-hdr" class="ssm_weekView_dayName ssm-subTitleBar_1 weekend">
+                                <%=weekdayName[0]%>
+                            </div>
+                            <div id="<%=weekdayName[1]%>-hdr" class="ssm_weekView_dayName ssm-subTitleBar_1">
+                                <%=weekdayName[1]%>
+                            </div>
+                            <div id="<%=weekdayName[2]%>-hdr" class="ssm_weekView_dayName ssm-subTitleBar_1">
+                                <%=weekdayName[2]%>
+                            </div>
+                            <div id="<%=weekdayName[3]%>-hdr" class="ssm_weekView_dayName ssm-subTitleBar_1">
+                                <%=weekdayName[3]%>
+                            </div>
+                            <div id="<%=weekdayName[4]%>-hdr" class="ssm_weekView_dayName ssm-subTitleBar_1">
+                                <%=weekdayName[4]%>
+                            </div>
+                            <div id="<%=weekdayName[5]%>-hdr" class="ssm_weekView_dayName ssm-subTitleBar_1">
+                                <%=weekdayName[5]%>
+                            </div>
+                            <div id="<%=weekdayName[6]%>-hdr" class="ssm_weekView_dayName ssm-subTitleBar_1 weekend">
+                                <%=weekdayName[6]%>
+                            </div>
+                        </div>
+
+                        <div id = "ssm_lower_body2">
+                            <div id="<%=weekdayName[0]%>-dtl" class="weekend">
+                                <div class="ssm_weekview_data_column">
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[0]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[0]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[7]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[7]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[14]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[14]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[21]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[21]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[28]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[28]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div id="week6">
+                                        <div class="ssm_day_container">
+                                            <div id="<%=weekdayDay[35]%>">
+                                                <div id="ssm_week_add_reminder<%=weekdayDay[35]%>"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="<%=weekdayName[1]%>-dtl">
+                                <div class="ssm_weekview_data_column">
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[1]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[1]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[8]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[8]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[15]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[15]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[22]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[22]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[29]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[29]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div id="week6">
+                                        <div class="ssm_day_container">
+                                            <div id="<%=weekdayDay[36]%>">
+                                                <div id="ssm_week_add_reminder<%=weekdayDay[36]%>"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="<%=weekdayName[2]%>-dtl">
+                                <div class="ssm_weekview_data_column">
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[2]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[2]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[9]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[9]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[16]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[16]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[23]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[23]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[30]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[30]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div id="week6">
+                                        <div class="ssm_day_container">
+                                            <div id="<%=weekdayDay[37]%>">
+                                                <div id="ssm_week_add_reminder<%=weekdayDay[37]%>"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="<%=weekdayName[3]%>-dtl">
+                                <div class="ssm_weekview_data_column">
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[3]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[3]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[10]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[10]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[17]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[17]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[24]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[24]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[31]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[31]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div id="week6">
+                                        <div class="ssm_day_container">
+                                            <div id="<%=weekdayDay[38]%>">
+                                                <div id="ssm_week_add_reminder<%=weekdayDay[38]%>"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="<%=weekdayName[4]%>-dtl">
+                                <div class="ssm_weekview_data_column">
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[4]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[4]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[11]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[11]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[18]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[18]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[25]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[25]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[32]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[32]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div id="week6">
+                                        <div class="ssm_day_container">
+                                            <div id="<%=weekdayDay[39]%>">
+                                                <div id="ssm_week_add_reminder<%=weekdayDay[39]%>"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="<%=weekdayName[5]%>-dtl">
+                                <div class="ssm_weekview_data_column">
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[5]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[5]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[12]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[12]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[19]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[19]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[26]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[26]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[33]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[33]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div id="week6">
+                                        <div class="ssm_day_container">
+                                            <div id="<%=weekdayDay[40]%>">
+                                                <div id="ssm_week_add_reminder<%=weekdayDay[40]%>"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="<%=weekdayName[6]%>-dtl" class="weekend">
+                                <div class="ssm_weekview_data_column">
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[6]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[6]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[13]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[13]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[20]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[20]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[27]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[27]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ssm_day_container">
+                                        <div id="<%=weekdayDay[34]%>">
+                                            <div id="ssm_week_add_reminder<%=weekdayDay[34]%>"></div>
+                                        </div>
+                                    </div>
+                                    <div id="week6">
+                                        <div class="ssm_day_container">
+                                            <div id="<%=weekdayDay[41]%>">
+                                                <div id="ssm_week_add_reminder<%=weekdayDay[41]%>"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+								    <div class="detachedFooter float-left">
+                    <span class="commandButton float-left"><a class="backToTop" href="#Top"></a></span>
+                </div>
+								    <div class="bottom-padding-footer clear-both"></div>
+            </div>
+        </div>
+    </div>
+</div>

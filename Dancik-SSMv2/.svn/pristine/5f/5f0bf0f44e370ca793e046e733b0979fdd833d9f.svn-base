@@ -1,0 +1,40 @@
+<tr>
+	<td valign="top" class="ssm_center colWidth-40 commandCol">
+		<span class="commandButton-35 ssm_center"><a href="#openEditLine/<%=line%>/<%=id%>" class="edit" title="Edit Selection Item"></a></span>
+		<input type="checkbox" class="orderCheck" style="display:none;"/>
+		<input type="checkbox" class="deleteCheck" style="display:none;"/>
+		
+	</td>
+	<td class="ssmItemDetails">
+		<div class="normalView">
+			<span class="itemDetail-line-1"><%=roomtype_desc%> | <%=roomarea_desc%></span>
+			
+			
+			<span class="itemDetail-line-2"><a href="#showItemOptions" class="ssmItemNum"><%=item%></a></span>
+			<div class="ssm_discontinuedPrevOrderedContainer">
+				<div class="discontinued" style="display:none">Discontinued</div>		
+				<div class="previouslyOrdered" style="display:none">Previously Ordered</div>
+			</div>
+			
+			<div class="extraDetail">
+				<span class="itemDetail-line-3"><%=item_desc1%>  <%= (item_desc2)?' | '+item_desc2:"" %></span>
+				<span class="itemDetail-line-4"><strong>Manufacturer:</strong> <%=mfgr%><span><strong>Product Line: </strong><%=prodline%></span></span>
+				<span class="itemDetail-line-5"><strong>Notes:</strong> <%=note2%></span>
+			</div>	
+		</div>			
+	</td>
+	<td class="colWidth-60 ssmQtyPriceCell" valign="top" align="right">
+		<nobr><strong><span class="quantity"><%=qty%></span> <%=uom%></strong></nobr>
+		<div class="errorMessage" style="display:none">here</div>
+	</td>
+	<td valign="top" class="ssmQtyPriceCell" align="right">
+		<div class="ssmPricingInfo">
+			<nobr><span class="selectionItemPrice"><strong><%=use_price%>  <%=uom%></strong></span></nobr>
+	  	</div>
+	  	<div class="extraDetail">
+	  		<span class="selectionItemList" style="display:none;"><!--<strong>List: </strong>--><%= (list_price)?list_price+' '+uom:"" %></span>
+	  	</div>
+		
+	</td>
+	<td valign="top" class="ssmQtyPriceCell" align="right"><span class="ssmPricingInfo"><strong><%=use_extprice%></strong></span></td>
+</tr>

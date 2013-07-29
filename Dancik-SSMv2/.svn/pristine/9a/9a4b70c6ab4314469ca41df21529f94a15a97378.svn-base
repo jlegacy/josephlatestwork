@@ -1,0 +1,15 @@
+<div class="padding10 float-left">
+	<div class="ssm_crumb">
+		<div class="inactiveCrumbLeft"></div>
+		<div class="inactiveCrumbBody"><span id="ssm_dd_bc" /></div>
+		<div class="inactiveCrumbRightPointed"></div> 
+	</div>
+</div>
+<div class="treeContainer float-left">
+	<ul id="mfgrBranchDrillDown" class="filetree">
+		<li><span class="folder"><strong>Grand Total: <%= grandtotals[0].qty %></strong></span>
+				<!-- placeholder for drilldownTreeViewBy.ejs --> 
+		</li>
+	</ul>
+
+</div>

@@ -1,0 +1,113 @@
+/* Style definitions for the various sprite icons used throughout SSMv2 */
+
+
+/* Container */
+.commandButton{	display:block;	height: 35px;	width:35px;}
+.commandButton-35{	display:block;	height: 35px;	width:35px;}
+.commandButton-40{	display:block;	height: 40px;	width:40px;}
+.commandButton a,.commandButton-35 a,.commandButton-40 a,.commandButton img,.commandButton-35 img,.commandButton-40 img{
+	background-image: url("../images/icons.png");
+	display:block;
+	height:inherit;
+	}
+
+/* individual icon definitions */
+/* attach classes to anchor tag <a> */
+/* from top left / row by row */
+ 	
+/* Row 1 */ 
+.search{} 
+.prev{background-position: -30px 0;}
+.next{background-position: -63px 0;}
+.ssm-collapse{background-position: -102px 0px;}
+.ssm-expand{background-position: -136px 0px;}
+.edit{background-position:-169px 1px;}
+.addDoc{background-position: -206px 1px;}
+
+/* Row 2 */
+.calendar-1{background-position: -3px -33px;}
+.calendar-7{background-position: -37px -33px;}
+.calendar-31{background-position: -71px -33px;}
+.arrowRight{}
+.bigRedX{}
+.deleteMode{background-position: -168px -28px;}
+.deleteMode-sm{background-position: -211px -32px;}
+
+/* Row 3 */
+.ssm-dates{ background-position: -4px -65px;}
+.ssm_day_add_icon{background-position: -38px -65px;}
+.download{}
+.copy{}
+.save{}
+.attach{}
+.addReminder{}
+.add-med{}
+
+/* Row 4 */
+/* Don't Use */
+.customer-info{background-position: -60px -108px}
+.dates{background-position: -104px -104px;}
+.references{background-position: -154px -104px;}
+.job-info{ background-position: -209px -108px;}
+.trashbin{}
+
+/* Row 5 */
+.editMode-expand{background-position: -10px -150px;}
+.editMode-collapse{background-position: -60px -150px;}
+.ssm-search{background-position: -113px -160px;}
+.ssm-swap-customer{background-position: -160px -160px;}
+.ssm-clear{background-position: -209px -160px;}
+.ssm-work-with{ background-position: -259px -160px;}
+
+/* Row 6 */
+.ssm-close-box{background-position: -8px -210px;}
+.account{}
+.ssm-print{background-position: -105px -210px;}
+.log{background-position: -154px -205px;}
+.notepad{background-position: -204px -205px;}
+.backToTop{}
+
+/* Row 7 */
+.settings{}
+.packaging{background-position: -357px -859px;}
+.arrowLeft{background-position: -406px -859px;}
+.home{background-position: -157px -260px;}
+.ship{background-position: -207px -260px;}
+.report{background-position: -258px -258px;}
+
+/* Row 8 */
+.memo{background-position: -10px -310px; }
+.close-sm{background-position: -63px -313px;}
+.excel{background-position: -105px -310px;}
+.copy-sm{}
+.new-sm{}
+.open-sm{}
+
+/* Row 9 */
+.reload{background-position: -9px -358px;}
+.play{background-position: -57px -361px;}
+.pdf{background-position: -108px -361px;}
+.doc{background-position: -159px -361px;}
+.redSquare{background-position: -208px -361px;}
+.greenSquare{background-position: -257px -361px;}
+
+/* Row 10 */
+.orderMode{background-position: -10px -403px;}
+.exclamation{background-position: -57px -403px;}
+.reminders{background-position: -105px -403px;}
+.multi-messages{background-position: -162px -408px; height:24px !important; width:24px;}
+.folder-notes{background-position:-200px -403px;}
+.ms-word{background-position:-253px -403px;}
+
+/* Row 11 */
+.next-sm{}
+.prev-sm{}
+.doc2{}
+.copy2{}
+.folder{}
+.warning{background-position: -256px -455px;}
+
+/* Row 12 */
+.search-doc{background-position: -5px -509px;}
+
+

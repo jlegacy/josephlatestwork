@@ -1,0 +1,79 @@
+<div id="ssm_selectionItemsContainer">
+	
+	<!-- Mode Header -->
+	<div id="ssm_modeHeader" class="roundedTop" style="display:none">	
+		<div class="padding5">	
+			<span class="commandButton float-right ssm-close-box">
+				<a id="ssm_closeModeHeader" class="ssm-close-box commandButton" href="#" title="Close"></a>
+			</span>
+			<span id="ssm_modeHeaderTitle">Order Mode</span>
+		</div>
+	</div>
+	<!-- Add Mode -Toggle #ssm_AddMode -->
+	<%= $App.Template("selectionItems/addMode.ejs").render() %>
+	
+	<!-- Command Bar -->
+	<div id="ssm_selectionItemCommands" class="roundedTop lightBlueGradient">
+		<div class="roundedTop disableClick"></div>
+		<div class="sidePadding10">
+			<strong class="float-left">Display:</strong>		
+			<div class="ssm-styled-select w250 float-left"> 
+				<select id="ssm_filter_room_types_select"></select> 
+			</div>
+			<span class="commandButton leftBorder-dotted float-left"><a href="#putSelectionItemsIntoAddMode" id="ssm_addModeIcon" class="addMode" title="Add Selection Item"></a></span>
+			<span class="commandButton leftBorder-dotted float-left"><a href="#" id="ssm_deleteModeIcon" class="deleteMode" title="Delete Selection Items"></a></span>
+			<span class="commandButton leftBorder-dotted float-left"><a href="#" id="ssm_orderModeIcon" class="orderMode" title="Order Selection Items"></a></span>
+						
+			<span class="leftBorder-dotted showPrices"><input type="checkbox" id="ssm_chkbx_ShowPrices" /><label> Show Prices</label></span>
+			<div class="float-right">
+				<span class="ssmPricingInfo"><strong>Estimated Total:</strong></span>
+				<span class="colWidth-100 ssmPricingInfo ssm_estimated_total"><strong></strong></span>
+			</div>
+		</div>	
+	</div>
+	<form accept-charset="UTF-8">
+	<!-- Table Wrapper -->
+	<div class="ssmTableWrapper">
+		<!-- SSM Table -->
+		<table id="ssm_selectionItemTable" class="ssmTable">
+			<thead>
+				<tr>
+					<th class="hdEditIcon colWidth-40">
+						<span class="commandButton"><a href="#" id="ssm_toggleSelectionItemsView" class="ssm-collapse"></a></span>
+						<input type="checkbox" name="allChecked" style="display:none"/>
+					</th>
+					<th class="hdItemDetails">Item Details</th>
+					<th class="hdQuantity colWidth-60">Quantity</th>
+					<th class="colWidth-1"><span class="ssmPricingInfo">Price</span></th>
+					<th class="colWidth-1"><span class="ssmPricingInfo">Total</span></th>
+				</tr>				
+			</thead>
+			<!-- Dynamically Populated -->
+			<tbody>	</tbody>
+			<!--<tfoot>
+				<tr class="footer">
+		        	<td colspan="4">
+		        		<span class="ssmPricingInfo float-right"><strong>Estimated Total:</strong></span>
+		        		<span class="commandButton float-left"><a href="#Top" class="backToTop"></a></span>
+    				</td>
+    				<td class="lightBlueGradient"><span class="ssmPricingInfo ssm_estimated_total"><strong></strong></span></td>			        	
+		        </tr>
+			</tfoot>-->
+		</table>	
+	</div>
+	<div class="detachedFooter float-left">
+		<div>
+         	<div class="ssmPricingInfo ssm_estimated_total lightBlueGradient"><strong></strong></div>
+         	<div class="ssmPricingInfo float-right"><nobr><strong>Estimated Total:</strong></nobr></div>
+        </div>
+	     <span class="commandButton float-left"><a href="#Top" class="backToTop"></a></span>
+	</div>
+	<!-- Mode Footer -->
+	<div id="ssm_modeFooter" class="roundedBottom" style="display:none;">		
+		<div>
+			<input type="submit" value=""><span class="commandButton float-left"><a href="#Top" class="backToTop"></a></span>
+		</div>
+	</div>
+	<div class="bottom-padding-footer clear-both"></div>	
+	</form>
+</div>

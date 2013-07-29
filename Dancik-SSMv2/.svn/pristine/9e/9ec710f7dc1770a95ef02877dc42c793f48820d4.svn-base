@@ -1,0 +1,78 @@
+<div id="ssm_job_editor" class="ssm_interfaceContainer"> 
+	<div id="ssm_editor_crumb" class="ssm_crumb">				
+		<div class="activeCrumbLeft"/>
+		<div class="activeCrumbBody"><span class="yellow">&lt;&lt; </span><a id="return_to_jobs" href="#return_to_jobs">Selection#: <%= ssmId %></a></div>
+		<div class="activeCrumbRight"/>
+		
+		<div class="inactiveCrumbBody">Job Information</div>
+		<div class="inactiveCrumbRight"></div>				
+	</div>
+	
+	<div class="ssm_interfaceSurrounder">	
+		<div class="ssm_interfacePadding">
+					
+			<div class="ssm_headerBarGray">
+				<div class="padding5">					
+					<div class="commandButton float-left ssm-jobs-icon ssm_headerIcon"/>	
+					<div class="title float-left">Job Information:</div>					
+					<div class="ssm-styled-select w250 float-left">
+						<select id="ssm_job_type_select" name="ssm_reference_type"/>
+					</div>	
+					<a href="#putJobsIntoAddMode" class="float-left putJobsIntoAddMode" title="Add Job Information"><span class="commandButton ssm-work-with"></span></a>																				
+				</div>
+			</div>
+					
+			<div class="ssm_busy" style="display:none">
+				<div class="ssm_load_indicator_text">Loading results</div>
+				<div class="ssm_load_indicator"></div>
+			</div>
+			
+			<div class="ssmTableWrapper">
+				<table id="ssm_edit_jobs_table" class="ssmTable">
+					<thead>
+						<tr>
+							<th class="colWidth-60"></th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="ssm_job_add_mode" style="display:none">
+							<td colspan="2">
+								<div class="ssm-add-job-container">								
+									<div class="padding10">									
+										<form id="addJobInfoRecord" action="#addJobInfoRecord">							
+											<div class="title">
+												<span class="jobTitle">Enter New Development Information</span>									
+											</div>
+											<div class="row">
+												<label class="first-label ssm-input-labels">Description</label>
+												<input id="focus" name="ssm_description" class="longer" type="text" value=""/>
+											</div>									
+											<div style="text-align:center;">								
+												<input  class="greenButton" type="submit" value="Add">
+												<button class="greenButton" id="ssm_jobs_close_add_interface">Cancel</button>							
+											</div>
+										</form>									
+									</div>																														
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align:center">
+								Select a Job Type
+							</td>
+						</tr>			
+					</tbody>					
+				</table>
+			</div>
+		</div>			
+	</div>	
+	
+	<div class="detachedFooter roundedBottom">
+		<span class="commandButton float-left"><a href="#Top" class="backToTop" title="Back to Top"></a></span>
+	</div>
+	    
+	    <div class="bottom-padding-footer clear-both"></div>
+	
+</div>
+

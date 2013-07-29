@@ -1,0 +1,483 @@
+(function ($) {
+	$App.View('Ordering', {		
+		config: $App.Controller('Config').getConfig().config,
+		currentStep : 1,	
+		numOfSteps : 6,	
+		initialize: function () {
+			
+		},
+		
+		init : function (data) {
+			//
+			var _this = this, 
+			ssm_tabs = $("#ssm_SelectionTabs"),
+			app_main_body = $("#appMainBody"),
+//			Step Templates 
+			baseTemplate = $App.Template('ordering/base.ejs'),
+			step1Template = $App.Template('ordering/step1/step.ejs'),
+
+//			Row Templates
+			step1Row = $App.Template('ordering/step1/row.ejs'),			
+//			jQuery Step Container Objects
+			container = $(baseTemplate.render(data.pending));
+			step1Container = $(step1Template.render(data));
+
+//			Make sure the current step is 1 when this interface is initialized
+			_this.currentStep = 1;						
+			
+//			Hide the tabs & header / add Order Interface
+			$("#ssm_Selection").hide();						
+			
+			// Populate Step1 Table
+			$(data.items).each(function(index, item) {
+				if(item.override_price){
+					item.price = item.override_price;
+					item.extprice = item.override_extprice;
+					step1Container.find(".ssmTable > tbody tr:last-child").before( $(step1Row.render(item)) );
+				}
+				else{
+					step1Container.find(".ssmTable > tbody tr:last-child").before( $(step1Row.render(item)) );
+				}
+				
+			});		
+			
+//			Initiate bread crumb.  Each step will have its own crumb template
+			stepCrumb = $( $App.Template('ordering/step1/crumb.ejs').render(data.pending) );
+			container.find("#crumbWrapper").append(stepCrumb);
+			
+//			Events
+			// Open a new selection
+			container.find("#ssm_orderingStep6Container").on('click', 'a[href=#newSelection]', function() {
+				$App.Fire("openCustomerSearch");
+			});
+			
+			// Return to the Dashboard 
+			container.find("#ssm_orderingStep6Container").on('click', 'a[href=#returnHome]', function() {
+				$App.Fire("openDashboard");
+			});
+			
+			// Selection Item crumb click
+			container.find("#crumbWrapper, #ssm_orderingStep6Container").on('click', 'a[href=#ssm_SelectionItems]', function() {
+				$App.Utils.saveInProcess({showBlanket : true});
+				var element = $(this);
+				element.data('payload', {
+					ssm_id : data.pending.ssm_id,
+					from_order : true
+				});				
+			});
+			
+//			Load a step based on the click of the bread crumb 
+			container.find("#crumbWrapper").on('click', 'a[href=#ssm_loadOrderStep]', function() {				
+//				Find out the index of the crumb that was clicked and then render the propper step
+				var index = parseInt( $('a[href=#ssm_loadOrderStep]').index($(this)) + 1);
+				$App.Fire("order_step_" + index, {step : _this.currentStep, ssm_ReferenceId:data.pending.referenceid});					
+			});
+			
+//			When clicking the continue button, show the next step
+			container.find(".smmOrderingContinueButton").click(function() {	
+				_this.default_continue();
+			});	
+//			When clicking the cancel button, pop up messge and then return to start if yes
+			container.find(".smmOrderingCancelButton").click(function() {	
+				$App.Fire('confirm_message' ,
+						{
+							message  : "Are you sure you want to cancel order?",
+							width: 400,
+							callback : function (confirmResponse) {
+								if(confirmResponse){
+									var cancelData = {
+											ssm_Id : data.pending.ssm_id,
+											ssm_ReferenceId : data.pending.referenceid
+										};	
+										$App.Fire("cancel_order", cancelData)
+										_this.currentStep = 1;
+								}
+							}
+						}
+					);
+			});		
+			
+			// Add the steps to the container and add the container
+			container.find("#ssm_orderingStep1Container").append(step1Container);
+			
+			// Apply the table styles to step 1
+			$App.Utils.applySsmTableStyles({
+				table : step1Container.find("#ssm_orderingStep1Table"),
+				evenOdd : "odd"
+			});
+			
+			app_main_body.append(container);			
+		},
+		
+		default_continue : function () {
+			var _this = this,
+				container = _this.container();
+			
+			_this.currentStep++;
+			
+			//
+//			Handle Steps 1 -5
+			if(_this.currentStep < _this.numOfSteps) {
+				// data to pass into the step
+				var data = {
+					step : _this.currentStep,
+					container : container
+				};				
+				$App.Fire("order_step_" + _this.currentStep, {step : _this.currentStep});					
+			}
+//			Handle Step 6
+			else if(_this.currentStep == _this.numOfSteps) {
+				container.find("#ssm_orderingFooter").hide();					
+				_this.load_step(_this.currentStep, {step : _this.currentStep});
+			}
+		},
+		
+		container : function () {
+			return $("#ssm_orderProcessingContainer");
+		},
+		
+		load_step : function(step, data) {
+			//
+		//	
+			var _this = this, stepCrumb,
+			container = _this.container();			
+
+			_this['initializeStep' + step](data, container);			
+			
+			// set the current step
+			_this.currentStep = step;
+			
+			// Hide each step and then display the proper one
+			container.find("#ssm_orderingSteps .ordering-step").hide();			
+			stepCrumb = $( $App.Template('ordering/step'+ step +'/crumb.ejs').render( {ssm_id : $App.Model('Selection').currentSelectionId}) );
+			container.find("#crumbWrapper")
+				.html('')
+				.append(stepCrumb);
+			
+			// Show the current step
+			container.find("#ssm_orderingSteps .ordering-step:eq("+parseInt(step - 1)+")").show();
+			
+		},
+		
+		initializeStep1 : function(data) {
+			//
+			var _this = this,
+				container = _this.container();
+				
+			_this.currentStep = 1;
+			
+			container.find(".smmOrderingContinueButton").unbind().click(function () {
+				_this.default_continue();
+			});
+			$("#ssm_orderingFooter").find("input[name='continue_btn']").val("Continue");
+		},
+		
+		// Handle Step 2 functionality
+		initializeStep2 : function (data, container) {
+			//
+			var _this = this,
+				stepWrapper = container.find("#ssm_orderingStep2Container"),
+				stepContainer = $($App.Template('ordering/step2/step.ejs').render(data.data));
+			
+			// Add the additional Ship To options
+			$(data.shipping).each(function(index, currentOption){
+				//
+				var option = $('<option>' + currentOption.name + '</option>');
+				option.attr("value", currentOption.id).data('data',currentOption);				
+				stepContainer.find("#ssm_orderShipToSelect").append(option);				
+			});
+			
+			// Populate Shipping information on click of the retail acct button
+			stepContainer.find(".retail_account").click(function () {				
+				stepContainer.find("#shipToInformationBlock input[name=shipto_name]").val(data.data.rtl_name).prev(".lockedText").html(data.data.rtl_name);					
+				stepContainer.find("#shipToInformationBlock input[name=shipto_address1]").val(data.data.rtl_address1).prev(".lockedText").html(data.data.rtl_address1);
+				stepContainer.find("#shipToInformationBlock input[name=shipto_address2]").val(data.data.rtl_address2).prev(".lockedText").html(data.data.rtl_address2);
+				stepContainer.find("#shipToInformationBlock input[name=shipto_city]").val(data.data.rtl_city).prev(".lockedText").html(data.data.rtl_city);
+				stepContainer.find("#shipToInformationBlock input[name=shipto_state]").val(data.data.rtl_state).prev(".lockedText").html(data.data.rtl_state);
+				stepContainer.find("#shipToInformationBlock input[name=shipto_zip]").val(data.data.rtl_zip).prev(".lockedText").html(data.data.rtl_zip);
+				
+				// Make fields editable
+				stepContainer.find("#shipToInformationBlock input").show();
+				stepContainer.find("#shipToInformationBlock .lockedText").hide();
+			});
+			
+			// Populate Shipping information on click of the buyer's acct button
+			stepContainer.find(".buyer_account").click(function () {				
+				stepContainer.find("#shipToInformationBlock input[name=shipto_name]").val(data.data.billto_name).prev(".lockedText").html(data.data.billto_name);					
+				stepContainer.find("#shipToInformationBlock input[name=shipto_address1]").val(data.data.billto_address1).prev(".lockedText").html(data.data.billto_address1);
+				stepContainer.find("#shipToInformationBlock input[name=shipto_address2]").val(data.data.billto_address2).prev(".lockedText").html(data.data.billto_address2);
+				stepContainer.find("#shipToInformationBlock input[name=shipto_city]").val(data.data.billto_city).prev(".lockedText").html(data.data.billto_city);
+				stepContainer.find("#shipToInformationBlock input[name=shipto_state]").val(data.data.billto_state).prev(".lockedText").html(data.data.billto_state);
+				stepContainer.find("#shipToInformationBlock input[name=shipto_zip]").val(data.data.billto_zip).prev(".lockedText").html(data.data.billto_zip);
+				
+				// Make fields editable
+				stepContainer.find("#shipToInformationBlock input").show();
+				stepContainer.find("#shipToInformationBlock .lockedText").hide();
+			});
+			
+			// Populate Shipping information on change of the dropdown menu
+			stepContainer.find("#ssm_orderShipToSelect").change(function () {
+				var value = $(this).val(),
+					index = $(this).find("option").index( $(this).find("option:selected") ),
+					option = $(this).find("option:selected"),
+					data = option.data('data');
+				
+				// If its a manual override, make all fields editable
+				if(index == 0){
+					stepContainer.find("#shipToInformationBlock input").show();
+					stepContainer.find("#shipToInformationBlock .lockedText").hide();
+				}
+				else{
+					//
+					//
+					stepContainer.find("#shipToInformationBlock input[name=shipto_name]").val(data.name).prev(".lockedText").html(data.name);					
+					stepContainer.find("#shipToInformationBlock input[name=shipto_address1]").val(data.address1).prev(".lockedText").html(data.address1);
+					stepContainer.find("#shipToInformationBlock input[name=shipto_address2]").val(data.address2).prev(".lockedText").html(data.address2);
+					stepContainer.find("#shipToInformationBlock input[name=shipto_city]").val(data.city).prev(".lockedText").html(data.city);
+					stepContainer.find("#shipToInformationBlock input[name=shipto_state]").val(data.state).prev(".lockedText").html(data.state);
+					stepContainer.find("#shipToInformationBlock input[name=shipto_zip]").val(data.zipcode).prev(".lockedText").html(data.zipcode);
+					
+					stepContainer.find("#shipToInformationBlock .lockedText").show();
+					stepContainer.find("#shipToInformationBlock input[type=text]").hide();
+				}
+			});
+			
+			// Append the step html to the DOM
+			stepWrapper.html(stepContainer);
+			
+			// Override the continue buttons default behavior
+			container.find(".smmOrderingContinueButton").unbind().click(function () {
+				// Update the step
+				_this.currentStep++;
+				
+				// create the data object to save this step
+				var data = {					
+					step : _this.currentStep,
+					ssm_ReferenceId : $("#order_reference").html(),
+					ssm_ShipToId : stepContainer.find("#ssm_orderShipToSelect").val(),
+					ssm_ManualName : stepContainer.find("#shipToInformationBlock input[name=shipto_name]").val(),
+					ssm_ManualAddress1 : stepContainer.find("#shipToInformationBlock input[name=shipto_address1]").val(),
+					ssm_ManualAddress2 : stepContainer.find("#shipToInformationBlock input[name=shipto_address2]").val(),
+					ssm_ManualCity : stepContainer.find("#shipToInformationBlock input[name=shipto_city]").val(),
+					ssm_ManualState : stepContainer.find("#shipToInformationBlock input[name=shipto_state]").val(),
+					ssm_ManualZipcode5 : stepContainer.find("#shipToInformationBlock input[name=shipto_zip]").val(),
+					ssm_ManualZipcode4 : '',
+					ssm_id : $App.Model('Selection').currentSelectionId
+				};								
+				
+				// Fire the event to save this step
+				$App.Fire("submit_order_step_2", data);	
+			});
+			$("#ssm_orderingFooter").find("input[name='continue_btn']").val("Continue");
+		},
+		
+		// Handle Step 3 functionality
+		initializeStep3 : function (data, container) {
+			//
+			var _this = this, container,  
+			stepWrapper = container.find("#ssm_orderingStep3Container"),
+			stepContainer = $($App.Template('ordering/step3/step.ejs').render(data.header));
+
+			// Append the step html to the DOM
+			stepWrapper.html(stepContainer);
+//			Populate Selection List/  Repeat for each field	\ 
+			_this.populate_dropdowns(data.salespersons, data.header.salesperson1_id, $("#ssm_Salesperson1"));
+			_this.populate_dropdowns(data.salespersons, data.header.salesperson2_id, $("#ssm_Salesperson2"));
+			_this.populate_dropdowns(data.truckroutes, data.header.truckroute_id, $("#ssm_TruckRoute"));
+			_this.populate_dropdowns(data.orderreasoncodes, data.header.reasoncode_id, $("#ssm_Reason"));
+			_this.populate_dropdowns(data.branches, data.header.branch_id, $("#ssm_Branch"));
+			_this.populate_dropdowns(data.orderhandlings, data.header.orderhandling_id, $("#ssm_Orderhandling"));
+			_this.populate_dropdowns(data.shipvias, data.header.ship_via, $("#ssm_ShipVia"));
+			_this.populate_dropdowns(data.ordertypes, data.header.ordertype_id, $("#ssm_Ordertype"));
+			_this.populate_dropdowns(data.warehouses, data.header.warehouse_id, $("#ssm_Warehouse"));
+			if (!_this.config.allow_shipdate_override) {
+				container.find("#ssm_ShipDate")
+					.prop('readonly', true)
+					.css({color: "#666"})
+					.closest('.date-wrapper')
+					.find('.ssm-dates')
+					.hide();
+			}
+			container.find(".smmOrderingContinueButton").unbind().click(function () {
+				// Update the step
+				_this.currentStep++;
+				//submit from data
+				$('#complete_order_header').submit();
+			});
+			//decorate date field when clicked
+			_this.datepicker_functionality(container);
+			$("#ssm_orderingFooter").find("input[name='continue_btn']").val("Continue");
+		},
+		
+		initializeStep4 : function (data, container) {
+			var _this = this,
+				stepWrapper = container.find("#ssm_orderingStep4Container"),
+				stepContainer = $($App.Template('ordering/step4/step.ejs').render(data.messages));	
+			// Append the step html to the DOM
+			stepWrapper.html(stepContainer);	
+			container.find(".smmOrderingContinueButton").unbind().click(function () {
+				// Update the step
+				_this.currentStep++;
+				//submit from data
+				$('#send_message_lines').submit();
+			});
+			$("#ssm_orderingFooter").find("input[name='continue_btn']").val("Continue");
+		},
+		initializeStep5 : function (data, container) {
+			var _this = this,
+				stepWrapper = container.find("#ssm_orderingStep5Container"),
+				stepContainer = $($App.Template('ordering/step5/step.ejs').render(data));	
+			// Append the step html to the DOM
+			stepWrapper.html(stepContainer);
+			
+			//Populate fields that are populated in the ejs due to extra characters 
+			//append City State and Zip
+			if(data.header.customer_city){
+				$("#os_city_state_zip").html(data.header.customer_city+", "+ data.header.customer_state +", "+data.header.customer_zip);		
+			}
+			else if(data.header.customer_city ==""  && data.header.customer_state !==""){
+				$("#os_city_state_zip").html(data.header.customer_state +", "+data.header.customer_zip);
+			}
+			else{
+				$("#os_city_state_zip").html(data.header.customer_zip);
+			}
+			//////
+			if(data.header.salesperson1_id){
+				$("#os_salesperson1").html(data.header.salesperson1_id+" - "+ data.header.salesperson1_description)			
+			}
+			if(data.header.salesperson2_id){
+				$("#os_salesperson2").html(data.header.salesperson2_id+" - "+ data.header.salesperson2_description)			
+			}
+			
+			if(data.header.branch_id){
+				$("#os_branch").html(data.header.branch_id+" - "+ data.header.branch_description)			
+			}
+			
+			if(data.header.warehouse_id){
+				$("#os_warehouse").html(data.header.warehouse_id+" - "+ data.header.warehouse_description)			
+			}
+			
+			if(data.header.ordertype_id){
+				$("#os_ordertype").html(data.header.ordertype_id+" - "+ data.header.ordertype_description)			
+			}
+			
+			if(data.header.orderhandling_id){
+				$("#os_orderhandling").html(data.header.orderhandling_id+" - "+ data.header.orderhandling_description)			
+			}
+			
+			if(data.header.reasoncode_id){
+				$("#os_reasoncode").html(data.header.reasoncode_id+" - "+ data.header.reasoncode_description)			
+			}
+			// Order button Fire
+			container.find(".smmOrderingContinueButton").unbind().click(function () {
+				// Update the step
+				_this.currentStep++;
+				//submit from data
+				$App.Fire("submit_order_step_5", data);
+			});
+			// Apply the table styles to step 5
+			
+			_this.insert_message_lines(data.messages);
+			_this.insert_items(data.details);
+			if (data.problems.length > 0){
+				_this.insert_problems(data.problems);
+			};
+			$("#ssm_orderingFooter").find("input[name='continue_btn']").val("Order");
+			
+			$App.Utils.applySsmTableStyles({
+				table : stepContainer.find("#ssm_orderingStep1TableFinal"),
+				evenOdd : "odd"
+			});
+			
+		},
+		initializeStep6 : function (data, container) {
+			//console.log("initialize 6", data)
+			var _this = this,
+				stepWrapper = container.find("#ssm_orderingStep6Container"),
+				stepContainer = $($App.Template('ordering/step6/step.ejs').render(data));	
+			// Append the step html to the DOM
+			stepWrapper.html(stepContainer);
+			$("#ssm_orderingFooter").hide();
+		},
+		populate_dropdowns: function(cachedID, headerID, fieldID){
+			var _this=this, option = "<option value=''></option>";
+			$(cachedID).each(function(i, v) {
+				if (v.id == headerID){
+					option += '<option value="'+v.id+'" selected="selected">'+v.id+' - '+v.description+'</option>';
+				}
+				else{
+					option += '<option value="'+v.id+'">'+v.id+' - '+v.description+'</option>';
+				}
+			});	
+			fieldID.html(option);
+		},
+		insert_message_lines : function (message){
+			var sorted_messages = {},
+		    key, myarray = [];
+			//sort the message Object in alphabetical order in an Array and change name to sorted_messages
+		    for (key in message) {
+		    	if (message.hasOwnProperty(key)) {
+		    		myarray.push(key);
+		    	}
+		    }
+		    myarray.sort();
+		    for (key = 0; key < myarray.length; key++) {
+		    	sorted_messages[myarray[key]] = message[myarray[key]];
+		    }
+		    var lineCount=1;
+		    //Go through new sorted Object and append to screen
+			$.each(sorted_messages, function (i, val) {
+				var data={
+						messageText:val,
+						lineNumber:lineCount
+				},
+				message_row = $($App.Template('ordering/step5/messageline.ejs').render(data));
+				//Append the template above the Item Details ONLY if text exist
+				if(val){
+					$('#message_bottom').before(message_row);
+				}
+			    lineCount++;
+			});
+		},
+		insert_items : function (details){
+			$.each(details, function (i, val) {
+				var item_row = $($App.Template('ordering/step5/item_row.ejs').render(details[i]));
+				$("#ssm_orderingStep1TableFinal").find(".ssmTable > tbody tr:last-child").before(item_row);
+			});
+		},
+		insert_problems : function (problems){
+		
+			$App.Fire("showNotification", {header: "Some items cannot be ordered at this time", 
+					detail : "Some items requested for this selection cannot be ordered.  The items are currently removed from the order, but not the selection.  The reasons are located at the bottom of the page." 
+			});
+			$.each(problems, function (i, val) {
+				var problem_row = $($App.Template('ordering/step5/problem_row.ejs').render(problems[i]));
+				$('#problem_items').before(problem_row);
+			});
+		},
+		datepicker_functionality : function (container){
+			// initialize all Calendars
+			container.find('.date-wrapper').each(function () {
+				var calContainer = $(this);
+				// bind click events for datepicker
+				calContainer.find(".ssm-dates").click(function() {				
+					calContainer.find("input").datepicker({
+	                    dateFormat: 'mm/dd/y',
+	                    showOtherMonths: true,
+	                    selectOtherMonths: true,
+	                    showOn: "button",
+	                    beforeShow: function(input){
+	                        $(this).attr('readonly', true);
+	                    },
+	                    onClose: function(dateText){
+	                        $(this).attr('readonly', false);
+	                    },
+	                    onSelect: function(dateText) { 
+	                    }
+	                });
+					calContainer.find("input").datepicker("show");
+				});
+			});
+		}
+	});		
+})(jQuery);

@@ -1,0 +1,85 @@
+					
+								<div class="title underlined_title refTitle">
+									<div>Edit <span class="ssmReferenceEditType"></span> Reference</div>									
+								</div>
+								
+								<div class="ssm_editReferenceData">
+								
+									<div class="row">							
+										<div class="firstCol"><span>Last / Company Name:</span></div>
+										<div>
+											<input type="text" class="longer" name="lastname" value="<%= last_name %>"/>
+										</div>																			
+									</div>
+									
+									<div class="row">	
+									
+										<div class="firstCol"><span>First Name:</span></div>
+										<div>
+											<input type="text" class="longer" name="firstname" value="<%= first_name %>" maxlength="50"/>
+										</div>
+									
+									</div>
+									
+									<div class="row">	
+									
+										<div class="firstCol"><span>Address:</span></div>
+										<div>
+											<input type="text" class="longer" name="address1" value="<%= address1 %>" maxlength="50"/>
+										</div>
+										
+									
+									</div>
+									
+									<div class="row">		
+										
+										<div class="firstCol">&#160;</div>
+										<div>
+											<input type="text" class="longer" name="address2" value="<%= address2 %>" maxlength="50"/>
+										</div>
+										
+									
+									</div>
+									
+									<div class="row">			
+									
+										<div class="firstCol"><span>City and State</span></div>
+										<div>
+											<input type="text" class="mid-plus" name="city" value="<%= city %>" maxlength="50"/>
+										</div>
+										<div>
+											<div class="ssm-styled-select w300">
+												<select name="state"></select>
+											</div>
+										</div>																			
+									</div>
+									
+									<div class="row">
+										<div class="firstCol"><span>Zipcode:</span></div>
+										<div>
+											<input type="text" class="mid" name="zipcode" value="<%= zip %>" maxlength="20"/>
+										</div>
+									</div>
+									
+									<div class="row">			
+									
+										<div class="firstCol"><span>Phone Number:</span></div>
+										<div>
+											<input type="text" class="mid-plus" name="phone1" value="<%= main_phone %>" maxlength="20"/>
+										</div>
+										<div><span>Fax:</span></div>
+										<div>
+											<input type="text" class="mid-plus" name="phone2" value="<%= fax %>" maxlength="20"/>
+										</div>
+									
+									</div>
+									<div class="row">			
+									
+										<div class="firstCol"><span>Email:</span></div>
+										<div>
+											<input type="text" class="longer" name="email" value="<%= email %>" maxlength="250"/>
+										</div>
+										
+									
+									</div>																		
+								</div>																							

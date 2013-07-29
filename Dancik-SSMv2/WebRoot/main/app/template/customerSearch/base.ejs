@@ -1,0 +1,97 @@
+<div id='ssm_CustomerSearch'>
+    <div class="widthControl">
+    	<div class="ssm_crumb">		
+			<div class="activeCrumbLeft"></div>
+			<div class="activeCrumbBody"><a href='#openDashboard'>Home</a></div>
+			<div class="activeCrumbRight"></div>
+			<div class="inactiveCrumbBody">New Selection</div>
+			<div class="inactiveCrumbRightPointed"></div>		
+		</div>
+		<div class="ssm_interfaceSurrounder">
+			<div class="ssm_interfacePadding">
+		        <div class="ssm_headerBarGray">
+		        	<div class="padding5">
+		        		<span class="commandButton float-left ssm_headerIcon">
+		        			<img src="../images/clear.gif" class="customer-info"/>
+		        		</span>
+		        		<div class="title float-left">Customers</div>
+		        	</div>
+		        </div>
+		
+		        <!-- default column headings-->
+		        <div class="new_record hide">
+		            <%= $App.Template("customerSearch/newCustomer.ejs").render(this)%>
+		        </div>
+		
+		        <div class="customerSearchWrapper">
+	            <div class="ssm_selectionFile_references">
+	                <form id="ssm_form" action="#getCustomers" autocomplete="off">
+	                    <span class ="ssm_SelectionLookup_Box3 ssm_newSelection_input">
+	                        <input type="text" name="ssm_keyword" id="ssm_select_customer" maxlength='100'/>
+	                    </span>
+	                    <span id="button_result_g1">
+	                        <input type="submit" value="Search" class="greenButton ssm_newSelection_submit"></input>
+	                    </span>
+						<a href='#openNewCustomer'>
+	        				<input class="greenButton ssm_search_customer_button" id="customer_button"  type="submit" value="New Customer"/>
+	        			</a>
+						<div class="ssm_div_label_text">
+		                    <span class="ssm_label_text">
+		                        <label  id="selection_results_label" style='display:none;'>Results.....</label>
+		                    </span>
+	                	</div>
+						<div class="containerRow">
+                                   
+                                
+                                    <div class="radioGroup">
+                                    	<label>Keywords: </label>
+                                        <input type="radio" value="N" name="ssm_usekeyword_stringsearch" checked='checked'/>
+                                        <span>Begins with </span>
+                                        <input type="radio" value="Y" name="ssm_usekeyword_stringsearch"/>
+                                        <span>Contains</span>
+                                    </div>
+                          </div>
+	                </form>
+	
+	                
+	
+	                <div class= "ssm_search_customer"></div>
+	            </div>
+	
+	            <div class="ssm_busy" style='display:none;'>
+	                <div class="ssm_load_indicator_text">Loading results...</div>
+	                <div class="ssm_load_indicator"></div>
+	            </div>
+	
+	            <div class="instructions">Begin customer search or enter a new customer</div>
+	
+	            <!-- default column headings-->
+	            <div class="results_table"></div>
+	        </div>	  
+ 			</div>
+ 		</div>
+ 
+			
+		<form class="more_form" action="#getCustomersMore" style='display:none;'>
+	        <div class="detachedFooter">     
+		        <div id="selection_search_results_more">
+		            <input class="ssm-Button greenButton" type="submit" value="More"/> 
+		        </div>
+		        <div id="selection_search_results" class="ssm-styled-select w150">
+		            <select name="SSM_MaxRecords">
+		                <option value="25" selected="selected">25 Records</option>
+		                <option value="50">50 Records</option>
+		                <option value="75">75 Records</option>
+		                <option value="100">100 Records</option>
+		                <option value="250">250 Records</option>
+		                <option value="500">500 Records</option>
+		            </select> 
+		        </div>
+		        <span class="commandButton float-left"><a class="backToTop" href="#Top" title="Back to Top"></a></span>
+	      </div> 
+		    <div class="bottom-padding-footer clear-both"></div>
+     </form>
+    </div>
+  
+</div>
+

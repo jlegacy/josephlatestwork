@@ -1,0 +1,235 @@
+			<div class="greySubSection">
+				<div class="containerRow">
+					<label>Name:</label>
+					<div class="float-left"> 
+						<input id="ssm_cr_filepath" type="text" value="" placeholder="Commissions Report" class="long-plus"/> 
+					</div>
+				</div>
+			</div>
+			<div class="subSection">
+				<div class="containerRow">
+					<label>Company:</label>
+					<div class="ssm-styled-select w300 float-left"> 
+						<select id="ssm_report_company_select" /> 
+					</div>
+				</div>
+				<div class="containerRow">
+					<label>Date Range:</label>
+					<div class="date-wrapper float-left">
+						<input type="text" maxlength="10" id="ssm_report_commissions_date_range_from"/>
+						<img src="../images/clear.gif" class="ssm-dates">
+					</div>
+					<span class="float-left midText"> to </span>
+					<div class="date-wrapper float-left">
+						<input type="text" maxlength="10" id="ssm_report_commissions_date_range_to"/>
+						<img src="../images/clear.gif" class="ssm-dates">
+					</div>
+				</div>
+				<div class="containerRow">
+					<label>Include Trim:</label>
+					<div class="radioGroup">
+						<input type="radio" name="includeTrim" value="Y" checked="checked" /> Yes
+						<input type="radio" name="includeTrim" value="N" /> No
+					</div>
+				</div>
+			</div>	
+			<div class="subSection commissionReferences"> <!--references -->
+				<div class="labelColumn">
+					<label>References:</label>
+				</div>
+				<div class="inputsColumn">
+			<!-- placeholder for references	-->
+				</div>
+			</div>
+			<div class="subSection sortBy">
+				<div class="labelColumn">
+					<label>Sort by:</label>
+					<span class="smallFont">*Primary sort is Salesperson ID</span>
+				</div>
+				<div class="inputsColumn">
+					<div class="containerRow">
+						<input type="checkbox" value="Branch" />
+						<span class="checkboxLabel">Branch</span>
+						<div class="radioGroup" style="display:none">
+							<input type="radio" name="branchAscDes" value="ASC" checked="checked" /> ASC
+							<input type="radio" name="branchAscDes" value="DESC" /> DES
+						</div>
+					</div>
+					<div class="containerRow">
+						<input type="checkbox" value="Customer Account" />
+						<span class="checkboxLabel">Customer Account#</span>
+						<div class="radioGroup" style="display:none">
+							<input type="radio" name="custAcctAscDes" value="ASC" checked="checked" /> ASC
+							<input type="radio" name="custAcctAscDes" value="DESC" /> DES
+						</div>
+					</div>
+					<div class="containerRow">
+						<input type="checkbox" value="Invoice #" />
+						<span class="checkboxLabel">Invoice#</span>
+						<div class="radioGroup" style="display:none">
+							<input type="radio" name="invNumAscDes" value="ASC" checked="checked" /> ASC
+							<input type="radio" name="invNumAscDes" value="DESC" /> DES
+						</div>
+					</div>
+					<div class="containerRow">
+						<input type="checkbox" value="Invoice Date" />
+						<span class="checkboxLabel">Invoice Date</span>
+						<div class="radioGroup" style="display:none">
+							<input type="radio" name="invDateAscDes" value="ASC" checked="checked" /> ASC
+							<input type="radio" name="invDateAscDes" value="DESC" /> DES
+						</div>
+					</div>
+					<div class="containerRow">
+						<input type="checkbox" value="Item" />
+						<span class="checkboxLabel">Item#</span>
+						<div class="radioGroup" style="display:none">
+							<input type="radio" name="itemAscDes" value="ASC" checked="checked" /> ASC
+							<input type="radio" name="itemAscDes" value="DESC" /> DES
+						</div>
+					</div>
+					<div class="containerRow">
+						<input type="checkbox" value="Manufacturer" />
+						<span class="checkboxLabel">Manufacturer</span>
+						<div class="radioGroup" style="display:none">
+							<input type="radio" name="mfgrAscDes" value="ASC" checked="checked" /> ASC
+							<input type="radio" name="mfgrAscDes" value="DESC" /> DES
+						</div>
+					</div>
+					<div class="containerRow">
+						<input type="checkbox" value="Salesperson Name" />
+						<span class="checkboxLabel">Salesperson Name</span>
+						<div class="radioGroup" style="display:none">
+							<input type="radio" name="salespersonAscDes" value="ASC" checked="checked" /> ASC
+							<input type="radio" name="salespersonAscDes" value="DESC" /> DES
+						</div>
+					</div>
+					<div class="containerRow">
+						<input type="checkbox" value="Selection #" />
+						<span class="checkboxLabel">Selection#</span>
+						<div class="radioGroup" style="display:none">
+							<input type="radio" name="selNumAscDes" value="ASC" checked="checked" /> ASC
+							<input type="radio" name="selNumAscDes" value="DESC" /> DES
+						</div>
+					</div>
+					<div class="containerRow">
+						<input type="checkbox" value="Selection Creation Date" />
+						<span class="checkboxLabel">Selection Create Date</span>
+						<div class="radioGroup" style="display:none">
+							<input type="radio" name="selCreationDateAscDes" value="ASC" checked="checked" /> ASC
+							<input type="radio" name="selCreationDateAscDes" value="DESC" /> DES
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="subSection">
+				<div class="labelColumn">
+					<label>Optional Filter:</label>
+				</div>
+				<div class="inputsColumn Optionals">
+					<div class="containerRow">
+						<div>
+							<input type="checkbox" id="branch" />
+							<span class="checkboxLabel">Branch</span>
+							<div class="filterOptions float-right">
+								<span class="commandButton"><a href="#" class="ssm-clear" title="Clear Options for this Filter"></a></span>
+								<span class="commandButton"><a href="#rpt_cr_GetLookupListing" class="edit" title="Edit Options"></a></span>
+								<div class="radioGroup">
+									<input type="radio" name="BromitInclude" value="I" checked="checked"/>	Include
+									<input type="radio" name="BromitInclude" value="O"/>	Omit
+								</div>
+							</div>
+						</div>
+						<div class="filterOptions2"></div>
+					</div>
+					<div class="containerRow">
+						<div>
+							<input type="checkbox" id="salesman" />
+							<span class="checkboxLabel">Salesperson</span>
+							<div class="filterOptions float-right">
+								<span class="commandButton"><a href="#" class="ssm-clear" title="Clear Options for this Filter"></a></span>
+								<span class="commandButton"><a href="#rpt_cr_GetLookupListing" class="edit" title="Edit Options"></a></span>
+								<div class="radioGroup">
+									<input type="radio" name="SPomitInclude" value="I" checked="checked"/>	Include
+									<input type="radio" name="SPomitInclude" value="O"/>	Omit
+								</div>
+							</div>
+						</div>
+						<div class="filterOptions2"></div>
+					</div>
+					<div class="containerRow">
+						<div>
+							<input type="checkbox" id="manufacturer" />
+							<span class="checkboxLabel">Manufacturer</span>
+							<div class="filterOptions float-right">
+								<span class="commandButton"><a href="#" class="ssm-clear" title="Clear Options for this Filter"></a></span>
+								<span class="commandButton"><a href="#rpt_cr_GetLookupListing" class="edit" title="Edit Options"></a></span>
+								<div class="radioGroup">
+									<input type="radio" name="MFRomitInclude" value="I" checked="checked"/>	Include
+									<input type="radio" name="MFRomitInclude" value="O"/>	Omit
+								</div>
+							</div>
+						</div>
+						<div class="filterOptions2"></div>
+					</div>
+					<div class="containerRow">
+						<div>
+							<input type="checkbox" id="costcenter" />
+							<span class="checkboxLabel">Cost Center</span>
+							<div class="filterOptions float-right">
+								<span class="commandButton"><a href="#" class="ssm-clear" title="Clear Options for this Filter"></a></span>
+								<span class="commandButton"><a href="#rpt_cr_GetLookupListing" class="edit" title="Edit Options"></a></span>
+								<div class="radioGroup">
+									<input type="radio" name="CComitInclude" value="I" checked="checked"/>	Include
+									<input type="radio" name="CComitInclude" value="O"/>	Omit
+								</div>
+							</div>
+						</div>
+						<div class="filterOptions2"></div>
+					</div>
+					<div class="containerRow">
+						<div>
+							<input type="checkbox" id="item_class_1" />
+							<span class="checkboxLabel">Item Class 1</span>
+							<div class="filterOptions float-right">
+								<span class="commandButton"><a href="#" class="ssm-clear" title="Clear Options for this Filter"></a></span>
+								<span class="commandButton"><a href="#rpt_cr_GetLookupListing" class="edit" title="Edit Options"></a></span>
+								<div class="radioGroup">
+									<input type="radio" name="IC1omitInclude" value="I" checked="checked"/>	Include
+									<input type="radio" name="IC1omitInclude" value="O"/>	Omit
+								</div>
+							</div>
+						</div>
+						<div class="filterOptions2"></div>
+					</div>
+					<div class="containerRow">
+						<div>
+							<input type="checkbox" id="item_class_2" />
+							<span class="checkboxLabel">Item Class 2</span>
+							<div class="filterOptions float-right">
+								<span class="commandButton"><a href="#" class="ssm-clear" title="Clear Options for this Filter"></a></span>
+								<span class="commandButton"><a href="#rpt_cr_GetLookupListing" class="edit" title="Edit Options"></a></span>
+								<div class="radioGroup">
+									<input type="radio" name="IC2omitInclude" value="I" checked="checked"/>	Include
+									<input type="radio" name="IC2omitInclude" value="O"/>	Omit
+								</div>
+							</div>
+						</div>
+						<div class="filterOptions2"></div>
+					</div>
+					<div class="containerRow">
+						<div>
+							<input type="checkbox" id="item_class_3" />
+							<span class="checkboxLabel">Item Class 3</span>
+							<div class="filterOptions float-right">
+								<span class="commandButton"><a href="#" class="ssm-clear" title="Clear Options for this Filter"></a></span>
+								<span class="commandButton"><a href="#rpt_cr_GetLookupListing" class="edit" title="Edit Options"></a></span>
+								<div class="radioGroup">
+									<input type="radio" name="IC3omitInclude" value="I" checked="checked"/>	Include
+									<input type="radio" name="IC3omitInclude" value="O"/>	Omit
+								</div>
+							</div>
+						</div>
+						<div class="filterOptions2"></div>
+					</div>
+				</div>
+			</div>

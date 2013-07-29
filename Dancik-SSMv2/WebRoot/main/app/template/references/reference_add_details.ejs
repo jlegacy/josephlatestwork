@@ -1,0 +1,54 @@
+<div class="ssm-edit-reference-container">
+	<div class="padding10">	
+		<form id="addReferenceRecord" action="#addReferenceRecord">							
+			<div class="title underlined_title">
+				<div class="float-left" style="margin-top:-6px;">Enter New <span class="ssmReferenceAddType"></span> Reference</div>									
+			</div>
+			<div class="row">
+				<label class="first-label ssm-input-labels">Last Name / Company:</label>
+				<input id="dc_test" name="ssm_lastname" class="longer" type="text" value="" maxlength="50"/>
+			</div>
+			<div class="row">
+				<label class="first-label ssm-input-labels">First Name:</label>
+				<input name="ssm_firstname" class="longer" type="text" value="" maxlength="50"/>
+			</div>
+			<div class="row">
+				<label class="first-label ssm-input-labels">Address</label>
+				<input name="ssm_address1" class="longer" type="text" value="" maxlength="50"/>
+			</div>
+			<div class="row">
+				<label class="first-label ssm-input-labels"></label>
+				<input name="ssm_address2" class="longer" type="text" value="" maxlength="50"/>
+			</div>
+			<div class="row">
+				<label class="first-label ssm-input-labels">City and State:</label>
+				<input name="ssm_city" type="text" value="" maxlength="50"/>
+				<div style="display:inline-block;vertical-align:top;margin:0 10px 0 0;">
+					<div class="ssm-styled-select w300">
+						<select name="ssm_state"></select>
+					</div>
+				</div>													
+			</div>
+			
+			<div class="row">
+				<label class="first-label ssm-input-labels">Zipcode:</label>				
+				<input name="ssm_zip" class="mid" type="text" value="" maxlength="20"/>									
+			</div>
+			
+			<div class="row">
+				<label class="first-label ssm-input-labels">Phone Number:</label>									
+				<input name="ssm_phone1" class="mid-plus" type="text" value="" maxlength="20"/>
+				<label class="ssm-input-labels">Fax:</label>
+				<input name="ssm_phone2" class="mid-plus" type="text" value="" maxlength="20"/>
+			</div>
+			<div class="row">
+				<label class="first-label ssm-input-labels">Email:</label>
+				<input name="ssm_email" class="longer" type="text" value="" maxlength="250"/>
+			</div>
+			<div style="text-align:center;">								
+				<input class="greenButton" type="submit" value="Add"/>
+				<button id="ssm_reference_cancel" class="greyButton" type="button">Cancel</button>
+			</div>
+		</form>
+	</div>																		
+</div>

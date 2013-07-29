@@ -1,0 +1,10 @@
+<tr>
+	<td class="centered">		
+		<span><a class="commandButton ssm-edit expand" href="#edit-reference" title="Edit Job"></a></span>			
+	</td>
+	<td>
+		<input class="longer" type="text" name="desc" value="<%= description %>"/>
+		
+		<span class="description"><%= description %></span>
+	</td>
+</tr>

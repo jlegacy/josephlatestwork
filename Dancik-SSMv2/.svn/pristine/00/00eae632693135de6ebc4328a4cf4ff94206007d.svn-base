@@ -1,0 +1,12 @@
+    <table>
+        <% for (var i = 0; i < accounts.length; i++) {%>
+
+        <tr id="buyer_<%=accounts[i]['id']%>" class="data_row ssm_popup_data_row">
+            <td id="buyerAccount-popup-id_<%=accounts[i]['id']%>" class="ssm_center ssm_popup_td_size1"><%=accounts[i]['id']%></td>
+            <td id="buyerAccount-popup-name_<%=accounts[i]['id']%>"><%=accounts[i]['name' ]%></td>
+        </tr>
+
+        <% }%>
+    </table>
+
+

@@ -1,0 +1,12 @@
+<div class="ssm_availableOptionsBody">
+	<div class="float-left" style="width:100%">
+		<div class="padding5 ssm_availableOptionsRow relatedItems">
+			<div class="float-left commandButton"><a class="packaging"/></div>  Related Items
+		</div>
+	</div>
+	<div class="float-left dashedTopBorder" style="width:100%">
+		<div class="padding5 ssm_availableOptionsRow productInformation">
+			<div class="float-left commandButton"><a class="job-info"/></div> Check Stock and Product Information		
+		</div>
+	</div>
+</div>

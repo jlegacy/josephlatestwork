@@ -1,0 +1,22 @@
+<div class="ssmTableWrapper">
+	<table id="ssm_prodDetailsInventoryTable" class="ssmTable">
+		<thead>
+			<tr>
+				<th>Serial#</th>
+			    <th>Shade</th>
+			    <th>Ware</th>
+			    <th>Location</th>
+			    <th>Available - CT</th>
+			    <th>Available - SF</th>
+			    <th>Status</th>
+			 </tr>
+		</thead>
+		<tbody>
+			<tr class="no_inventory_row" style="display:none;">
+				<td colspan="7" align="center">
+					No Inventory available
+				</td>				
+			</tr>
+		</tbody>
+	</table>
+</div>

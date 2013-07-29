@@ -1,0 +1,103 @@
+<div id="ssm_AddMode" style="display:none;" class="border-green">
+	<form action="#addSelectionItemRecord">
+		<input type="hidden" name='ssm_Selectionid' value="<%= $App.Model('Selection').currentSelectionId %>"/>
+	
+		<div class="float-left">
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Room Type:</label>
+					<div class="ssm-styled-select w250 editable">
+						<select name="ssm_RoomTypeId" class="editable" id="ssm_room_type_select"></select>
+					</div>
+				</div>
+				<div class="labelInputBlock">
+					<label>Room Area:</label>
+					<div class="ssm-styled-select w250 editable">
+						<select name="ssm_RoomAreaId" class="editable" id="ssm_room_area_select"></select>
+					</div>
+				</div>
+			</div>
+				<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Item Number:</label>
+					<div class="itemNumberContainer pseudoTextBox">
+						<input type="text" name="ssm_Item" class="upper" style="border:none;width:80%;"/>
+						<span class="commandButton float-right"><a href="#openItemSearch" class="openItemSearch ssm-search" title="Search"></a></span>
+					</div>
+			   </div>
+				<div class="labelInputBlock">
+					<label>&nbsp;</label>
+					<span class="commandButton-35"><a href="#openItemDetails" class="ssm-jobs-icon" title="Item Details"></a></span>
+				</div>
+		</div>
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Quantity:</label>
+					<div>
+						<input name="ssm_Qty" class="mid" type="text" value="" maxlength="30">
+					</div>
+				</div>
+				<div class="labelInputBlock">
+					<label>UM:</label>
+					<div class="ssm-styled-select w85">
+						<select name="ssm_UOM" class="editable" id="ssm_unit_of_measure_select"></select>
+					</div>
+				</div>
+			</div>
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Price Override:</label>
+					<div>
+						<input class="editable upper mid" type="text" value="" maxlength="30" name="ssm_PriceOverride" />
+					</div>
+				</div>
+				<div class="labelInputBlock">
+					<label>Override Price List:</label>
+					<div class="ssm-styled-select w300 editable">
+						<select name="ssm_PL_Override" class="editable" id="ssm_price_codes_select"></select>
+					</div>
+				</div>
+			</div>
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Restriction Code:</label>
+					<div class="ssm-styled-select w300">
+						<select name="ssm_RCCode" class="editable" id="ssm_restriction_codes_select"></select>
+					</div>
+				</div>
+			</div>
+
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Notes:</label>
+					<div>
+						<input name="ssm_Note" class="editable upper longer bottom-spacer-2" type="text" value="" maxlength="50">
+					</div>
+					<div>
+						<input name="ssm_Note3" class="editable upper longer bottom-spacer-2" type="text" value="" maxlength="50">
+					</div>
+					<div>
+						<input name="ssm_Note4" class="editable upper longer bottom-spacer-2" type="text" value="" maxlength="50">
+					</div>
+					<div>
+						<input name="ssm_Note5" class="editable upper longer bottom-spacer-2" type="text" value="" maxlength="50">
+					</div>
+					<div>
+						<input name="ssm_Note6" class="editable upper longer bottom-spacer-2" type="text" value="" maxlength="50">
+					</div>
+					<div>
+						<input name="ssm_Note7" class="editable upper longer bottom-spacer-2" type="text" value="" maxlength="50">
+					</div>
+					<div>
+						<input name="ssm_Note8" class="editable upper longer bottom-spacer-2" type="text" value="" maxlength="50">
+					</div>
+					<div>
+						<input name="ssm_Note9" class="editable upper longer bottom-spacer-2" type="text" value="" maxlength="50">
+					</div>
+				</div>
+			</div>	
+			
+		</div>
+	<div id="ssm_addModeFooter" class="modeGreen border-green"><input type="submit" value="Add" class="greenButton" /></div>
+	</form>
+</div>

@@ -1,0 +1,50 @@
+<form action="#rpt_dd_getSummary">	
+	<div class="greySubSection">
+		<div class="containerRow">
+			<label>View by:</label>
+			<div class="ssm-styled-select w250 float-left"> 
+				<select id="ssm_report_view_by_select" name="ssm_MainSort">
+					<option value="manufacturer">Manufacturer</option>
+					<option value="salesperson">Salesperson</option>
+					<option value="status">Status</option>
+					<option value="productline">Product Line</option>
+					<option value="item">Item</option>
+					<option value="roomtype">Room</option>
+					<option value="roomarea">Area</option>
+					<option value="reference">Reference</option>
+				</select> 
+			</div>
+		</div>
+	</div>
+	<div class="subSection">
+		<div class="containerRow">
+			<label>Sub-sort:</label>
+			<div class="ssm-styled-select w250 float-left"> 
+				<select id="ssm_report_sub_sort_select" name="ssm_SubSort">
+					<option value="status">Status</option>
+					<option value="branch">Branch</option>
+					<option value="salesperson">Salesperson</option>
+					<option value="customer">Customer</option>
+				</select> 
+			</div>
+		</div>
+		<div class="containerRow">
+			<label>Date Created</label>
+			<div class='date-wrapper float-left'>
+				<input type='text' id='ssm_report_date_range_from' maxlength='10' name='ssm_BeginDate'/>
+				<img class='ssm-dates editable' src='../images/clear.gif'/>
+			</div>
+			<span class="float-left midText"> to </span>
+			<div class="date-wrapper float-left">
+				<input type='text' maxlength='10' id='ssm_report_date_range_to' name='ssm_EndDate' />
+				<img src="../images/clear.gif" class="ssm-dates">
+			</div>
+		</div>
+		<div class="containerRow">
+		<label>&nbsp;</label>
+		<input type="submit" class="greenButton" value="Submit" />
+		</div>
+	</div>
+</form>
+	<div id="ssm_Reports_Drilldown_Placeholder" />
+	<div id="ssm_Reports_Drilldown_Details_Placeholder" />

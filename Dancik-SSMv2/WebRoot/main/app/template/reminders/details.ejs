@@ -1,0 +1,63 @@
+<div id="ssm_lower_body"> 
+    <div id='ssm_Reminders'>
+        <div class='widthControl'>
+            <div class="padding5"></div>
+            <div id = "ssm_Dayview_Section" class="ssm_interfaceSurrounder">
+                <div class="ssm_headerBarGray">
+                    <div class="padding5">
+                        <span class="commandButton float-left ssm_headerIcon"> <img class="reminders" src="../images/clear.gif"> </span>
+                        <div class="title float-left">
+                            Reminders: Add/Edit
+                        </div>
+                    </div>
+                </div>
+                <div id="ssm_Dayview_left">
+                    <div id="ssm_Dayview_left_container">
+                    
+                        <div class="ssm-input-labels ssm_detailview_link">Date</div>
+                        <div id="ssm_input_date" class="date-wrapper">
+                        	<input type="text" name="ssm_Date"/>
+                            <img class="ssm-dates" src='../images/clear.gif'>
+                        </div>
+                        
+                        <div class="ssm-input-labels ssm_detailview_link">Subject</div>
+                        <div id="ssm_input_brief">
+                        	<input type='text' class='longer' maxlength="50" name="ssm_Brief"/>
+                        </div>
+                        
+                        <div class="ssm-input-labels ssm_detailview_link">Notes</div>
+                        <div id="ssm_input_description">
+                        	<textarea name="ssm_description" class='longer'></textarea>
+                        </div>
+                        
+                        <div class="footer">
+                           	<input id="ssm_delete_button" class ="greyButton float-right" value="Delete" type="button"></input>
+                           	<input id="ssm_save_button" class ="greenButton float-left" value="Save" type="button"></input>
+                        </div>
+                    </div>
+                </div>
+    
+                <div id="ssm_Dayview_right">
+                    <div id="ssm_Dashboard_CalendarSection_1">
+                        <div id='ssm_Dashboard_Calendar'></div>
+                        <div class='options'>
+                            <a href="#openRemindersMonth/reset" class='mini-calendar calendar-31'></a>
+                            <a href="#openRemindersWeek/reset" class='mini-calendar calendar-7'></a>
+                            <a href="#openRemindersDay/reset" class='mini-calendar calendar-1'></a>
+                        </div>
+    
+                        <div id='ssm_dayview_right_date_display' class='title'>
+                            <label>Reminders on</label></div>
+                        <div id='ssm_Reminders_Detail_Listing'></div>
+    
+                    </div>
+                    <div id="ssm_divider"></div>
+                </div>
+            </div>
+            <div class="detachedFooter float-left">
+                <span class="commandButton float-left"><a class="backToTop" href="#Top"></a></span>
+            </div>
+		  <div class="bottom-padding-footer clear-both"></div>
+        </div>
+    </div>
+</div>

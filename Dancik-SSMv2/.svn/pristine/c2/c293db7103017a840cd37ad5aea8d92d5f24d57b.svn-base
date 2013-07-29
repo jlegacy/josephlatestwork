@@ -1,0 +1,169 @@
+<div id="ssm_lower_body">
+    <div id='ssm_SelectionSearch'>
+        <div class='dayViewTop widthControl'>
+            <div class="padding5"></div>
+            <div id = "ssm_searchResults_Section" class="ssm_interfaceSurrounder inline-labels">
+                <div class="ssm_headerBarGray">
+                    <div class="padding5">
+                        <span class="commandButton float-left ssm_headerIcon"> <img class="search-doc" src="../images/clear.gif"> </span>
+                        <div class="title float-left">
+                            Search Selections
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="ssm_mainPage_hdr">Search Results</div>
+                <div id="ssm_line"></div> -->
+
+                <form class="submit_form" action="#search_results_submit">
+
+                    <!-- Preference Check Boxes-->
+
+                    <div class="filterSection">
+                        <!-- Preference Search Box-->
+                        <div class="containerRow">
+                            <span class ="ssm_SelectionLookup_Box2">
+                                <input type="text" name="ssm_Keyword" class="float-left" id="ssm_search_selected_checksboxes" maxlength='100'/>
+                            </span>
+                            <span id="button_result_g1">
+                                <input type="submit" value="Search" class="ssm_search_button_go2 ssm_search_button_go2_margin greenButton float-left"/>
+                            </span>
+
+                        </div>
+
+                        <div class="containerRow">
+                            <span class="ssm_label_text"> <label  id="selection_results_label"></label> </span>
+                        </div>
+
+                        <div class="containerRow">
+                            <span class="ssm_label_text"> <label> Filter results by:</label> </span>
+
+                            <span class="ssm_selectionFile_reference_text">
+                                <input  id="checkbox_customers"  type="checkbox" class="filter_check_boxes" value="Y" name="ssm_Keyword_FilterOn_Customer"/>
+                                <label id="checkbox_customers"> CUSTOMERS</label>
+                             </span>
+
+                            <span class="ssm_selectionFile_reference_text" id="ssm_selectionFile_references">
+                                <input  id="checkbox_reference"  type="checkbox" class="filter_check_boxes" value="Y" name="ssm_Keyword_FilterOn_Reference"/>
+                                <label id="checkbox_references"> REFERENCES </label> 
+                            </span>
+
+                            <span class="ssm_selectionFile_reference_text" id="ssm_selectionFile_jobInfo">
+                                <input id="checkbox_jobinfo" type="checkbox" class="filter_check_boxes"  value="Y" name="ssm_Keyword_FilterOn_JobInfo" />
+                                <label id="checkbox_jobinfo"> JOB INFORMATION </label>
+                            </span>
+
+                            <span class="ssm_selectionFile_reference_text" id="ssm_selectionFile_notes">
+                                <input id="checkbox_notes" type="checkbox" class="filter_check_boxes"  value="Y" name="ssm_Keyword_FilterOn_Notes"/>
+                                <label id="checkbox_notes"> NOTES </label>
+							</span>
+
+                            <span class="ssm_selectionFile_reference_text" id="ssm_selectionFile_notepad">
+                                <input id="checkbox_notepad" type="checkbox" class="filter_check_boxes"  value="Y" name="ssm_Keyword_FilterOn_Notepad"/>
+                                <label id="checkbox_notepad"> NOTEPAD </label>
+							</span>
+
+                            <span class="ssm_selectionFile_reference_text" id="ssm_selectionFile_items">
+                                <input id="checkbox_items" type="checkbox" class="filter_check_boxes" value="Y" name="ssm_Keyword_FilterOn_Items"/>
+                                <label id="checkbox_items"> ITEMS </label>
+                             </span>
+                        </div>
+                        <div class="containerRow">
+                            <span class="commandButton float-left"><a href="#" class="ssm-expand"></a></span><a class="float-left" id="advancedSearchExpand" href="#">Advanced Search</a>
+                        </div>
+                        <div id="advancedSearchOptions" class="subSection">
+                            <div class="containerRow">
+                                <div class="labelColumn">
+                                      <label>Keywords: </label>
+                                </div>
+                                <div class="inputsColumn">
+                                    <div class="radioGroup">
+                                        <input type="radio" value="N" name="ssm_UseKeyword_StringSearch" checked='checked'/>
+                                        <span>Begins with </span>
+                                        <input type="radio" value="Y" name="ssm_UseKeyword_StringSearch"/>
+                                        <span>Contains</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="containerRow">
+                                <div class="labelColumn">
+                                    <label>Status: </label>
+                                </div>
+                                <div class="inputsColumn">
+                                    <div class="ssm-styled-select w175">
+                                        <select name="ssm_FilterBy_CurrentStatus"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="containerRow">
+                                <div class="labelColumn">
+                                    <label>User: </label>
+                                </div>
+                                <div class="inputsColumn">
+                                    <div class="ssm-styled-select w250">
+                                        <select name="ssm_FilterBy_CreationUser"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="containerRow">
+                                <div class="labelColumn">
+                                    <label>Warehouse: </label>
+                                </div>
+                                <div class="inputsColumn">
+                                    <div class="ssm-styled-select w350">
+                                        <select name="ssm_FilterBy_CreationWarehouse"></select>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+               
+                <!-- default column headings-->
+               <!-- <div class="ssm_new_customer">
+                    <table id="new_customer_table"></table>
+                </div>-->
+
+                <!-- default column headings-->
+                <div class="ssm_search_results" id="searchResultsTable">
+                    <!--<table class="results_table"></table>-->
+                </div>
+                <div class="ssm_busy">
+                    <div class="ssm_load_indicator_text">
+                        Loading results...
+                    </div>
+                    <div class="ssm_load_indicator"></div>
+                </div>
+
+                <div class="ssm_search_results">
+                    <div id="ssm_no_results" class="ssm_no_results ssm_customer_search_start"></div>
+                </div>
+
+            </div>
+            <div class="detachedFooter float-left">
+                <div class="footer float-right" style="display: none">
+                    <form class="more_form" action="#search_results_more">
+                        <div id="selection_search_results" class="ssm-styled-select w150">
+                            <select name="SSM_MaxRecords">
+                                <option value="25" selected="selected">25 Records</option>
+                                <option value="50">50 Records</option>
+                                <option value="75">75 Records</option>
+                                <option value="100">100 Records</option>
+                                <option value="250">250 Records</option>
+                                <option value="500">500 Records</option>
+                            </select>
+                        </div>
+                        <div id="selection_search_results_more">
+                            <input class="ssm-Button greenButton" type="submit"  value="More"/>
+                        </div>
+                    </form>
+                </div>
+                
+                <span class="commandButton float-left"><a class="backToTop" href="#Top"></a></span>
+            </div>
+		  <div class="bottom-padding-footer clear-both"></div>
+        </div>
+    </div>
+</div>

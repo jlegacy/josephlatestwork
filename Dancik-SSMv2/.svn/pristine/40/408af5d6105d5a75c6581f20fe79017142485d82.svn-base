@@ -1,0 +1,52 @@
+<div id="ssm_optionalFilterContainer">
+	<form id="filterSearch" action="#rpt_cr_GetLookupListing">
+		<div class="lightBlueGradientHeader">
+			<input type="text" id="ssm_optional_idfilter" placeholder="ID" class="small5 upper" name="filterId"/>
+			<input type="text" id="ssm_optional_descfilter" placeholder="Description" class="long upper" name="filterDescr"/>
+			<input class="greenButton" id="ssm_optional_filter_search" value="Search" type="submit" />
+		</div>
+	</form>
+	
+	<div id="ssm_optionalFilterTableContainer">
+		<div class="ssmTableWrapper">
+			<form>
+				<table class="ssmTable">
+					<thead>
+						<tr>
+							<th class="colWidth-60">ID</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>	</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="2">
+								<div class="float-right">
+									<div id="optional_filter_results_more" class="float-right">
+							            <input class="greenButton" type="submit" value="More"/> 
+							        </div>
+							        <div id="optional_filter_search_results" class="ssm-styled-select w150 float-right">
+							            <select name="maxRows">
+							                <option value="10" selected="selected">10 Records</option>
+							                <option value="25">25 Records</option>
+							                <option value="50">50 Records</option>
+							                <option value="75">75 Records</option>
+							                <option value="100">100 Records</option>
+							                <option value="250">250 Records</option>
+							            </select> 
+							        </div>
+							  	</div>
+						        <span class="float-left" id="queryInfo"></span>  
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+		</div>	
+		<div class="detachedFooter float-left">
+			<span class="commandButton float-left"><a class="backToTop" href="#FilterTop" title="Back to Top"></a></span>
+			
+		</div>
+<div class="bottom-padding-footer clear-both"></div>	    
+	</div>	
+</div>

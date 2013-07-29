@@ -1,0 +1,10 @@
+<ul>
+    <li class="viewby closed">
+        <!--<span class="viewby folder"><strong><%=level1_key1 %></strong> - <%=level1_description %> <strong>(<%=total_count%>)</strong></span>-->
+       <!-- <span class="viewby folder"><a href='#rpt_dd_getLevel2/<%=level1_key1%><%=(this.level1_key2)?'/'+this.level1_key2:''%>'><strong><%=level1_key1 %></strong> - <%=level1_description %> <strong>(<%=total_count%>)</strong></a></span>-->
+       <span class="viewby folder"><a href='#rpt_dd_getLevel2/<%=level1_key1%>/<%=level1_key2%>'><strong> <%=level1_key1 %><%=(level1_key2)?'/'+ level1_key2:''%></strong> - <%=level1_description %> <strong>(<%=total_count%>)</strong></a></span>
+        <ul class="subsort">
+            <li><span class="placeholder"> </span></li>
+        </ul>
+    </li>
+</ul>   

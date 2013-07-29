@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>Dancik Selection Sheet Manager</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="../../dws/js/ui-themes/smoothness/smoothness.css"/>
+		<link rel="stylesheet" type="text/css" href="../../dws/js/jquery-plugins/css/jquery.growler.css"></link>
+		<link rel="stylesheet" type="text/css" href="../../dws/js-components/calendar/calendarObject.css"></link>
+
+		<!--CSS-MINIFY-->
+		<link rel="stylesheet" type="text/css" href="../js/ui-themes/start/start.css"></link>
+
+		<link rel="stylesheet" type="text/css" href="../css/ui-overrides.css"></link>
+		<link rel="stylesheet" type="text/css" href="../css/ssm.css"></link>
+		<link rel="stylesheet" type="text/css" href="../css/sprites.css"></link>
+		<!--CSS-MINIFY-->
+	</head>
+
+	<body class="ssm-main">
+		<div class="maintop" id="app"></div>
+		<div id="ssm_growler"></div>
+		
+		<!-- jQuery -->
+		<script src="../../dws/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		   $j = jQuery.noConflict()
+		</script>
+		
+		
+	    <script src="../../dws/js/jquery-ui-1.8.14.custom.min.js" type="text/javascript"></script>
+		<script src="../../dws/js/jquery-plugins/jquery.ba-bbq.js" type="text/javascript"></script>
+		<script src="../../dws/js/jquery-plugins/jquery.serializeobject.js" type="text/javascript"></script>
+		<script src="../../dws/js/jquery-plugins/jquery.growler.js" type="text/javascript"></script>
+		<script src="../../dws/js/jquery-plugins/jquery.validate.1.9.js" type="text/javascript"></script>
+		<script src="../../dws/js/jquery-plugins/jquery.watermark.min.js" type="text/javascript"></script>
+		<script src="../../dws/js/jclass.js" type="text/javascript"></script>
+		<script src="../../dws/js/json2.js" type="text/javascript"></script>
+		<script src="../../dws/js/base64.js" type="text/javascript"></script>
+		<script src="../../dws/js/ejs.js" type="text/javascript"></script>
+		<script src="../../dws/js/messages.js" type="text/javascript"></script>
+		<script src="../../dws/js/appFramework.js" type="text/javascript"></script>
+
+		<script src="../js/ssm-plugins/jquery.autotab.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+			EJS.config({cache: false})		
+			new Application({
+				appRoot: 'app',
+				profile: 'development'
+			});
+		</script>
+		
+		<!-- DWS Models -->
+		<script src="../../dws/mvc/model/base.js" type="text/javascript"></script>
+		<!-- DWS Views -->
+		<script src="../../dws/mvc/view/growler.js" type="text/javascript"></script>
+		<script src="../../dws/mvc/view/messaging.js" type="text/javascript"></script>
+		<script src="../../dws/mvc/view/ods.js" type="text/javascript"></script>
+		<script src="../../dws/mvc/view/help.js" type="text/javascript"></script>
+		<!-- DWS Controllers -->
+		<script src="../../dws/mvc/controller/growler.js" type="text/javascript"></script>
+		<script src="../../dws/mvc/controller/messaging.js" type="text/javascript"></script>
+		<script src="../../dws/mvc/controller/ods.js" type="text/javascript"></script>
+		<script src="../../dws/mvc/controller/help.js" type="text/javascript"></script>
+
+		<script type="text/ejs" id='appBase'>
+			<jsp:include flush="true" page="app/template/appBase.ejs"/>
+		</script>	
+
+		<!--MINIFY-->
+			<!-- Configuration -->
+			<script src="app/config/profiles.js" type="text/javascript"></script>
+			<script src="app/config/routes.js" type="text/javascript"></script>
+			<script src="app/config/messages.js" type="text/javascript"></script>
+			<script src="app/config/utils.js" type="text/javascript"></script>
+
+			<!-- Models -->
+			<script src="app/model/ssm-ajax.js" type="text/javascript"></script>
+			<script src="app/model/application.js" type="text/javascript"></script>
+			<script src="app/model/cache.js" type="text/javascript"></script>
+			<script src="app/model/config.js" type="text/javascript"></script>
+			<script src="app/model/dashboard.js" type="text/javascript"></script>
+			<script src="app/model/ods.js" type="text/javascript"></script>
+			<script src="app/model/reminders.js" type="text/javascript"></script>
+			<script src="app/model/reports.js" type="text/javascript"></script>
+			<script src="app/model/reportsDrilldown.js" type="text/javascript"></script>
+			<script src="app/model/selection.js" type="text/javascript"></script>
+			<script src="app/model/selectionItems.js" type="text/javascript"></script>
+			<script src="app/model/selectionSearch.js" type="text/javascript"></script>
+			<script src="app/model/customerSearch.js" type="text/javascript"></script>
+			<script src="app/model/references.js" type="text/javascript"></script>
+			<script src="app/model/jobs.js" type="text/javascript"></script>
+			<script src="app/model/itemSearch.js" type="text/javascript"></script>
+			<script src="app/model/kits.js" type="text/javascript"></script>
+			<script src="app/model/editLine.js" type="text/javascript"></script>
+			<script src="app/model/ordering.js" type="text/javascript"></script>			
+			<script src="app/model/relatedItems.js" type="text/javascript"></script>
+			<script src="app/model/itemDetails.js" type="text/javascript"></script>
+
+			<!-- Controllers -->
+			<script src="app/controller/application.js" type="text/javascript"></script>
+			<script src="app/controller/cache.js" type="text/javascript"></script>
+			<script src="app/controller/config.js" type="text/javascript"></script>
+			<script src="app/controller/dashboard.js" type="text/javascript"></script>
+			<script src="app/controller/not_authorized.js" type="text/javascript"></script>
+			<script src="app/controller/ods.js" type="text/javascript"></script>
+			<script src="app/controller/reminders.js" type="text/javascript"></script>
+			<script src="app/controller/reports.js" type="text/javascript"></script>
+			<script src="app/controller/reportsDrilldown.js" type="text/javascript"></script>
+			<script src="app/controller/selection.js" type="text/javascript"></script>
+			<script src="app/controller/selectionItems.js" type="text/javascript"></script>
+			<script src="app/controller/selectionSearch.js" type="text/javascript"></script>
+			<script src="app/controller/customerSearch.js" type="text/javascript"></script>
+			<script src="app/controller/references.js" type="text/javascript"></script>
+			<script src="app/controller/jobs.js" type="text/javascript"></script>
+			<script src="app/controller/itemSearch.js" type="text/javascript"></script>
+			<script src="app/controller/kits.js" type="text/javascript"></script>
+			<script src="app/controller/editLine.js" type="text/javascript"></script>
+			<script src="app/controller/ordering.js" type="text/javascript"></script>
+			<script src="app/controller/relatedItems.js" type="text/javascript"></script>
+			<script src="app/controller/itemDetails.js" type="text/javascript"></script>
+			<script src="app/controller/messages.js" type="text/javascript"></script>
+
+			<!-- Views -->
+			<script src="app/view/application.js" type="text/javascript"></script>
+			<script src="app/view/dashboard.js" type="text/javascript"></script>
+			<script src="app/view/not_authorized.js" type="text/javascript"></script>
+			<script src="app/view/ods.js" type="text/javascript"></script>
+			<script src="app/view/reminders.js" type="text/javascript"></script>
+			<script src="app/view/reports.js" type="text/javascript"></script>
+			<script src="app/view/reportsDrilldown.js" type="text/javascript"></script>
+			<script src="app/view/selection.js" type="text/javascript"></script>
+			<script src="app/view/selectionItems.js" type="text/javascript"></script>
+			<script src="app/view/selectionSearch.js" type="text/javascript"></script>
+			<script src="app/view/customerSearch.js" type="text/javascript"></script>
+			<script src="app/view/references.js" type="text/javascript"></script>
+			<script src="app/view/jobs.js" type="text/javascript"></script>
+			<script src="app/view/itemSearch.js" type="text/javascript"></script>
+			<script src="app/view/kits.js" type="text/javascript"></script>
+			<script src="app/view/editLine.js" type="text/javascript"></script>
+			<script src="app/view/ordering.js" type="text/javascript"></script>			
+			<script src="app/view/relatedItems.js" type="text/javascript"></script>
+			<script src="app/view/itemDetails.js" type="text/javascript"></script>
+			<script src="app/view/messages.js" type="text/javascript"></script>
+		
+
+			<!--Boot the app -->
+			<script src="app/config/boot.js" type="text/javascript"></script>
+			<!--MINIFY-->
+		
+	</body>
+</html>		

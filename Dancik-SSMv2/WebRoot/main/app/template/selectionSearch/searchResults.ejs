@@ -1,0 +1,54 @@
+<div id="ssm_lower_body"> 
+    <div class='dayViewTop widthControl'>
+        <div class="padding5"></div>
+        <!--<div class="ssm_mainPage_hdr">Search Results</div>-->
+        <div class="ssm_interfaceSurrounder">
+        <div class="ssm_headerBarGray">
+                <div class="padding5">
+                    <span class="commandButton float-left ssm_headerIcon">
+                        <img class="search-doc" src="../images/clear.gif">
+                    </span>
+                    <div class="title float-left">Search Results</div>
+                    
+                </div>
+            </div>
+
+        <div id = "ssm_searchResults_Section">
+
+            <% if (selection.found == 'Y') {%>
+            <div id="ssm_selection_result" class="ssm_search_results_go ssm_search_button2 ssm_search_separator ssm_selection_file_count">
+                <span id="button_result_g1" class="ssm_search_button_go">Go</span>
+                <span class="ssm_search_button_text">
+                    Go to Selection#: <b><%= data.ssm_Search_SelectionId%></b>
+                </span>
+            </div>
+            <% }%>
+
+            <div class="ssm_search_separator"></div>
+
+            <div  class="ssm_title_results">Selection Search Results</div>
+            <div id="selection_all_count" class="ssm_search_results_go ssm_search_button1 ssm-selection-show ssm_selection_file_count"></div>
+            <div class="ssm_selection_file_results">
+                <div id="selection_customer_count" class="ssm_search_results_go ssm_search_button1 ssm-selection-show"></div>
+                <div id="selection_reference_count" class="ssm_search_results_go ssm_search_button1 ssm-selection-show"></div>
+                <div id="selection_jobinfo_count" class="ssm_search_results_go ssm_search_button1 ssm-selection-show"></div>
+                <div id="selection_notes_count" class="ssm_search_results_go ssm_search_button1 ssm-selection-show"></div>
+                <div id="selection_notepad_count" class="ssm_search_results_go  ssm_search_button1 ssm-selection-show"></div>
+                <div id="selection_items_count" class="ssm_search_results_go ssm_search_button1 ssm-selection-show"></div>
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="detachedFooter float-left">
+        <span class="commandButton float-left"><a class="backToTop" href="#Top"></a></span>
+    </div>
+		  <div class="bottom-padding-footer clear-both"></div>
+</div>
+
+
+
+
+
+
+

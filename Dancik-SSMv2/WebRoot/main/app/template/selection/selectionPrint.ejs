@@ -1,0 +1,92 @@
+<div id="printContainer">
+    <div class="ssm_crumb padding5" style="display:none; float:none;">     
+            <div class="activeCrumbLeft"></div>
+            <div class="activeCrumbBody"><a href="#" id="ssm_back-to-print">Print Selection</a></div>
+            <div class="activeCrumbRight"></div>
+            <div class="inactiveCrumbBody">Account Search</div>
+            <div class="inactiveCrumbRightPointed"></div>       
+    </div>
+    <div id="ssm_billingAccountSearch" />
+    <form action="#submitPrint" id="ssm_submitPrint">
+        <div class="ssm_interfaceSurrounder inline-labels">
+            <div class="subSection">
+                <div class="labelColumn">
+                    <label>Pricing</label>
+                </div>
+                <div class="inputsColumn">
+                    <div class="containerRow">
+                        <input type="radio" name="ssm_UsePricingAccount" value="" checked="checked"/>
+                        <span class="checkboxLabel">None </span>
+                    </div>
+                    <div class="containerRow">
+                        <input type="radio" name="ssm_UsePricingAccount" value="<%= billing_account %>" />
+                        <span class="checkboxLabel">Buyers Account#: <%= billing_account %> </span>
+                    </div>
+                    <div class="containerRow">
+                        <input type="radio" name="ssm_UsePricingAccount" value="<%=listprice_account %>" />
+                        <span class="checkboxLabel">List Price Account#: <%=listprice_account %> </span>
+                    </div>
+                    <div class="containerRow">
+                        <input type="radio" class="float-left" name="ssm_UsePricingAccount" value="" />
+                        <div class="itemNumberContainer pseudoTextBox checkboxLabel">
+                            <input type="text" id="ssm-printBuyerSearch" style="border:none;width:70%;" maxlength="6" class="upper" name="ssm_SelectedPricingAccount">
+                            <span class="commandButton float-right">
+                                 <a title="Search" class="openItemSearch ssm-search" href="#promptBuyerAccountLookup/ssm-printBuyerSearch/ssm-printBuyerSearch" />   
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="subSection">
+                <div class="labelColumn">
+                    <label>Include</label>
+                </div>
+                <div class="inputsColumn">
+                    <div class="containerRow">
+                        <input type="checkbox" name="ssm_PrintConsumerName_Label" id="parm_PrintConsumer" value='Y' />
+                        <span class="checkboxLabel">Consumer name </span>
+                    </div>
+                    <div class="containerRow">
+                        <input type="checkbox" name="ssm_PrintSummary_Page" id="parm_PrintSummary" value='Y' />
+                        <span class="checkboxLabel">Summary page </span>
+                    </div>
+                    <div class="containerRow">
+                        <input type="checkbox" name='ssm_IncludeZeroQuantities' id='parm_PrintItemsWithoutQuantities' value='Y' />
+                        <span class="checkboxLabel">Records without quantities </span>
+                    </div>
+                    <div class="containerRow">
+                        <input type="checkbox" name="ssm_IncludePreviouslyOrderItems" id="parm_PrintPreviouslyOrdered" value='Y' />
+                        <span class="checkboxLabel">Previously ordered items </span>
+                    </div>
+                    <div class="containerRow">
+                        <input type="checkbox" name="ssm_PrintHeaderNotes_Page" id="parm_PrintHeaderNotes" value='Y' />
+                        <span class="checkboxLabel">Selection sheet header notes</span>
+                    </div>
+                    <div class="containerRow">
+                        <input type="checkbox" name="ssm_PrintDisclaimer_Page" id="parm_PrintDisclaimer" value='Y' />
+                        <span class="checkboxLabel">Disclaimer page</span>
+                    </div>
+                </div>                
+            </div>
+            <div class="subSection">
+                <div class="labelColumn">
+                    <label>Layout</label>
+                </div>
+                <div class="inputsColumn">
+                    <div class="containerRow">
+                        <input type="checkbox" name="ssm_PagebreakOnRoomTypes" id="parm_PageBreakOnRoomTypes" value='Y' />
+                        <span class="checkboxLabel">Add page breaks by room</span>
+                    </div>
+                   <div class="containerRow">
+                        <input type="checkbox"  name="ssm_UseDisplaySequenceSorting" id="parm_UseDspSeqSort" value='Y' />
+                        <span class="checkboxLabel">Use the Display Sequence sorting</span>
+                    </div>
+                    <div class="containerRow">
+                        <input class="greenButton" type="submit" value="Print" id="ssm_printSelection" />
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </form>
+</div>
+

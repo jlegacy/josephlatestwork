@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+
+<project name="ssmv2" basedir="." default="package">
+	<property file="build.properties"/>
+	<property file="profiles/${profile}.properties"/>
+
+	<!-- the default name of the war file (without extention) -->
+	<property name="package.name" value="ssm2" />
+
+	<property name="src.dir" value="src" />
+	<!-- resources.dir : location of the web source (context,WebRoot, etc) -->
+	<property name="resources.dir" value="WebRoot" />
+	
+	<property name="svnversion.path" value="c:\program files\subversion\bin\svnversion"/>
+	<property name="dest.dir" value="C:\Webapps\Wars\" />
+	<property name="temp.dir" value="${dest.dir}/antBuild" />
+	<property name="temp.dir.web-inf" value="${temp.dir}/WEB-INF" />
+	<property name="temp.dir.classes" value="${temp.dir.web-inf}/classes" />
+
+	<tstamp>
+		<format property="curDate" pattern="yyyy-MM-dd" />
+	</tstamp>
+
+	<target name="clean">
+		<delete dir="${temp.dir}" />
+	</target>
+
+	<target name="prepare" depends="clean">
+		<mkdir dir="${temp.dir}" />
+	</target>
+
+	<target name="minify" depends="copy">
+		<property name="target.file" value="${temp.dir}/main/index.jsp"/>
+		<dirname property="target.path" file="${target.file}"/>
+		<basename property="target.fname" file="${target.file}"/>
+		<tstamp>
+			<format property="js.tstamp" pattern="MMddyyhhmmss"/>
+		</tstamp>
+
+		<!-- create a copy of the target file for debugging -->
+		<copy file="${target.file}" tofile="${target.path}/debug-${target.fname}" overwrite="true"/>
+		<!-- copy target file to create a list of js files-->
+		<copy file="${target.file}" tofile="list.txt" overwrite="true"/>
+		<!-- convert target file to a list of files to minify -->
+		<replaceregexp file="list.txt"
+		               match=".*?&lt;!--MINIFY--&gt;(.*?)&lt;!--MINIFY--&gt;.*"
+		               flags="sm"
+		               replace="\1"/>
+		<replaceregexp file="list.txt"
+		               match='(?:.*?src="(.*?)".*)|.*'
+		               byline="true"
+		               replace="\1,"/>
+		<!-- load the list of files to concat/minify into a property -->
+		<loadfile property="fileList" srcFile="list.txt">
+			<filterchain>
+				<striplinebreaks/>
+			</filterchain>
+		</loadfile>
+		<!-- concatenate files -->
+		<concat destfile="concated.js" fixlastline="yes">
+			<filelist dir="${target.path}" files="${fileList}"/>
+		</concat>
+		<!-- minify the file and give it a unique name -->
+		<java jar="buildlib/yuicompressor-2.4.2.jar" fork="true" failonerror="true">
+			<arg value="--type" />
+			<arg value="js" />
+			<arg value="-o" />
+			<arg value="${target.path}/app-${js.tstamp}.js" />
+			<arg value="concated.js"/>
+		</java>
+		<!-- Replace target file script tags -->
+		<replaceregexp file="${target.file}"
+		                match="(.*?)&lt;!--MINIFY--&gt;(?:.*?)&lt;!--MINIFY--&gt;(.*)"
+		                flags="sm"
+						replace='\1&lt;script src="app-${js.tstamp}.js" type="text/javascript"&gt;&lt;/script&gt;\2'/>
+
+		<!-- cleanup temporary files -->
+		<delete file="list.txt"/>
+		<delete file="concated.js"/>
+	</target>
+
+	<target name="copy" depends="version, prepare">
+		<echo>=== PACKAGE ===</echo>
+		<copy todir="${temp.dir.classes}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.xml" />
+				<include name="**/*.xsl" />
+				<include name="**/*.properties" />
+				<include name="**/*.settings" />
+				<exclude name="**/.svn/**/*.*" />
+			</fileset>
+		</copy>
+
+		<copy todir="${temp.dir}">
+			<fileset dir="${resources.dir}">
+				<include name="**/*" />
+				<exclude name="**/work/**" />
+				<exclude name="**/src/**" />
+			</fileset>
+		</copy>
+		
+		<!-- set version information -->
+		<replace file="${temp.dir}/WEB-INF/version.xml" token="BUILDNUMBER" value="${svn.revision}"/>
+	</target>
+
+	<target name="addRandoms" depends="clean">
+		<!-- Add parameter to .css files, to avoid caching in environments -->
+		<replaceregexp file="${target.file}" match="ssm.css" flags="s" replace='ssm.css?p=${js.tstamp}'/>
+		<replaceregexp file="${target.file}" match="ui-overrides.css" flags="s" replace='ui-overrides.css?p=${js.tstamp}'/>
+	</target>
+
+	<!-- compile target primarily used for build server -->
+	<target name="compile" depends="copy">
+		<javac srcdir="${src.dir}"
+			destdir="${temp.dir.classes}">
+			<classpath>
+				<fileset dir="lib">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="WebRoot/WEB-INF/lib">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="version">
+		<!-- VERSION INFORMATION -->
+    	<exec outputproperty="svn.revision" executable="${svnversion.path}">
+        	<arg line="-n -c" />
+	        <redirector>
+	        	<outputfilterchain>
+	            	<tokenfilter>
+	                	<replaceregex pattern="^[0-9]*:?" replace="" flags="g"/>
+	             	</tokenfilter>
+	          	</outputfilterchain>
+	    	</redirector>
+		</exec>
+		<!-- End Version Information -->
+		<echo>Version ${svn.revision}</echo>
+		<condition property="version.modified">
+			<contains string="${svn.revision}" substring="M"/>
+		</condition>
+		<fail if="version.modified" message="Can not package until changes are checked in to SVN"/>
+	</target>
+
+	<target name="package" depends="copy, minify, addRandoms">
+		<condition property="war.name" value="${warnameOverride}">
+			<and>
+				<isset property="warnameOverride"/>
+				<not>
+					<equals arg1="${profile}" arg2="production"/>
+				</not>
+			</and>
+		</condition>
+		<property name="war.name" value="${package.name}"/>
+		<property name="package.file" value="${dest.dir}/${war.name}.war" />
+
+		<war destfile="${package.file}" basedir="${temp.dir}">
+			<manifest>
+				<attribute name="Project-Version" value="${project_version}" />
+				<attribute name="Associated-Tasks" value="${list_of_tasks}" />
+				<attribute name="Associated-Events" value="${list_of_events}" />
+				<attribute name="Associated-Specs" value="${list_of_specs}" />
+				<attribute name="Built-By" value="${builder}" />
+				<attribute name="Build-Date" value="${curDate}" />
+				<section name="${proj}">
+					<attribute name="Version-Description" value="" />
+					<attribute name="Sealed" value="false" />
+				</section>
+			</manifest>
+		</war>
+		
+		<delete dir="${temp.dir}" />
+	</target>
+
+	<target name="deploy" depends="compile, package">
+		<!-- stop the application on the server -->
+		<exec executable="wget"
+			   outputproperty="app.stopOutput">
+			<arg line="http://${srvUser}:${srvPass}@${appServer}:8080/manager/stop?path=${appPath} -O - -q"/>
+		</exec>
+		<condition property="app.stopped">
+			<or>
+				<matches string="${app.stopOutput}" pattern="^OK.*"/>
+				<matches string="${app.stopOutput}" pattern="^.*No context exists.*"/>
+			</or>
+		</condition>
+		<fail message="Error stopping application: ${app.stopOutput}" unless="app.stopped"/>
+		<!-- Upload war to tomcat server for deployment -->
+		<exec executable="scp"
+		      failonerror="false"
+		      outputproperty="upload.output"
+		      resultproperty="upload.result">
+			<arg line="${package.file} ${sshUser}@${appServer}:/usr/share/tomcat6/dancik"/>
+		</exec>
+		<!-- Upload war to iSeries for promotion process -->
+		<exec executable="scp"
+		      failonerror="false"
+		      outputproperty="upload-sal.output"
+		      resultproperty="upload-sal.result">
+			<arg line="${package.file} ruser@10.1.2.1:/home/Dancik/lib/${salLib}/DilampWars/"/>
+		</exec>
+		<!-- start the application again -->
+		<exec executable="wget"
+			   outputproperty="app.startOutput">
+			<arg line="http://${srvUser}:${srvPass}@${appServer}:8080/manager/start?path=${appPath} -O - -q"/>
+		</exec>
+		<condition property="app.started">
+			<matches string="${app.startOutput}" pattern="^OK.*"/>
+		</condition>
+		<fail message="Error restarting application: ${app.startOutput}" unless="app.started"/>
+		<!-- check the return code from tomcat scp to see if it succeded -->
+		<condition property="upload.success">
+			<equals arg1="${upload.result}" arg2="0"/>
+		</condition>
+		<fail message="Error uploading application to tomact server: ${upload.output}" unless="upload.success"/>
+		<!-- check the return code from sal scp to see if it succeded -->
+		<condition property="upload-sal.success">
+			<equals arg1="${upload-sal.result}" arg2="0"/>
+		</condition>
+		<fail message="Error uploading application to iSeries: ${upload-sal.output}" unless="upload-sal.success"/>
+		<!-- test for build server -->
+	</target>
+
+	<!-- tag a release in svn-->
+	<target name="tag">
+		<!-- properties come from build server -->
+		<exec executeable="svn" failonerror="true">
+			<arg line="copy --parents ${svn.root}${svn.branch}${svn.revision} ${svn.root}/releases/${profile}-${DSTAMP}:${TSTAMP}" />
+		</exec>
+
+	</target>
+
+</project>

@@ -1,0 +1,41 @@
+<div class="mainheader">
+    <div id="ssm_HdrBar">
+        <div class='widthControl'>
+            <div id="ssm_Logo"></div>
+            <div id="topInfoContainer">
+                <div class="float-left" id="ssm_UserName"> [%= config.user_name %]</div>
+                <div class="verticalSeperator float-left"> | </div> 
+                <div id="ssm_lastActiveSelection" class="float-left"></div>
+				<div class="verticalSeperator float-left"> | </div> 
+				<div class="float-left"><a href='#help'>Help</a></div>
+        	</div>
+	        <div id="ssm_SelectionLookup_Box" class="ssm-Box_A ssm-Go-Box border-gray">
+	        	<div class="ssm_quickLookupWrapper">
+		            <form id="ssm_form" action="#quickSelectionLookup" autocomplete="off">
+		            	<div class="ssm_selectionSearchPadding">
+		                	<input type="text" name="ssm_Search_SelectionId" id="ssm_Search_SelectionId" maxlength='100'/>
+		                	<input type="submit" value="Go" class='greenButton' id="ssm_topSearchGo"/>	                	
+		                </div>	                
+		            </form>            	        
+	            </div> 	            
+	            <div class="ssm_searchInfoWrapper">
+					<div id="search_box" class="ssm_search_info hide"></div>	                
+				</div> 				            				
+	        </div>        	        	        	        
+        </div>
+    </div>
+
+    <div id="ssm_MainTabs">
+        <div class="widthControl">
+            <ul class='tabListing'>
+                <li class='tab'><a class='active' id='tab_home' href='#openDashboard'>Home</a></li>
+                <li class='tab'><a class='not-active' id='tab_selections' href='#openSelectionSearch'>Selections</a></li>
+                <li class='tab'><a class='not-active' id='tab_reminders' href='#openReminders'>Reminders</a></li>
+                <li class='tab ods_reports' style='display:none'><a class='not-active' id='tab_reports' href='#openReports'>Reports</a></li>
+                <li class='tab ods_reports' style='display:none'><a class='not-active' id='tab_ods' href='#openODS'>ODS</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id='appMainBody' class='app-main-body'></div>

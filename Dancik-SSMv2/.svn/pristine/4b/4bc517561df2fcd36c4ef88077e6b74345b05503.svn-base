@@ -1,0 +1,110 @@
+<div id="ssm_prodDetailsContainer" class="container">	
+    <!-- Breadcrumb -->
+    <div id="ssm_prodDetailsCrumb" class="ssm_crumb float-left">
+	   <div class="activeCrumbLeft"/>
+
+	   <div class="activeCrumbBody"><a id="back_to_item" href="#openEditLine/<%= line%>/<%= ssm_id%>" style="display:none;">Item#: <%= id%></a></div>
+	   <div class="activeCrumbBody"><a id="back_to_selection" href="#back" style="display:none;">Selection#: <%= ssm_id%></a></div>
+
+	   <div class="activeCrumbRight"/>
+
+	   <div class="inactiveCrumbBody">Details and Inventory</div>
+	   <div class="inactiveCrumbRightPointed"></div>
+    </div>
+
+    <div class="ssm_interfaceSurrounder">
+
+	   <div class="ssm_interfacePadding">
+
+		  <!-- Header -->
+		  <div class="ssm_headerBarGray roundedBottom bottom-spacer-5">				
+			 <div class="padding5">
+				<div class="commandButton packaging float-left"><a class="packaging"/></div>
+				<span class="ssmTitleText">Items#: <%= item%> Details, Product Knowledge, and Available Inventory</span>																		
+			 </div>			
+		  </div>
+
+		  <!-- Static Product Information -->
+		  <div id="ssm_prodDetailsStaticInfo" class="bottom-spacer-20">
+			 <div class="padding10">		
+				<div class="float-left bottom-spacer-5">
+				    <div class="productImage"/>		                
+				</div>
+
+				<div id="ssm_prodDetailsInfoWrapper">
+				    <div class="item bottom-spacer-5"><%= item%></div>
+				    <div class="itemDetail-line-4 bottom-spacer-20"><%= iname%> | <%= iname2%></div>
+
+				    <div class="label-list float-left">
+					   <label class="float-left colWidth-140">Manufacturer:</label>
+					   <div class="float-left upper"><%= mfgr_name%></div>
+				    </div>
+				    <div class="label-list float-left">
+					   <label class="float-left colWidth-140">Product Line:</label>
+					   <div class="float-left upper"><%= prodline_name%></div>
+				    </div>
+				    <div class="label-list  float-left">
+					   <label class="float-left colWidth-140">Item Status:</label>
+					   <div class="float-left upper"><%= iinven%></div>
+				    </div>
+				    <div class="label-list  float-left">
+					   <label class="float-left colWidth-140">Comments:</label>
+					   <div class="float-left upper"><%= icomm1%></div>
+				    </div>				               
+				</div>				
+			 </div>
+		  </div>
+
+		  <!-- Options Bar -->
+		  <div id="ssm_prodDetailsOptionsBar" class="ssm_headerBarGray roundedBottom bottom-spacer-10">		    	
+			 <div class="padding">		    	
+				<div class="activeOption rounded option"><a href="#showSection">Additional Details</a></div>
+				<div class="rounded option"><a href="#showSection">Product Knowledge</a></div>	
+				<div class="rounded option"><a href="#showSection">Available Inventory</a></div>			    	
+			 </div>		    	
+		  </div>
+
+		  <!-- Sections Container -->
+		  <div id="ssm_prodDetailsSections">
+
+			 <div id="additional_details" class="ssm_prodDetailsSection">
+
+				<!-- Initial Loading Message -->
+				<div class="ssm_busy">
+				    <div class="ssm_load_indicator_text">Loading results</div>
+				    <div class="ssm_load_indicator"></div>
+				</div>
+
+			 </div>
+
+			 <div id="product_knowledge" class="ssm_prodDetailsSection" style="display:none;">		    		
+
+				<!-- Initial Loading Message -->
+				<div class="ssm_busy">
+				    <div class="ssm_load_indicator_text">Loading results</div>
+				    <div class="ssm_load_indicator"></div>
+				</div>
+
+			 </div>
+
+			 <div id="available_inventory" class="ssm_prodDetailsSection" style="display:none;">		    				    		
+
+				<!-- Initial Loading Message -->
+				<div class="ssm_busy">
+				    <div class="ssm_load_indicator_text">Loading results</div>
+				    <div class="ssm_load_indicator"></div>
+				</div>
+
+			 </div>
+
+
+		  </div>
+
+	   </div>					
+    </div>
+
+    <div class="detachedFooter roundedBottom">
+	   <span class="commandButton float-left"><a href="#Top" class="backToTop" title="Back to Top"></a></span>				
+    </div>	
+    <div class="bottom-padding-footer clear-both"></div>
+</div>

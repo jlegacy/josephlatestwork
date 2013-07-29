@@ -1,0 +1,18 @@
+<table class="results_table">
+    <thead>
+        <th class="ssm_search_heading_icon"></th>
+        <th class="ssm_search_heading_selection">Selection#</th>
+        <th class="ssm_search_heading_customer">Customer</th>
+        <th class="ssm_search_heading_status">Status</th>
+        <th class="ssm_search_heading_created">Created on</th>
+        <th class="ssm_search_heading_salesperson">Salesperson</th>
+    </thead>
+    <tbody><!--placeholder--></tbody>
+    <!--<tfoot>
+        <tr>
+            <td colspan="6">
+                
+            </td>
+        </tr>
+    </tfoot>-->
+</table>

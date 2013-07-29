@@ -1,0 +1,19 @@
+<tr>
+	<td class="colWidth-30 tac">
+		<%= line%>
+	</td>
+	<td class="padding10">
+		<div class="bottom-spacer-5 itemDetail-line-2"><%= item %></div>
+		<% if (backorder_flag == 'Y') { %>
+			<div class='ssm_backOrder_Container'>
+				<div class='backOrdered'>Back Ordered (<%=backorder_date%>)</div>
+			</div>
+		<% } %>
+	</td>
+	<td class='tac'><%= warehouse %></td>
+	<td class='tal'><%= serialnumber %></td>
+	<td class='tac'><%= location %></td>
+	<td><%= qtyordered %> <%= uom %></td>
+	<td><%= price %></td>
+	<td><%= extendedprice %></td>
+</tr>

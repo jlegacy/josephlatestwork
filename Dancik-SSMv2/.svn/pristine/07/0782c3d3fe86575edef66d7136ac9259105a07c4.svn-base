@@ -1,0 +1,15 @@
+<tr>
+	<td align="center"><%=detail_date%></td>
+	<td align="center"><a href="#rpt_dd_openSelection/<%=detail_selectionid%>"><%=detail_selectionid%></a></td>
+	<td align="center"><%=detail_status%></td>
+	<td align="left"><%=detail_customerdesc%></td>
+	<td align="center"><%=detail_company%></td>
+	<td align="center"><%=detail_branch%></td>
+	<td align="left"><%=detail_salesperson%></td>
+	
+	<td align="center">
+		<% if (this.detail_linenumber) { %>
+			<%=detail_linenumber%>
+		<% } %>
+	</td>
+</tr>

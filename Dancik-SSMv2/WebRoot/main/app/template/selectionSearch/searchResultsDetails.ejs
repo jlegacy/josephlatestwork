@@ -1,0 +1,74 @@
+<% var j = lastRecord.lastRec %>
+<% for (var i = 0; i < selections.length; i++) {%>
+<% j++%>
+
+<tr class="ssm_search_details">
+    <td class="ssm_search_extended_icons ssm_border_bottom">
+        <div class="expand_icon ssm_search_detail_icon_expand ssm_search_detail_icon_margin" id="selection-icon_<%=j%>"></div>
+    </td>
+
+    <td class="ssm_search_detail_selection" id="selection_<%=j%>">
+        <a href='#openSelection/<%=selections[i].id%>'><%=selections[i].id%></a>
+    </td>
+    <td class="ssm_search_detail_customer" id="customer_<%=j%>"><%=selections[i].customer_name%></td>
+    <td class="ssm_search_detail_status" id="status_<%=j%>"><%=selections[i].status%></td>
+    <td class="ssm_search_detail_created" id="created_<%=j%>"><%=selections[i].createdate%></td>
+    <td class="ssm_search_detail_salesperson" id="salesperson_<%=j%>"><%=selections[i].salesperson_name%></td>
+</tr>
+
+<tr class="ssm_search_extended_details extended_<%=j%>">
+   <td class="ssm_search_extended_icons ssm_vertical_align_top">
+    <!--<td class="ssm_search_extended_icons  ssm_border_bottom">-->
+        <div class ="ssm_extended_icon_group">
+            <div class="commandButton"><a href="#copySelection/<%=selections[i].id%>" class="ssm_extend_icon_copy" title="Copy Selection Sheet"></a></div>
+            <div class="commandButton"><a href="#rmvSelection/<%=selections[i].id%>" class="ssm_extend_icon_delete" title="Delete Selection Sheet"></a></div>
+            <!--<div class="extended_icons <%=selections[i].id%>" id="extend-icon-copy_<%=j%>" title='Copy Selection Sheet'></div>
+            <div class="extended_icons ssm_extend_icon_delete ssm_extend_icon_copy_margin" id="extend-icon-delete_<%=j%>" title='Delete Selection Sheet'></div>-->
+        </div>
+    </td>
+
+    <td colspan="5" class="ssm_search_extended_section">
+        <div class="ssm_search_extended_section1">
+            <% for (var z = 0; z < references.length; z++) {%>
+            <div id="section1-<%=j%>_<%=z%>" class="ssm_detail_bold"><%=references[z].description%>:</div>
+            <% }%>
+            <div id="section1-<%=j%>_<%=z++%>" class="ssm_detail_bold">Warehouse:</div>
+            <div id="section1-<%=j%>_<%=z++%>" class="ssm_detail_bold">Branch:</div>
+        </div>
+
+
+        <div class="ssm_search_extended_section2">
+            <% for (var z = 0; z < references.length; z++) {%>
+            <% var fld = 'reference_'
+                + references[z].id %>
+            <div id="section2-<%=j%>_<%=z%>" class="ssm_detail_regular extended_section2"><%=selections[i][fld]%>&nbsp;</div>
+            <% }%>
+            <div id="section2-<%=j%>_<%=z++%>" class="ssm_detail_regular extended_section2"><%=selections[i].warehouse_id%> - <%=selections[i].warehouse_name%></div>
+            <div id="section2-<%=j%>_<%=z++%>" class="ssm_detail_regular extended_section2"><%=selections[i].branch_id%> - <%=selections[i].branch_name%></div>
+        </div>
+
+        <div class="ssm_search_extended_section3">
+            <div class="ssm_detail_bold">Created by:</div>
+            <div class="ssm_detail_bold">Last updated on:</div>
+            <div class="ssm_detail_bold">Last updated by:</div>
+        </div>
+
+
+        <div class="ssm_search_extended_section4">
+            <div class="ssm_detail_regular"><%=selections[i].createuser%></div>
+            <div class="ssm_last_updated_date ssm_detail_regular"><%=selections[i].updateddate%></div>
+            <div class="ssm_detail_regular"><%=selections[i].updateduser%></div>
+        </div>
+    </td>
+</tr>
+
+
+<tr class="ssm_search_extended_graphic ssm_search_extended_details graphic_<%=j%>">
+    <td colspan="6"></td>
+</tr>
+
+
+
+<% }%>
+
+

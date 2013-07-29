@@ -1,0 +1,74 @@
+   
+    <div class='title underlined_title'> 	    	    	    		
+        <span>References</span>        
+    </div>
+
+
+    <%
+        var hdr, dtl, rec;
+        for (var i = 0; i < reference_hdrs.length; i++) {
+            hdr = reference_hdrs[i];            
+
+            // -- Pull the Selection Record for the current Job-Info header...
+            rec = { id: '', idvalue:'' };
+            for (var k = 0; k < references.length; k++) {
+                if (hdr.id == references[k].referenceid) {
+                    rec = references[k];
+                    break;
+                }
+            }
+    %>
+
+		<div class='parent'>
+		    <div class='labels'>
+		        <span class='ssm-input-labels'><%= hdr.description%>:</span>
+		    </div>
+		
+		
+		    <% if (hdr.id == '7') { %>
+			    <div id="billingAccount_<%= hdr.id%>" class='billingAccount editable'>
+			        <% for (var m = 0; m < references.length; m++) {%>
+				        <% if (hdr.id == references[m].referenceid) {%>
+				            <div id="billingAccount-name_7"class='name'><%=references[m].personname%></div>
+				            <div id="billingAccount-id_7"class='name' style='display:none' ><%=references[m].personid%></div>
+							<a href="#promptBuyerAccountLookup/billingAccount_<%= hdr.id%>" class='editable-hidable'>
+				            	<img class='ssm-search' src='../images/clear.gif'/>
+				            </a>
+				        <%  }%>
+			        <%  }%>
+			    </div>
+			    <div class='opts editable-hidable'>
+					<a href="#clearSelectionReference/<%= hdr.id%>">
+					 	<img class="ssm-clear" src='../images/clear.gif' border='0'/>
+					 </a>		    
+			    </div>			    
+		
+		    <%  } else {%>
+			    <div class='ssm-styled-select editable'>
+			        <select name='hdrid_<%= hdr.id%>' class='editable long'>
+			            <option value=''></option>				
+			            <% for (var j = 0; j < reference_dtls.length; j++) {%>
+				            <% var dtl = reference_dtls[j];%>
+				            <% if (hdr.id == dtl.header_id) {%>
+				                <% if (rec.personid == dtl.id) {%>
+				                    <option value='<%= dtl.id%>' selected='selected'><%= dtl.description %></option>
+					            <%  } else {%>
+									<option value='<%= dtl.id%>'><%= dtl.description %></option>
+					            <%  }%>
+				            <%  }%>
+			            <%  }%>
+			        </select>
+			    </div>
+			    <div class='opts editable-hidable'>
+					<a href="#clearSelectionReference/<%= hdr.id%>">
+					 	<img class="ssm-clear" src='../images/clear.gif' border='0'/>
+					 </a>		    
+			    </div>
+			    <div class='opts edit-reference-type editable-hidable'>
+			    	<a href="#editReferenceList/<%= parseInt(hdr.id) %>/<%= parseInt(i - 1) %>" title="Reference Maintenance"><span class="commandButton float-right ssm-editable"></span></a>
+			    </div>
+		    <%  } %>
+		    
+			<div class='clear-both'></div>
+		</div>
+    <%  }%>

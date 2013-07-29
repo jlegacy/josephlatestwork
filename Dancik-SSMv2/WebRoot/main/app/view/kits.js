@@ -1,0 +1,89 @@
+(function ($) {
+	$App.View('Kits', {
+		
+		config : {
+			baseTemplate : $App.Template('kits/base.ejs'),
+			rowTemplate : $App.Template('kits/row.ejs')		
+		},
+		
+		
+			
+		initialize: function () {
+			
+		},
+		
+		init : function (data, returnedRecords) {
+//			
+			var _this = this, container,
+			selectionTabs = $("#ssm_SelectionItems"), 
+			itemsHome = $("#ssm_selectionItemsContainer"), 
+			room_type_select,
+			room_area_select,
+			uom;
+			
+//			Hide the previous screen and insert this one
+			itemsHome.hide();
+			
+			container = $(_this.config.baseTemplate.render(data));
+			
+			selectionTabs.append(container);
+//			Close the "Add Items" mode from the previous screen
+			$("#ssm_closeModeHeader")[0].click();
+			
+//			Create Rows
+			$(returnedRecords.kit).each(function(i,kitData) {
+				if(kitData.kititem_flag != "Y"){
+					var row = $(_this.config.rowTemplate.render(kitData));
+					
+//					
+	//				Populate Room Types Dropdown Box
+					room_type_select = row.find("select[name=ssm_RoomTypeId]");
+					$App.Utils.roomTypesDropDown(room_type_select,{"selected_roomtype" : data.ssm_RoomTypeId});
+					
+	//				Populate Room Area Dropdown Box
+					room_area_select = row.find("select[name=ssm_RoomAreaId]");
+					$App.Utils.roomAreasDropDown(room_area_select,{"selected_roomarea" : data.ssm_RoomAreaId});
+					
+	//				Populate Unit of Measure Dropdown Box
+					uom = row.find("select[name=ssm_UOM]");
+					$App.Utils.UOMDropDown(uom,{
+						item : kitData.item,
+						selected_item : kitData.native_uom,
+						uoms : [kitData.uom1, kitData.uom2, kitData.uom3, kitData.uom4, kitData.uom5, kitData.uom6, kitData.uom7,kitData.uom8,  kitData.uom9, kitData.uom10 ]
+					});
+					
+					container.find("#ssm_kitSaveTable .ssmTable tbody").append(row);
+				}
+			});
+			
+//			Set Borders and alternating shading
+			// Fix Table Border Issue
+			$App.Utils.applySsmTableStyles({
+				table : $("#ssm_kitSaveTable .ssmTableWrapper"),
+				evenOdd : "odd"
+			});
+			
+//			Go back to the previous screen
+			container.find("#ssm_SelectionItemsLinks").click(function(){
+				itemsHome.show();
+				container.hide();
+			});
+			
+//			Toggle All Items Checked
+			container.find("#ssm_toggleAllItemsChecked").click(function() {				
+				if($(this).is(":checked")){
+					container.find("tbody tr").each(function(){
+						var row = $(this);
+						row.find("td:first-child .kitCheck").attr("checked","checked");
+					});
+				}else{
+					container.find("tbody tr").each(function(){
+						var row = $(this);
+						row.find("td:first-child .kitCheck").removeAttr("checked");
+					});
+				}
+			});			
+		}		
+	});		
+})(jQuery);
+

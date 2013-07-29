@@ -1,0 +1,507 @@
+(function ($) {
+	$App.View('SelectionItems', {
+		config : {},
+		
+		initialize: function () {},				
+		
+		// ------------------------------------------------------------
+		// -- Load Selection Items
+		// ------------------------------------------------------------
+		renderItems: function (results) {
+			var _this = this, row_temp,
+				base = $App.Template("selectionItems/base.ejs"),
+				row_html = $App.Template("selectionItems/selectionItem.ejs"),
+				total_row_template = $App.Template("selectionItems/roomTypeRow.ejs"),
+				total_row,
+				nextRoomTypeId,
+				prevRoomTypeId,
+				sub_total,
+				newRow,
+				container,
+				option,
+				showPrices,
+				roomTypeFilterId,
+				numOfSelections = parseInt($(results.items).size());			
+			
+			_this.config = results;
+			
+			container = $( base.render(results) );
+			
+// 			Store the results set to pass back the value from the Room Types Select				
+			container.find("#ssm_filter_room_types_select").change(function(foo){
+				$.extend(results,{selected_room_type : foo.target.value});
+				
+				//store Show Prices checked state 
+				showPrices = $("#ssm_chkbx_ShowPrices").attr("checked");
+				
+				_this.renderItems(results);	
+				
+				// persist Show Prices after Room Type Filter has changed
+				if(showPrices == "checked"){ $("#ssm_chkbx_ShowPrices")[0].click();	}
+			});
+				
+			roomTypeFilterId = (results.selected_room_type) ? results.selected_room_type : "";
+				
+			$('#ssm_SelectionItems').html(container);
+
+			
+			
+			//Confirm the delete button push
+			$('form #ssm_modeFooter input').click(function (event) {
+				var value = $(this).val(),
+					form = $(this).closest("form"),					
+					numOfDelete = $(".deleteCheck:checked,.orderCheck:checked").size();
+					//console.log("VIEW - mode submission:numOfDelete - selectionItems.js", numOfDelete);				
+				
+				// Initially only considered the delete mode, but also checks the number for order mode
+				// Makes sure there is something checked, then, based on mode, carries out the appropriate action
+				if(numOfDelete > 0) {
+					if(value == "Delete"){
+						$App.Fire('confirm_message' ,
+							{
+								message  : "Are you sure you want to delete these Selection Items?",
+								callback : function (doDelete) {
+									if(doDelete){
+										event.preventDefault();
+										event.stopPropagation();
+										form.submit();
+									}									
+								}
+							}
+						);
+						return false;
+					}
+					else if(value == "Order"){						
+						return true;
+					}
+				}
+				else{
+					$App.Fire("warn_message", {
+						message : "Please select at least one Selection Item to " + value.toLowerCase() + "."
+					});
+					return false;
+				}				
+			});
+			
+			
+//			Show the options for this selection item
+			container.find('#ssm_selectionItemTable').on('click', 'a[href=#showItemOptions]', function() {
+				var element = $(this),
+				row = element.closest("tr"),
+				line_num = row.data("line");				
+				element.data('payload',{
+					ssm_id : $App.Model('Selection').currentSelectionId,
+					ssm_line : line_num
+				});								
+			});
+
+			// Estimated Total
+			container.find(".ssm_estimated_total strong").html(results.totals.price);
+			$.each(results.items, function (index, item) {
+				newRow = $(row_html.render(item));
+				if(roomTypeFilterId == ''){
+//					Render the new row and set the selection items
+					//newRow = $(row_html.render(item));
+//					Add line data to the row to fetch later when editing the row
+					newRow.data('line',item.line);			
+					
+					if(index < parseInt(numOfSelections) ){
+						nextRoomTypeId = (index == parseInt(numOfSelections -1))?item.roomtype_id:results.items[parseInt(index+1)].roomtype_id;
+						prevRoomTypeId = (index == 0)?item.roomtype_id:results.items[parseInt(index-1)].roomtype_id;						
+						
+//						Show Discontinued and Previously Ordered if applicable
+						(item.discontinued_flag == "Y")?newRow.find(".discontinued").show():"";
+						(item.prev_ordered_flag == "Y")?newRow.find(".previouslyOrdered").show():"";
+						
+//						If the index is 0 or greater, check the next room type id.  
+//						if they are not equal, the grouping should end and a total row should be added						
+						if(index >= 0 && nextRoomTypeId != item.roomtype_id ){
+							sub_total = _this.get_item_type_sub_total(results,item.roomtype_id);
+							$.extend(item,sub_total);
+							total_row = $(total_row_template.render(item));
+						}
+//						If its the last row, its always needs a total, whther its grouped or not.
+//						The previous if and the following else take care of all other cases
+						else if(index == parseInt(numOfSelections -1)){
+							sub_total = _this.get_item_type_sub_total(results,item.roomtype_id);
+							$.extend(item,sub_total);
+							total_row = $(total_row_template.render(item));
+						}
+//						if its not the last row, and next room type id == the current one, they shoudl be grouped
+						else{total_row = false;}
+						
+//						Append the row to the table.  If there is a room type total row, append it as well
+						$('#ssm_selectionItemTable tbody').append(newRow);
+						if(total_row){$('#ssm_selectionItemTable tbody').append(total_row);}
+					}										
+					
+					
+				}				
+				else if(roomTypeFilterId == item.roomtype_id){
+//					Render the new row and set the selection items
+					//newRow = $(row_html.render(item));
+					
+//					Add line data to the row to fetch later when editing the row
+					newRow.data('line',item.line);
+					
+//					Show Discontinued and Previously Ordered if applicable
+					(item.discontinued_flag == "Y")?newRow.find(".discontinued").show():"";
+					(item.prev_ordered_flag == "Y")?newRow.find(".previouslyOrdered").show():"";
+					
+//					Get Subtotal for sub total row and render that row
+					sub_total = _this.get_item_type_sub_total(results,item.roomtype_id);
+					$.extend(item,sub_total);
+					total_row = $(total_row_template.render(item));
+					
+//					Add the neccessary rows to the table 
+					$('#ssm_selectionItemTable tbody').append(newRow);
+					//$('#ssm_selectionItemTable tbody').append(total_row);
+				}	
+				if( item.note3 || item.note4 || item.note5 || item.note6 || item.note7 || item.note8 || item.note9 ){
+					newRow.find(".itemDetail-line-5").prepend("<span class='commandButton multi-messages'><a class='multi-messages' title='This item has multiple notes'></a></span>");
+				};
+			});	
+			
+//			Add the total row as the last row if there is a room type filter.
+//			It gets populated in the above each loop
+			if(roomTypeFilterId != ""){
+				$('#ssm_selectionItemTable tbody').append(total_row);
+			}
+			
+//			Populate the Room Type Selection Drop Down
+			option = '<option value="">All Room Types</option>';
+			$(results.roomtypes).each(function(i, v) {
+				
+				if(v.id == roomTypeFilterId){
+					option += '<option selected="selected" value="' + v.id + '">' + v.description + '</option>';
+				}else{
+					option += '<option value="' + v.id + '">' + v.description + '</option>';
+				}
+								
+			});		
+			$("#ssm_filter_room_types_select").html(option);								
+			
+			// Fix Table Border Issue
+			$App.Utils.applySsmTableStyles({				
+				evenOdd : "odd"
+			});
+			
+			// Open Item Deatils
+			container.find(".ssm-jobs-icon").click(function () {
+				var element = $(this),
+					item = container.find('input[name=ssm_Item]').val(),
+					data = {
+						item : item
+					};				
+				
+				if(item != ""){
+					element.data('payload', data);
+				}else{
+					$App.Fire('warn_message', {message : 'Please enter a valid Item Number.'});
+					return false;
+				}
+			});
+			
+//			Item Search
+			container.find(".openItemSearch").click(function(){
+				var element = $(this),
+					searchTerm = container.find("input[name=ssm_Item]").val(),
+					hasTerm = (searchTerm == "")?false:true,
+					data;
+				
+//				Pass potentially existing search term and boolean to the item search view via a paylaod
+				data = {
+					searchTerm : searchTerm,
+					hasTerm : hasTerm
+				};										
+				
+				element.data('payload',data);								
+			});
+			
+			// --------------------------------------------------------
+			// -- Toggle pricing info
+			container.find("#ssm_chkbx_ShowPrices").click(function(){				
+				if ($(this).is(":checked")){
+					$(".ssmPricingInfo").show();
+					$(".colWidth-1").addClass("colWidth-100");
+					if(container.find("#ssm_toggleSelectionItemsView").hasClass("ssm-expand")){
+						$(".selectionItemList").hide();
+						$(".extraDetail").hide();
+					}else{
+						$(".selectionItemList").show();
+						$(".extraDetail").show();
+					}
+				}else{
+					$(".ssmPricingInfo").hide();
+					$(".selectionItemList").hide();
+					$(".colWidth-1").removeClass("colWidth-100");
+				}				
+				var priceWidth = container.find("#ssm_selectionItemTable th:eq(4)").width();
+				container.find(".ssm_estimated_total.lightBlueGradient").width(priceWidth);				
+			});
+	
+			//container.find("#ssm_chkbx_ShowPrices")[0].click();
+			
+			// -- Toggle Detail
+			container.find("#ssm_toggleSelectionItemsView").click(function(){
+				if( $(this).hasClass("ssm-expand")){
+					$(this).removeClass("ssm-expand");
+					$(".extraDetail").show();
+					($("#ssm_chkbx_ShowPrices").is(":checked"))?$(".selectionItemList").show():$(".selectionItemList").hide();	
+				}else{
+					$(".extraDetail").hide();
+					$(this).addClass("ssm-expand");
+				}
+				return false;
+				
+			});
+			
+//			Check All
+			container.find("input[name=allChecked]").click(function() {
+				var checkBoxes = container.find(".orderCheck:visible,.deleteCheck:visible");
+				($(this).is(":checked"))?checkBoxes.removeAttr("checked"):checkBoxes.removeAttr("checked").attr("checked","checked");
+				checkBoxes.each(function(){
+					$(this)[0].click();
+				})
+			});
+			
+//			Initiate Order Mode
+			container.find("#ssm_orderModeIcon").click(function(){
+				container.find("#ssm_selectionItemTable thead tr:eq(0) th:eq(0) .commandButton").hide();
+				container.find("#ssm_selectionItemTable thead tr:eq(0) th:eq(0) input[name=allChecked]").show();						
+				container.find("#ssm_modeHeader").show().addClass("border-blue").addClass("modeBlue");
+				container.find("#ssm_modeFooter").show().addClass("border-blue").addClass("modeBlue");
+				container.find("#ssm_modeHeaderTitle").text("Order Mode");
+				container.find("#ssm_selectionItemCommands").hide();
+				container.find(".detachedFooter").hide();
+				container.find("#ssm_selectionItemTable td .edit").hide();
+				container.find(".orderCheck").show();
+				container.find(".ssmTableWrapper").addClass("border-blue");
+				container.find("#ssm_modeFooter input[type=submit]").val("Order");
+				container.find("#ssm_modeFooter input").addClass("blueButton");
+				container.find("form").attr("action","#gotoPlaceOrder"); // change action for form
+				
+			});
+			
+//			Initiate Delete Mode
+			container.find("#ssm_deleteModeIcon").click(function(){
+				container.find("#ssm_selectionItemTable thead tr:eq(0) th:eq(0) .commandButton").hide();
+				container.find("#ssm_selectionItemTable thead tr:eq(0) th:eq(0) input[name=allChecked]").show();			
+				container.find("#ssm_modeHeader").show().addClass("border-red").addClass("modeRed");
+				container.find("#ssm_modeFooter").show().addClass("border-red").addClass("modeRed");
+				container.find("#ssm_modeHeaderTitle").text("Delete Mode");
+				container.find("#ssm_selectionItemCommands").hide();
+				container.find(".detachedFooter").hide();
+				container.find("#ssm_selectionItemTable td .edit").hide();
+				container.find(".deleteCheck").show();
+				container.find(".ssmTableWrapper").addClass("border-red");
+				container.find("#ssm_modeFooter input[type=submit]").val("Delete");	
+				container.find("#ssm_modeFooter input").addClass("redButton");
+				container.find("form").attr("action","#removeSelectionItems"); // change action for form
+			});
+				
+//			Prevent Form Submission				
+			container.find("form").submit(function(event){
+				event.preventDefault();					 				
+			});		
+			
+			
+//			Close All Modes
+			container.find("#ssm_closeModeHeader").click(function(){
+//				Reset inputs to text from Order Mode
+				container.find("#ssm_selectionItemTable tbody tr").each(function(){
+					_this.reset_checked_order_row($(this));
+				});								
+				container.find("#ssm_selectionItemTable thead tr:eq(0) th:eq(0) input[name=allChecked]").removeAttr("checked");
+				container.find("#ssm_selectionItemTable thead tr:eq(0) th:eq(0) .commandButton").show();
+				container.find("#ssm_selectionItemTable thead tr:eq(0) th:eq(0) input[name=allChecked]").hide();
+//				Remove border / color from header and footer
+				container.find("#ssm_modeHeader,#ssm_modeFooter").hide()
+					.removeClass("modeBlue").removeClass("border-blue")
+					.removeClass("modeRed").removeClass("border-red")
+					.removeClass("modeGreen").removeClass("border-green");
+				container.find("#ssm_selectionItemCommands").show();
+				container.find(".detachedFooter").show();
+				container.find("#ssm_selectionItemTable td .edit").show();				
+//				remove any shading / checked check boxed
+				container.find("#ssm_selectionItemTable td")
+					.removeClass("orderRowSelected")
+					.removeClass("deleteRowSelected");
+//				Remove checked Checkboxes
+				container.find("#ssm_selectionItemTable td .orderCheck,#ssm_selectionItemTable td .deleteCheck").removeAttr("checked");
+//				Remove Red / Blue border
+				container.find(".ssmTableWrapper").removeClass("border-blue").removeClass("border-red").removeClass("border-green");
+//				Hide checkboxes
+				container.find(".orderCheck,.deleteCheck").hide();
+				container.find("#ssm_modeFooter input[type=submit]").val("");
+				container.find("#ssm_modeFooter input")
+					.removeClass("redButton")
+					.removeClass("blueButton");
+//				Hide Error Messages
+				container.find(".errorMessage").hide();				
+				container.find("#ssm_AddMode").hide();
+				container.find("#ssm_selectionItemTable").show();
+			//	container.find("form").attr("action",""); // change action for form
+			});
+			
+//			Validate quantity when its changed
+			container.find("#ssm_selectionItemTable tbody").on('keyup', 'input[name=quantity]', function(){				
+				var cell = $(this).closest("td");				
+				_this.validate_quantity(cell)
+			});
+			
+//			Add functionality to Order Checkboxes
+			container.find(".orderCheck").click(function(){
+				var row = $(this).closest("tr"), quantity, newVal = 0, 
+				input = $('<input type="text" name="qty" class="small7"/>');
+				/* Make quantity editable */
+				if($(this).is(":checked")){			
+					row.find("td").addClass("orderRowSelected");
+					quantity = row.find("span.quantity").text();
+					input.val( quantity );
+					row.find("input[name=qty]").remove();
+					row.find("span.quantity").after(input).hide();
+					_this.validate_quantity(input.closest("td"));
+				}else{
+					_this.reset_checked_order_row(row);
+				}
+			});
+			
+			container.find(".deleteCheck").click(function(){
+				var row = $(this).closest("tr");
+				($(this).is(":checked"))?row.find("td").addClass("deleteRowSelected"):row.find("td").removeClass("deleteRowSelected");				
+			});			
+		},
+		
+		get_item_type_sub_total : function(obj,itemId){
+			var out = -1;
+			$(obj.subtotals).each(function(i,subtotal){
+				if(subtotal.roomtype_id == itemId){
+					out = subtotal;
+				}
+			});
+			return out;
+		},
+		
+		reset_checked_order_row : function(row) {
+			newVal = row.find("input[name=qty]").val();					
+			row.find("input[name=qty]").remove();
+			row.find("span.quantity").show().html(newVal);
+			row.find("td").removeClass("orderRowSelected");
+			row.find(".errorMessage").hide();
+		},
+		
+		validate_quantity : function(cell) {
+			var input = cell.find("input[name=qty]"),
+			errorMessage = cell.find(".errorMessage"),
+			quantity = input.val();
+			if($.isNumeric(quantity) && parseFloat(quantity) <= 0){
+				input.addClass("border-red");
+				errorMessage.html("Quantity Required").show();
+			}else if(! $.isNumeric(quantity)){
+				input.addClass("border-red");
+				errorMessage.html("Invalid Number").show();
+			}else{errorMessage.hide();input.removeClass("border-red");}
+		},
+		
+		// Delete Items from Selection Sheet 
+		// iterate through each row adding each index of the row containing checked boxes to an array
+		delete_selection_items : function(){
+			var tempArr = [];
+			$("#ssm_selectionItemTable tbody tr").each(function(){
+				var row = $(this),
+				line = row.data("line");
+				if( row.find(".deleteCheck").is(":checked") ){
+					tempArr.push(line);
+				}
+			});
+			
+			return tempArr;
+		},
+		
+//		Initiates Add Mode		
+		initialize_add_mode : function(){
+			container = $("#ssm_selectionItemsContainer");
+			container.find("#ssm_modeHeader,#ssm_AddMode").show().addClass("border-green").addClass("modeGreen");
+			container.find("#ssm_modeHeaderTitle").text("Add Mode");
+			container.find("#ssm_selectionItemCommands").hide();
+			container.find("#ssm_selectionItemTable td .edit").hide();
+			container.find(".ssmTableWrapper").addClass("border-green");
+			container.find("#ssm_AddMode form").attr("action", "#addSelectionItemRecord");
+			
+			container.find("#ssm_selectionItemTable").hide();
+			container.find(".detachedFooter").hide()
+			
+//			Populate UoM on blur of the Item Number if it is manually added 
+			container.find(".itemNumberContainer > input").unbind().on('blur',function(ev){
+				var uomSelect = $("#ssm_unit_of_measure_select"),
+				itemNumber = $(this).val();
+										
+				uomSelect.find("option").remove();
+				$App.Utils.UOMDropDown(uomSelect,{
+					item : itemNumber,
+					errorCallback : function(errorData) {
+		        		var activeElement = $(document.activeElement);		        		
+//		        		console.log("VIEW - Item_Number_blur:activeElement - selectionItems.js", activeElement.attr("class") );		        		
+		        		// The ssm-main class accomodates Chrome, because it doesnt consider the magnifying glass to be "active" when its clicked,
+		        		// only when its tabbed to?		        		
+		        		if(! activeElement.hasClass("openItemSearch") && ! activeElement.hasClass("ssm-main")){		        			
+//		        			console.log("VIEW - Item_Number_blur:activeElement - selectionItems.js", activeElement.attr("class") );		
+		        			$App.Fire("ajax_errors", errorData);
+		        		}
+					}
+				});
+			});
+			
+			$App.Utils.saveComplete();
+		},
+		
+//		Toggle Saving Indicator
+		saveInProcess: function () {
+			$('#ssm_Selection .savingIndicator').addClass('save-inprocess');
+			$('<div class="pageBlocker"/>').appendTo("body");
+		},		
+		saveComplete: function () {
+			$('#ssm_Selection .savingIndicator').removeClass('save-inprocess');
+			$(".pageBlocker").fadeOut(500,function(){$(this).remove();});
+		},
+		
+		displayAvailableOptions : function(data) {
+			
+			var relatedItemTitle = $App.Template('selectionItems/relatedItemsPopupTitle.ejs'),
+			relatedItemsBody = $App.Template('selectionItems/relatedItemsPopupBody.ejs').render(),
+			dialog_width = 325;		
+			
+//			Define and open the popup window
+			$dialog = $('<div class="ssm-NotificationDialog"></div>')
+	            .html(relatedItemsBody)
+	            .dialog({
+	                autoOpen: false,
+	                title: relatedItemTitle.render(
+	                	{ 
+	                		width : parseInt(dialog_width - 16)
+	                	}
+	                ),
+	                modal:true,
+	                width : dialog_width+'px'	               
+	            });
+			$dialog.dialog('open');
+			
+//			Related Items Button Click
+			$dialog.find(".ssm_availableOptionsRow.relatedItems").click(function(){
+				$.extend(data,{dialog:$dialog});
+				$App.Utils.saveInProcess({showBlanket:true});				
+				$App.Fire('loadRelatedItems',data);
+			});
+			
+//			Product Information Button Click
+			$dialog.find(".ssm_availableOptionsRow.productInformation").click(function(){
+				$.extend(data, {dialog:$dialog}, {from : 'back_to_selection'});
+				$App.Utils.saveInProcess({showBlanket:true});
+				$App.Fire('loadItemDetails',data);
+			});
+			
+		}
+	});		
+})(jQuery);
+

@@ -1,0 +1,61 @@
+<div id="ssm_reference_editor" class="ssm_interfaceContainer">
+	<div id="ssm_editor_crumb" class="ssm_crumb">		
+			<div class="activeCrumbLeft"/>
+			<div class="activeCrumbBody"><a id="return_to_references" href="#return_to_references">Selection#: <%= ssmID %></a></div>
+			<div class="activeCrumbRight"/>
+		
+			<div class="inactiveCrumbBody">References</div>
+			<div class="inactiveCrumbRight"></div>		
+	</div>
+	
+	<div class="ssm_interfaceSurrounder">	
+		<div class="ssm_interfacePadding">		
+			<div class="ssm_headerBarGray">
+				
+				<div class="padding5">				
+					<div class="commandButton float-left ssm-reference-icon ssm_headerIcon"/>					
+					<div class="title float-left">References:</div>					
+					<div class="ssm-styled-select w250 float-left">
+						<select class="ssm_reference_in_title_select" id="ssm_reference_type" name="ssm_reference_type"/>
+					</div>
+					<a href="#putReferenceIntoAddMode" class="float-left putReferenceIntoAddMode" title="Add a Reference"><span class="commandButton ssm-work-with"></span></a>
+				</div>			
+			</div>
+		
+			<div>		
+				<div class="ssm_busy">
+					<div class="ssm_load_indicator_text">Loading results</div>
+					<div class="ssm_load_indicator"></div>
+				</div>
+			
+				<div class="ssmTableWrapper">
+					<table id="ssm_edit_reference_table" class="ssmTable" cellpadding="0" cellspacing="0" border="0">
+						<thead>
+							<tr>
+								<th class="colWidth-60"></th>
+								<th>Reference Information</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="ssm_references_add_mode" style="display:none;">
+								<td colspan="2">
+									
+								</td>
+							</tr>	
+							<tr>
+								<td colspan="2" style="text-align:center">
+									Select a Reference Type
+								</td>
+							</tr>	
+						</tbody>
+					</table>
+				</div>
+			</div>		
+		</div>		
+	</div>
+	<div class="detachedFooter roundedBottom">
+		<span class="commandButton float-left"><a href="#Top" class="backToTop" title="Back to Top"></a></span>
+	</div>
+	    <div class="bottom-padding-footer clear-both"></div>
+</div>
+

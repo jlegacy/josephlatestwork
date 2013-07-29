@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcatProjectProperties>
+    <rootDir>/WebRoot</rootDir>
+    <exportSource>false</exportSource>
+    <reloadable>true</reloadable>
+    <redirectLogger>true</redirectLogger>
+    <updateXml>true</updateXml>
+    <warLocation></warLocation>
+    <extraInfo>%3CEnvironment+name%3D%22jdbcProperties%22+type%3D%22java.lang.String%22+value%3D%22file%3A%2F%24%7Bcatalina.home%7D%2Fdancik%2Fjdbc.properties%22%2F%3E</extraInfo>
+    <webPath>/ssm2</webPath>
+</tomcatProjectProperties>

@@ -1,0 +1,13 @@
+<div class='title underlined_title'>
+	<span>Notes:</span>
+</div>
+<div id="ssm_selection_notes_busy">
+    <div class="ssm_busy">
+        <div class="ssm_load_indicator_text">Loading results</div>
+        <div class="ssm_load_indicator"></div>
+    </div>
+</div>
+
+<div id="ssm_selection_notes_textarea" style="display:none">
+    <textarea name="notes" class='editable'></textarea>
+</div>

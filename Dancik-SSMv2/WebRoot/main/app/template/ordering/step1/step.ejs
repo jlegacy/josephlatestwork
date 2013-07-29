@@ -1,0 +1,31 @@
+<div>
+		<div class="ssm_headerBarGray float-left">				
+			<div class="padding5">				
+				<div class="title float-left">Step 1: Verify Selected Items</div>													
+			</div>			
+		</div>
+		<div id="ssm_orderingStep1Table" class="ssmTableWrapper orderingTable">
+			<table class="ssmTable">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Item Details</th>
+						<th>Quantity</th>
+						<th>Price</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="ssm_orderingStep1TotalRow">
+						<td colspan="4" class="col1 tal">
+							<span class="sidePadding10" style="">Taxes and Handling Charges not included</span>
+							<div class="sidePadding10 float-right">Estimated Total:</div>
+						</td>
+						<td id="estimated_total" class="col2 lightBlueGradient">
+							<%= totals.price %> 
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>				
+</div>

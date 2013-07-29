@@ -1,0 +1,87 @@
+<div>
+    <div class='title'>
+    <%
+        var hdr, len = reference_hdrs.length;
+        for (var i = 0; i < len; i++) {
+            hdr = reference_hdrs[i];
+			if (hdr.id == '7') {
+    %>        
+		<span> <%= hdr.description %> Search</span>        
+    <%
+				break;
+			}
+		}
+    %>        
+    </div>
+	
+	<form id="ssm_form_buyerAccount" action="dynamic" autocomplete="off">
+	    <div class="ssm-Box_A">
+	        <span class="ssm_SelectionLookup_Box4 ssm_newSelection_input">
+		        <input type="text" name="ssm_keyword" id="ssm_select_customer" maxlength="100" class='upper'></input>
+	            <input id="ssm_StartingRecord_id" type="text" style="display:none" name="ssm_StartingRecord"></input>
+	            <input id="ssm_TargetBox_id" type="text" style="display:none" name="ssm_TargetBox"></input>
+	        </span>
+	
+	        <span id="button_result_g1">
+	            <input id="ssm_buyer_account_search" type="button" value="Search" class="ssm_search_button_go2 ssm_newSelection_submit greenButton">
+	        </span>
+	    </div>
+	
+	    <div id ="ssm_popup_table_button_bar1" class="ssm-popup-bar1 border-gray">
+	        <div id="buyer_account_results" class="ssm-search-results-pos">Results...</div>
+	        <div class="ssm-sortby-pos" >Sort By:</div>
+	        <div class="ssm-sortselect-pos ssm-styled-select w120">
+	            <select id="ssm_OrderBy_id" name="ssm_OrderBy">
+	                <option value="id">Account#</option>
+	                <option value="name" selected="">Name</option>
+	            </select> 
+	        </div>
+	        <div class ="ssm-sortselect-dir ssm-styled-select w85">
+	            <select id="ssm_OrderBy_Desc_id" name="ssm_OrderBy_Desc">
+	                <option value="">A - Z</option>
+	                <option value="Y">Z - A</option>
+	            </select> 
+	        </div>
+	    </div>
+	
+	    <div class="ssm_busy" style="display:none;">
+	        <div class="ssm_load_indicator_text">Loading results...</div>
+	        <div class="ssm_load_indicator"></div>
+	    </div>
+	
+	    <div class="header">
+	        <table>
+	            <tr class="data_row ssm_popup_header_row">  
+	                <th class="ssm_popup_td_size1">Account#</th>
+	                <th>Name</th>
+	            </tr>
+	        </table>
+	    </div>
+	    
+	    <div id ="ssm_popup_table_buyer_details" class="ssm_popup_table_buyer"></div>
+	
+	    <div class="footer">
+	    
+	    	<div class="float-left">
+		        <div class="range padding5">
+		           
+		        </div>
+		    </div>
+	    
+	        <div id="buyer_account_select" class="ssm-styled-select w150" style="display:none;">
+	            <select name="SSM_MaxRecords">
+	                <option value="25" selected="selected">25 Records</option>
+	                <option value="50">50 Records</option>
+	                <option value="75">75 Records</option>
+	                <option value="100">100 Records</option>
+	                <option value="250">250 Records</option>
+	                <option value="500">500 Records</option>
+	            </select> 
+	        </div>
+	        <div id="buyer_account_select_more" style="display:none;">
+	            <input id="ssm_buyer_account_search_more" class="ssm-Button greenButton" type="button"  value="More"></input>  
+	        </div>
+	    </div>
+	</form>
+</div>
+

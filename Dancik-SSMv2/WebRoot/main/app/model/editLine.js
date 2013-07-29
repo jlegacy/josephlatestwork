@@ -1,0 +1,38 @@
+(function ($) {
+	$App.Model.Extend('SSM.Ajax', 'EditLine', {
+		
+		initialize: function () {
+			this._super();
+		},
+		
+		setSelectionItemField : function (data, callback, errorCallback) {
+			var _this = this;
+			_this.post(data, '../../dancik-aws/ssm/setSelectionItemFields', function (results) {
+					callback(results);
+				}, 
+				errorCallback);
+		},
+		setSelectionItemRecord : function(data, callback, errorCallback){
+			var _this = this;
+			_this.post(data, '../../dancik-aws/ssm/setSelectionItemRecord', function (results) {
+					callback(results);
+				}, 
+				errorCallback);
+		},
+		getSelectionItem : function (data, callback, errorCallback) {
+			var _this = this;
+			_this.post(data, '../../dancik-aws/ssm/getSelection_Item', function (results) {
+					callback(results);
+				}, 
+				errorCallback);
+		},
+		
+		openMacroMessages : function (data, callback, errorCallback) {
+			var _this = this;
+			_this.post(data, '../../dancik-aws/ssm/getMacroMessages', function (results) {
+					callback(results);
+				}, 
+				errorCallback);
+		}
+	});
+})(jQuery);

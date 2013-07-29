@@ -1,0 +1,194 @@
+<div>
+		<div class="ssm_headerBarGray float-left">				
+			<div class="padding5">				
+				<div class="title float-left">Step 5: Verify Order and Submit</div>													
+			</div>			
+		</div>
+		<div class="ssm_orderingStepContainer">
+			<div class="padding10">
+				   				    				    				    				    				    
+				<!-- Customer Information -->
+				<div class="ssm_orderingBlueBorderBottomTitle float-left bottom-spacer-10">
+				    <div class="commandButton float-left icon"><a class="customer-info"/></div>
+				    <div class="float-left" style="width:416px;margin-right:10px;">
+				        <div class="title bottom-spacer-10">Customer Information</div>
+				        
+				        <div>
+							<div class="label-list bottom-spacer-5 float-left">
+								<label class="float-left colWidth-140">Name:</label>
+								<div class="float-left upper"><%= header.customer_name %></div>
+							</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">Address:</label>
+                            	<div class="float-left upper"> <%= header.customer_address1 %></div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">&#160;</label>
+                            	<div class="float-left upper">  <%= header.customer_address2 %> </div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">&#160;</label>
+                            	<div id="os_city_state_zip" class="float-left upper"></div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">Phone Number:</label>
+                            	<div class="float-left"> <%= header.po %> </div>
+                        	</div>
+						</div>						
+				    </div>				    				    
+				</div>
+				
+				<!-- Ship To Information -->
+				<div class="ssm_orderingBlueBorderBottomTitle float-left">
+				    <div class="commandButton float-left icon"><a class="ship"/></div>
+				    <div class="float-left" style="width:416px;">
+				        <div class="title bottom-spacer-10">Ship To Information</div>
+				        
+				        <div id="shipToInformationBlock">
+							<div class="label-list bottom-spacer-10 float-left">
+								<label class="float-left colWidth-140">Name:</label>
+								<div class="float-left upper"><%= header.shipto_name %></div>
+							</div>							
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">Address:</label>
+                            	<div class="float-left upper"> <%= header.shipto_address1 %> </div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">&#160;</label>
+                            	<div class="float-left upper"> <%= header.shipto_address2 %> </div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">&#160;</label>
+                            	<div id="os_shipto_city_state_zip" class="float-left upper"></div>
+                        	</div>                        	
+						</div>												
+				    </div>
+				</div>
+				
+				<!-- Order Header -->
+				<div class="ssm_orderingBlueBorderBottomTitle float-left">
+				    <div class="commandButton float-left icon"><a class="report"/></div>
+				    <div class="float-left" style="width:887px;">
+				        <div class="title bottom-spacer-10">Order Header</div>
+				        
+				        <!-- Column 1 -->
+				        <div class="float-left" style="width:440px;">
+					        <div id="shipToInformationBlock">
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">PO Number:</label>
+									<div class="float-left upper"> <%= header.po %> </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Job Name:</label>
+									<div class="float-left upper"> <%= header.jobname %> </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Ship Date:</label>
+									<div class="float-left upper"> <%= header.ship_date %> </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Ship Via:</label>
+									<div class="float-left upper"> <%= header.ship_via %> </div>
+								</div>
+								<div class="label-list bottom-spacer-20 float-left">
+									<label class="float-left colWidth-140">Initials:</label>
+									<div class="float-left upper"> <%= header.initials %> </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Salesperson1:</label>
+									<div id="os_salesperson1" class="float-left upper"></div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Salesperson2:</label>
+									<div id="os_salesperson2" class="float-left upper"></div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Branch:</label>
+									<div id="os_branch" class="float-left upper"></div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Warehouse:</label>
+									<div id="os_warehouse" class="float-left upper"></div>
+								</div>
+															
+	                        	      	
+							</div>
+						</div>
+						
+						<!-- Column 2 -->
+						<div class="float-left" style="width:440px;">
+					        <div id="shipToInformationBlock">
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Order Type:</label>
+									<div id="os_ordertype" class="float-left upper"> </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Order Handling:</label>
+									<div id="os_handling" class="float-left upper"> </div>
+								</div>							
+	                        	<div class="label-list bottom-spacer-5 float-left">
+	                                <label class="float-left colWidth-140">Reason:</label>
+	                            	<div id="os_reasoncode" class="float-left upper"></div>
+	                        	</div>
+	                        	<div class="label-list bottom-spacer-5 float-left">
+	                                <label class="float-left colWidth-140">Truck Route</label>
+	                            	<div class="float-left upper"> <%= header.truckroute_id %> </div>
+	                        	</div>
+	                        	<div class="label-list bottom-spacer-20 float-left">
+	                                <label class="float-left colWidth-140">Stop Number</label>
+	                            	<div class="float-left upper"> <%= header.truckroute_stop_id %>  </div>
+	                        	</div>
+	                        	<div class="label-list bottom-spacer-5 float-left">
+	                                <label class="float-left colWidth-140">Measure</label>
+	                            	<div class="float-left upper"><%= header.measure_flag %> </div>
+	                        	</div>                               	
+							</div>
+						</div>
+																		
+				    </div>
+				</div>
+				
+				
+				<!-- Message Lines -->
+				<div class="ssm_orderingBlueBorderBottomTitle float-left bottom-spacer-10">
+				    <div class="commandButton float-left icon"><a class="memo"/></div>
+				    <div class="float-left" style="width:888px;">
+				        <div class="title bottom-spacer-10">Message Lines</div>
+				        
+
+						    <div id="message_bottom"></div>
+				    </div>		    				    				    				    				    				    
+				</div>					
+			</div>
+			
+			<!-- Items Table -->
+				<div id="ssm_orderingStep1TableFinal" class="ssmTableWrapper orderingTable">
+					<table class="ssmTable ssmTable_orderFinalStep">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Item Details</th>
+								<th>Quantity</th>
+								<th>Price</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+								<tr id="ssm_orderingStep1TotalRow">
+									<td colspan="4" class="col1 tal">
+										<span class="sidePadding10" style="">Taxes and Handling Charges not included</span>
+										<div class="sidePadding10 float-right">Estimated Total:</div>
+									</td>
+									<td class="col2 lightBlueGradient">
+										<%= totals.extendedprice %>
+									</td>
+								</tr>
+						</tbody>
+					</table>
+					
+					<div id="problem_items"></div>
+				</div>
+		</div>		
+	
+		
+</div>

@@ -1,0 +1,105 @@
+<div class='cust-info'>
+	<div class='title underlined_title'>
+		<span>Customer Information</span>
+		<a href='#gotoCustomerSearchForSelection/<%= header.id %>' class='editable-hidable' title="Swap Customer"><img class="ssm-swap-customer" src='../images/clear.gif' alt='Swap Customer'/></a>
+	</div>
+	
+	<div>
+		<span class="ssm-input-labels">Name:</span>
+		<input type="text" name="firstname" id='ssm_CustomerFirstName' class="editable upper mid" maxlength='12' value='<%= header.rtl_firstname %>'/>
+		<input type="text" name="lastname" id='ssm_CustomerLastName' class="editable upper mid-plus" maxlength='18' value='<%= header.rtl_lastname %>'/>
+	</div>
+	<div>
+		<span class="ssm-input-labels">Address:</span>
+		<input type="text" name="address1" class="editable upper long" maxlength='30' value='<%= header.rtl_addr1 %>'/>
+	</div>
+	<div>
+		<span class="ssm-input-labels">&nbsp;</span>
+		<input type="text" name="address2" class="editable upper long" maxlength='30' value='<%= header.rtl_addr2 %>'/>
+	</div>
+	<div>
+		<span class="ssm-input-labels">City:</span>
+		<input type="text" name="city" class="editable upper long" maxlength='30' value='<%= header.rtl_city %>'/>
+	</div>
+	<div>
+		<span class="ssm-input-labels ssm-align-state-label">State:</span>
+		<div class='ssm-styled-select editable'>
+			<select name="state" class="editable long">
+				<option value=""></option>				
+				<% for (var i = 0; i < states.length; i++) {%>
+					<% if ( header.rtl_state === states[i].id) { %>
+							<option value="<%= states[i].id %>" selected='selected'><%= states[i].id %> - <%= states[i].description %></option>				
+					<% } else { %>
+							<option value="<%= states[i].id %>"><%= states[i].id %> - <%= states[i].description %></option>				
+					<%  } %>
+				<%  } %>
+			</select>
+		</div>
+	</div>
+	<div>
+		<span class="ssm-input-labels">Zip Code:</span>
+		<input type="text" name="zipcode5" class="editable small5" maxlength='5' value='<%= header.rtl_zip5 %>'/>
+		<span class='ssm-input-symbols'>-</span>
+		<input type="text" name="zipcode4" class="editable small4" maxlength='4' value='<%= header.rtl_zip4 %>'/>
+	</div>
+	<div>
+		<span class="ssm-input-labels">Phone:</span>
+		<span class='ssm-input-symbols'>(</span>
+		<input type="text" name="phone_ac" class="editable small3" maxlength='3' value='<%= header.rtl_phone_area %>'/>
+		<span class='ssm-input-symbols'>)</span>
+		<input type="text" name="phone" class="editable small7" maxlength='7' value='<%= header.rtl_phone_7 %>'/>
+	</div>
+	<div>
+		<span class="ssm-input-labels">Email:</span>
+		<input type="text" name="email" class="editable long" maxlength='64' value='<%= header.rtl_email %>'/>
+	</div>
+</div>
+
+
+
+
+<div class='alt-addr'>
+	<div class='title'>
+		<span>Alt Address</span>
+		<a href='#selectionToggleAltAddr'><img class="ssm-expand ssm-toggle" src='../images/clear.gif' alt='Toggle Alternate Address'/></a>
+	</div>
+
+	<div class='data hide'>
+		<div>
+			<span class="ssm-input-labels">First Name:</span>
+			<input type="text" name="firstname" class="editable long" maxlength='50' value='<%= header.altaddr_fname %>'/>
+		</div>
+		<div>
+			<span class="ssm-input-labels">Last Name:</span>
+			<input type="text" name="lastname" class="editable long" maxlength='50' value='<%= header.altaddr_lname %>'/>
+		</div>
+		<div>
+			<span class="ssm-input-labels">Address:</span>
+			<input type="text" name="address1" class="editable long" maxlength='50' value='<%= header.altaddr_addr1 %>'/>
+		</div>
+		<div>
+			<span class="ssm-input-labels">&nbsp;</span>
+			<input type="text" name="address2" class="editable long" maxlength='50' value='<%= header.altaddr_addr2 %>'/>
+		</div>
+		<div>
+			<span class="ssm-input-labels">City:</span>
+			<input type="text" name="city" class="editable long" maxlength='50' value='<%= header.altaddr_city %>'/>
+		</div>
+		<div>
+			<span class="ssm-input-labels">State:</span>
+			<input type="text" name="state" class="editable small2" maxlength='2' value='<%= header.altaddr_state %>'/>
+		</div>
+		<div>
+			<span class="ssm-input-labels">Zip Code:</span>
+			<input type="text" name="zipcode" class="editable mid-plus" maxlength='20' value='<%= header.altaddr_zip %>'/>
+		</div>
+		<div>
+			<span class="ssm-input-labels">Phone:</span>
+			<input type="text" name="phone1" class="editable mid-plus" maxlength='20' value='<%= header.altaddr_phone1 %>'/>
+		</div>
+		<div>
+			<span class="ssm-input-labels">Email:</span>
+			<input type="text" name="email" class="editable long" maxlength='64' value='<%= header.altaddr_email %>'/>
+		</div>
+	</div>
+</div>

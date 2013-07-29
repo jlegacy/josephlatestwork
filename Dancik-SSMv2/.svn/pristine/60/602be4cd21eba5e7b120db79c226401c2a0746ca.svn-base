@@ -1,0 +1,4 @@
+<div class="ssm_busy">
+    <div class="ssm_load_indicator_text"><%= msg %></div>
+    <div class="ssm_load_indicator"></div>
+</div>

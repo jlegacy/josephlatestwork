@@ -1,0 +1,69 @@
+<div>
+	<div class='title underlined_title'>		
+		<span>Job Information</span>
+	</div>
+	
+	<% 
+		var hdr, dtl, rec;
+		for (var i = 0; i < jobinfo_hdrs.length; i++) {
+			hdr = jobinfo_hdrs[i];
+						
+			// -- Pull the Selection Record for the current Job-Info header...
+			rec = { id : '', idvalue :'' };
+			for (var k = 0; k < jobinfo.length; k++) {
+				if ( hdr.id == jobinfo[k].infoid) {
+					rec = jobinfo[k];
+					break;
+				}
+			} 
+		%>
+		
+		<div class='parent'>
+		    <div class='labels'>
+				<span class='ssm-input-labels'><%= hdr.description %>:</span>
+			</div>
+			
+			
+			<% if ( hdr.textonly == 'Y') { %>
+				<div>
+					<input type='text' name='hdrid_<%= hdr.id %>' class='editable long' maxlength='30' value='<%= rec.idvalue %>'/>
+				</div>
+			    <div class='opts editable-hidable'>
+					<a href="#clearSelectionJobInfo/<%= hdr.id %>">
+					 	<img class="ssm-clear" src='../images/clear.gif' border='0'/>
+					 </a>		    
+			    </div>
+			    <div class="opts edit-job-types">
+			    	<a href="#editJobsList/<%= hdr.id %>/<%= i %>"><span class="commandButton float-right ssm-editable"></span></a>
+			    </div>			
+				
+			<% } else { %>		
+				<div class='ssm-styled-select editable'>
+					<select name='hdrid_<%= hdr.id %>' class='editable long'>
+						<option value=''></option>				
+						<% for (var j = 0; j < jobinfo_dtls.length; j++) { %>
+							<% var dtl = jobinfo_dtls[j]; %>
+							<% if ( hdr.id == dtl.header_id) { %>
+								<% if ( rec.id == dtl.id) { %>
+										<option value='<%= dtl.id %>' selected='selected'><%= dtl.description %></option>
+								<%  } else { %>
+										<option value='<%= dtl.id %>'><%= dtl.description %></option>
+								<%  } %>
+							<%  } %>
+						<%  } %>
+					</select>
+				</div>
+			    <div class='opts editable-hidable'>
+					<a href="#clearSelectionJobInfo/<%= hdr.id %>">
+					 	<img class="ssm-clear" src='../images/clear.gif' border='0'/>
+					 </a>		    
+			    </div>
+			    <div class="opts edit-job-types">
+			    	<a href="#editJobsList/<%= hdr.id %>/<%= i %>"><span class="commandButton float-right ssm-editable"></span></a>
+			    </div>	
+			<%  } %>
+
+			<div class='clear-both'></div>
+		</div>
+	<%  } %>
+</div>

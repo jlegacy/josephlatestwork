@@ -1,0 +1,73 @@
+/*globals $App */
+(function ($) {
+	$App.Controller('Dashboard', {
+		// ------------------------------------------------------------
+		// -
+		// ------------------------------------------------------------
+		initialize: function () {
+			this.view = $App.View('Dashboard');
+			this.model = $App.Model('Dashboard');
+		},
+		// ------------------------------------------------------------
+		// -- Initialize and render the initial application skeleton
+		// ------------------------------------------------------------
+		init: function (data) {
+			var _this = this,
+			target = $App.View('Application').get_app_container(),
+			needed_config = [
+                 "text_RetrievingRecords"
+             ];
+	
+			$App.Model("Config").getConfig(needed_config,
+				function (configResults) {
+        			// -- Set Reminders as the active tab.
+            		$App.Fire('setActiveTab', $('#tab_home'));
+            		
+					_this.view.init(target, configResults);
+				}
+			);			
+		},
+
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		getReminderDayListing: function (data) {
+			var _this = this;
+			_this.model.getReminderDayListing(data,
+				function (results) {
+					_this.view.getReminderDayListing(results);
+				},
+				function (errors) {}
+			)
+		},		
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		getLastSelections: function (data) {
+			var _this = this;
+			_this.model.getLastSelections(data,
+				function (results) {
+				
+					// - Store the first selection in the array as last active selection
+					if (results.selections && results.selections.length > 0) {
+						$App.Model('Selection').currentSelectionId = results.selections[0].s_id;
+						_this.view.setLastSelectionID();
+					}
+					_this.view.getLastSelections(results);
+				},
+				function (errors) {}
+			)
+			
+		},		
+		// ------------------------------------------------------------
+		// --
+		// ------------------------------------------------------------
+		setLastSelectionID: function () {
+			var _this = this;
+			_this.view.setLastSelectionID();
+		}
+		
+		
+		
+	});
+})(jQuery);

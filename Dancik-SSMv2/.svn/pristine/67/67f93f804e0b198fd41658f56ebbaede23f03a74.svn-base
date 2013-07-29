@@ -1,0 +1,53 @@
+<div id="ssm_orderProcessingContainer">
+	
+	<div class="widthControl">
+	
+		<div id="crumbWrapper"/>
+		
+		<!-- Global Order Details -->
+		<div id="ssm_orderingDetails" class="bottom-spacer-10">	
+			<div class="float-left sidePadding5">
+				<div class="bottom-spacer-5">
+					<label>Selection#: </label><span><%= ssm_id %></span> | <label>Reference#: </label><span id="order_reference"><%= referenceid %></span>
+				</div>
+				<div class="accountSubHeader">
+					<label>Account Number: </label> <span><%= billingaccount %> - <%= billingaccount_name %></span>
+				</div>
+			</div>
+			
+			<div class="float-right sidePadding5">
+				<div class="bottom-spacer-5 tar accountSubHeader">
+					<label>Order Date: </label><span><%= orderdate %></span>
+				</div>
+				<div class="tar">
+					<label>Entry Date: </label><span><%= enterdate %></span>
+				</div>
+			</div>		
+		</div>
+		
+		<div id="ssm_orderingSteps">
+			<div id="ssm_orderingStep1Container" class="ordering-step"/>
+			
+			<div id="ssm_orderingStep2Container" class="ordering-step" style="display:none;"/>	
+			
+			<div id="ssm_orderingStep3Container" class="ordering-step" style="display:none;"/>
+				
+			<div id="ssm_orderingStep4Container" class="ordering-step" style="display:none;"/>
+			
+			<div id="ssm_orderingStep5Container" class="ordering-step" style="display:none;"/>			
+			
+			<div id="ssm_orderingStep6Container" class="ordering-step" style="display:none;"/>
+		</div>
+		
+		
+		<!-- Order Process Footer -->
+		<div id="ssm_orderingFooter" class="detachedFooter float-left">
+			<span class="commandButton float-left"><a href="#Top" class="backToTop" title="Back to Top"></a></span>
+			<input name="continue_btn" type="button" value="Continue" class="greenButton float-right smmOrderingContinueButton"/>
+			<input type="button" value="Cancel" class="redButton float-right smmOrderingCancelButton" style="margin-right:10px;" />
+		</div>		
+	
+	
+	</div>
+	
+</div>

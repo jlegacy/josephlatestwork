@@ -1,0 +1,3 @@
+<div id="ssm_no_results" class="ssm_no_results ssm_customer_search_start">There are no customers matching '<%=ssm_keyword%>'.</div>
+
+

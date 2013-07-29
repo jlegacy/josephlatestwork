@@ -1,0 +1,121 @@
+<tr class="ssm_kitRow">
+	<td valign="top" class="ssm_center colWidth-40">		
+		<input type="checkbox" checked="checked" class="kitCheck" name="kitCheck"/>		
+	</td>
+	<td class="ssmItemDetails padding10">	
+
+		<div class="float-left">
+		
+			<div class="containerRow">
+				<span class='item'><%= item %></span>
+				<input type="hidden" name='ssm_Item' value='<%= item %>'/>
+			</div>
+				
+			<div class="containerRow itemDetail-line-3"><%= description1 %></div>
+		
+		
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Room Type:</label>
+					<div class="ssm-styled-select w250 editable">
+						<select id="ssm_room_type_select" class="editable" name="ssm_RoomTypeId"/>		
+					</div>
+				</div>								
+				<div class="labelInputBlock">
+					<label>Room Area:</label>
+					<div class="ssm-styled-select w250 editable">
+						<select id="ssm_room_area_select" class="editable" name="ssm_RoomAreaId"/>
+					</div>
+				</div>
+			</div>			
+			
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Quantity:</label>
+					<div>
+						<input type="text" maxlength="30" value="<%= qty %>" class="mid" name="ssm_Qty" />
+					</div>
+				</div>
+				<div class="labelInputBlock">
+					<label>UM:</label>
+					<div class="ssm-styled-select w85">
+						<select id="ssm_unit_of_measure_select" class="editable" name="ssm_UOM"></select>
+					</div>
+				</div>
+			</div>
+		
+			<div class="containerRow">
+				<div class="labelInputBlock">
+					<label>Notes:</label>
+					<div>
+						<input type="text" maxlength="100" value="" class="editable upper longer" name="ssm_Note">
+					</div>
+				</div>
+			</div>	
+		</div>
+
+	
+		<!-- Edit Mode Code
+		
+		
+		
+		<div class="editLine">
+			<div class="addModePricing border-gray">			
+
+				<div style="width:150px;margin-right:4px;" class="float-left">
+					<div class="padding5">
+						<div class="labelInputBlock bottom-spacer-5"><label>Quantity</label></div>
+						<input type="text"  name="ssm_Qty" class='editable'/>
+					</div>
+				</div>
+							    
+				<div style="width:100px;">
+					<div class="padding5">
+						<div class="labelInputBlock bottom-spacer-5"><label>UM</label></div>
+						<div class="ssm-styled-select w85 editable">
+							<select class="editable" name="ssm_UOM"></select>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			
+			<div class="ssm_kitsRightData float-left topPadding10">
+				
+				<div class="containerRow">
+				    <a href="#"><%= item %></a>
+					<input type="hidden" name='ssm_Item' value='<%= item %>'/>
+				</div>
+				
+				<div class="containerRow itemDetail-line-3">
+				    <%= description1 %>
+				</div>
+				
+				<div class="containerRow">
+					<div class="labelInputBlock">
+						<label>Room Type:</label>
+						<div class="ssm-styled-select w250 editable">
+						        <select class="editable" name="ssm_RoomTypeId"></select>
+						</div>
+					</div>
+					<div class="labelInputBlock">
+						<label>Room Area:</label>
+						<div class="ssm-styled-select w250 editable">
+							<select class="editable" name="ssm_RoomAreaId"></select>
+						</div>
+					</div>
+				</div>				
+				<div class="containerRow">
+					<div class="labelInputBlock">
+						<label>Notes:</label>
+						<div>
+							<input type="text" name="ssm_Note" class="long-plus editablef"/>
+						</div>
+					</div>
+				</div>				
+			</div>		
+		</div>	
+		
+		-->				
+	</td>	
+</tr>

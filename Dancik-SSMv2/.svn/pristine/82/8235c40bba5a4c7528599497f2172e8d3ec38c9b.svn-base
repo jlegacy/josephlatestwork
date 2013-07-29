@@ -1,0 +1,1 @@
+<iframe src="<%= url %>" style="width:95%; height:<%= height %>px;"></iframe>

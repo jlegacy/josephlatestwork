@@ -1,0 +1,9 @@
+<tr>
+	<td><%= serialnumber %></td>
+	<td><%= shade %></td>
+	<td class='tac'><%= warehouse %></td>
+	<td><%= location %></td>
+	<td class='tar'><%= availableqty %></td>
+	<td class='tar'><%= originalqty %></td>
+	<td class='tac'><%= statuscode %></td>
+</tr>

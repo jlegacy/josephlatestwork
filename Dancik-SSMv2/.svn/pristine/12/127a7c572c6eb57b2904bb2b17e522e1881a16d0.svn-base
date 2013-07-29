@@ -1,0 +1,116 @@
+<div id="ssm_itemSearchContainer" class="ssm_interfaceContainer">
+	
+	<!-- Breadcrumb -->
+	<div id="ssm_itemSearchCrumb" class="ssm_crumb">
+		<div class="activeCrumbLeft"/>
+		<div class="activeCrumbBody"><a id="ssm_SelectionItemsLinks" href="#">Add Items</a></div>
+		<div class="activeCrumbRight"/>
+		
+		<div class="inactiveCrumbBody">Search</div>
+		<div class="inactiveCrumbRight"></div>
+	</div>
+	
+	<div class="ssm_interfaceSurrounder">
+		<div class="ssm_interfacePadding">
+		
+			<!-- Header -->
+			<div class="ssm_headerBarGray roundedBottom bottom-spacer-5">				
+				<div class="padding5">
+					<div class="commandButton ssm-search float-left"/>
+					<span class="ssmTitleText">Item Search</span>																		
+				</div>			
+			</div>				
+						
+			<!-- Search Bar -->
+			<div id="ssm_itemSearchBar" class="border-gray lightBlueGradient roundedBottom roundedTop">
+				<div class="padding5">		
+					<form id="getItems" action="#getItems">
+						<!--<input name="startsWith" type="checkbox" id="startsWith" name="startsWith" class="float-left"/>			
+						<div class="float-left">Starts With</div>-->			
+						<input type="text" name="keyword" class="float-left long"/>			
+						<input class="float-left greenButton ui-button" value="Search" type="submit"/>
+					</form>			
+				</div>
+			</div>
+			
+			<!-- Results Bar -->
+			<div id="ssm_itemSearchResultsBar" class="roundedTop roundedBottom border-gray" style="display:none;">
+				<div class="padding5">
+					<div class="bottom-spacer-5">
+						Results: <span id="ssm_ItemResultsRange"/>
+					</div>
+					<div>
+						Index <ul id="ssm_lettersList"/>
+					</div>
+				</div>		
+			</div>
+			
+			<!-- Load Bar -->
+			
+			<div class="ssm_busy" style="display:none">
+				<div class="ssm_load_indicator_text">Loading results</div>
+				<div class="ssm_load_indicator"></div>
+			</div>
+			
+			
+			<!-- Results Table -->
+			<div id="ssm_itemSearchResults">
+				<div class="ssmTableWrapper" style="display:none">
+					<table class="ssmTable">
+						<thead>
+							<tr>
+								<th>Item Number</th>
+								<th>Description</th>
+								<th>Color</th>
+								<th>Pattern</th>
+							</tr>
+						</thead>
+						<tbody>					
+						</tbody>						
+					</table>
+				</div>
+			</div>	
+			
+			<!-- Search Footer
+			<div id="ssm_itemSearchFooter" style="display:none;">
+			
+				<div id="ssm_itemSearchFooterText">test</div>
+				
+				<input id="ssm_itemSearchMoreResults" type="button" value="More" class="greenButton float-right"/>
+				
+				<div class="float-right">
+					<div class="ssm-styled-select w150">
+						<select id="ssm_itemSearchNumOfResults">
+							<option value="5">5 Records</option>
+							<option value="10" selected="selected">10 Records</option>
+							<option value="25">25 Records</option>
+							<option value="50">50 Records</option>
+							<option value="75">75 Records</option>					
+						</select>
+					</div>
+				</div>				
+			</div-->	
+		</div>
+	</div>
+	
+	<!-- Footer -->
+	<div id="ssm_itemSearchFooter" class="detachedFooter roundedBottom" style="display:none">
+		<span class="commandButton float-left"><a href="#Top" class="backToTop" title="Back to Top"></a></span>
+		
+		<span id="ssm_itemSearchFooterText">test</span>
+				
+		<input id="ssm_itemSearchMoreResults" type="button" value="More" class="greenButton float-right"/>
+				
+		<div class="ssm-styled-select w150 float-right">
+			<select id="ssm_itemSearchNumOfResults">
+				<option value="5">5 Records</option>
+				<option value="10" selected="selected">10 Records</option>
+				<option value="25">25 Records</option>
+				<option value="50">50 Records</option>
+				<option value="75">75 Records</option>					
+			</select>
+		</div>
+		
+	</div>	
+		
+</div>

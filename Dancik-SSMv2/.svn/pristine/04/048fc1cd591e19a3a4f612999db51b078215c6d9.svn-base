@@ -1,0 +1,13 @@
+<div id="ssm_confirmMessageBody" class="messageBody">
+	<div class="bodyWrapper" style="text-align: center;">
+		<div class="bottom-spacer-20"><%= message %></div>
+		<div>
+			
+			<input type="button" class="greenButton" value="Yes"/>
+			
+			<input type="button" class="redButton" value="No"/>
+			
+			
+		</div>
+	</div>				
+</div>

@@ -1,0 +1,110 @@
+<div>
+		<div class="ssm_headerBarGray float-left">				
+			<div class="padding5">				
+				<div class="title float-left">Step 2: Customer and Ship To</div>													
+			</div>			
+		</div>
+		<div class="ssm_orderingStepContainer">
+			<div class="padding10">
+				<!-- Customer Information Block -->
+				<div class="ssm_orderingBlueBorderBottomTitle float-left bottom-spacer-10">
+				    <div class="commandButton float-left icon"><a class="customer-info"/></div>
+				    <div class="float-left" style="width:800px;">
+				        <div class="title bottom-spacer-10">Customer Information</div>
+				        
+				        <div>
+							<div class="label-list bottom-spacer-5 float-left">
+								<label class="float-left colWidth-140">Name:</label>
+								<div class="float-left upper"><%= customer_name %></div>
+							</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">Address:</label>
+                            	<div class="float-left upper"><%= customer_address1 %></div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">&#160;</label>
+                            	<div class="float-left upper"><%= customer_address2 %></div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">&#160;</label>
+                            	<div class="float-left upper"><%= customer_city %>, <%= customer_state %> <%= rtl_zip %></div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">Phone Number:</label>
+                            	<div class="float-left"> <%= billto_name %> </div>
+                        	</div>
+						</div>						
+				    </div>				    				    
+				</div>
+				
+				<!-- Ship To Information Block -->
+				<div class="ssm_orderingBlueBorderBottomTitle float-left">
+				    <div class="commandButton float-left icon"><a class="ship"/></div>
+				    <div class="float-left" style="width:800px;">
+				        <div class="title bottom-spacer-10">Ship To Information</div>
+				        
+				        <div id="shipToInformationBlock">
+							<div class="label-list ship-to-dropdown-row bottom-spacer-10 float-left">
+								<label class="float-left colWidth-140">Ship To:</label>
+								<div class="float-left upper">
+									<div class="ssm-styled-select w250 float-left">
+										<select id="ssm_orderShipToSelect">
+											<option value="">Manual Override</option>											
+										</select>
+									</div>
+									
+									<input class="greyButton float-left retail_account" type="button" value="Retail Account" style="margin-left:10px;"/>
+									
+									<input class="greyButton float-left buyer_account" type="button" value="Buyer's Account" style="margin-left:5px;"/>
+									
+								</div>
+							</div>
+							<div class="label-list bottom-spacer-5 float-left">
+								<label class="float-left colWidth-140">Name:</label>
+								<div class="float-left upper">
+									<span class="lockedText"></span>
+									<input class="long upper" type="text" name="shipto_name" value="<%= shipto_name %>" maxlength="30"/>
+								</div>
+							</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">Address:</label>
+                            	<div class="float-left upper">
+                            		<span class="lockedText"></span>
+									<input class="long upper" type="text" name="shipto_address1" value="<%= shipto_address1 %>" maxlength="30"/>
+								</div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">&#160;</label>
+                            	<div class="float-left upper">
+                            		<span class="lockedText"></span>
+									<input class="long upper" type="text" name="shipto_address2" value="<%= shipto_address2 %>" maxlength="30"/>
+								</div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">City:</label>
+                            	<div class="float-left upper">
+                            		<span class="lockedText"></span>
+									<input class="long upper" type="text" name="shipto_city" value="<%= shipto_city %>" maxlength="30"/>
+								</div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">State:</label>
+                            	<div class="float-left upper">
+                            		<span class="lockedText"></span>
+									<input class="small3 upper" type="text" name="shipto_state" value="<%= shipto_state %>" maxlength="2"/>
+								</div>
+                        	</div>
+                        	<div class="label-list bottom-spacer-5 float-left">
+                                <label class="float-left colWidth-140">Zipcode:</label>
+                            	<div class="float-left upper">
+                            		<span class="lockedText"></span>
+									<input class="small5 upper" type="text" name="shipto_zip" value="<%= shipto_zip %>" maxlength="5"/>
+								</div>
+                        	</div>
+						</div>
+												
+				    </div>
+				</div>				
+			</div>
+		</div>		
+</div>

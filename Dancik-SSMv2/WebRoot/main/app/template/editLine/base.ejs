@@ -1,0 +1,195 @@
+<div id="ssm_EditLineScreen" class="float-left">
+    <form action="#setSelectionItemRecord">
+        <!-- Breadcrumb -->
+        <div id="ssm_itemSearchCrumb" class="ssm_crumb" style="display:none;">
+    	   <div class="activeCrumbLeft"></div>
+    	   <div class="activeCrumbBody"><a id="ssm_SelectionItemsLinks" href="#ssm_SelectionItems">Items Main</a></div>
+    	   <div class="activeCrumbRight"></div>
+    
+    	   <div class="inactiveCrumbBody">Edit Item#: <%=item%></div>
+    	   <div class="inactiveCrumbRightPointed"></div>
+        </div>
+        <div class="ssm_interfaceSurrounder border-dark-grey">	
+             <!-- Header -->
+            <div style="" class="roundedTop modeGrey" id="ssm_modeHeader">    
+                <div class="padding5">  
+                    <span class="commandButton float-right ssm-close-box">
+                        <a title="Close" href="#ssm_SelectionItems" class="ssm-close-box commandButton" id="ssm_SelectionItemsLinks"></a>
+                    </span>
+                    <span id="ssm_modeHeaderTitle">Edit Mode</span>
+                </div>
+            </div>
+            
+    	   <div class="ssm_interfacePadding">
+    		  <!-- Edit Mode Code -->
+    		  <div class="editLine padding5">
+    			 <div class="imageProdSampleThumbContainer float-left">
+    				<% if (item_thumb_url_flag == 'Y')
+    				    {%>
+    				<a href="<%= item_image_url%>" target="_blank"><img src="<%= item_thumb_url%>" /></a>
+    
+    				<% } else
+    				{%>
+    				<img src="../images/noImage.png" />
+    				<%	}%>
+    			 </div>				
+    			 <div class="productInfoEdit float-left">
+    
+    				<div class="containerRow">
+    				    <span class="itemNumberEdit"><%=item%></span>
+    				    <span class="commandButton-35 float-left"><a href="#openItemDetails" class="ssm-jobs-icon" title="Open Item Details"></a></span>
+    				</div>
+    				<div class="containerRow"><span class="itemDetail-line-3"><%=item_desc1%>  <%= (item_desc2) ? ' | ' + item_desc2 : "" %></span></div>
+    				<div class="containerRow"><strong>Manufacturer:</strong><%=mfgr%><%= (mfgr_desc) ? ' - ' + mfgr_desc : ""  %></div>
+    				<div class="containerRow"><strong>Product Line: </strong><%=prodline%><%= (prodline_desc) ? ' - ' + prodline_desc : "" %></div>
+    				<div class="containerRow"><strong>Item Status: </strong><%=item_status%></div>
+    				<div class="containerRow"><strong>Comments:</strong><%=item_comment%></div>
+    			 </div>
+    			 <div class="containerRow">
+    				<div class="labelInputBlock">
+    				    <label>Room Type:</label>
+    				    <div class="ssm-styled-select w200 editable">
+    					   <select class="editable" name="ssm_RoomTypeId"></select>
+    				    </div>
+    				</div>
+    				<div class="labelInputBlock">
+    				    <label>Room Area:</label>
+    				    <div class="ssm-styled-select w200 editable">
+    					   <select class="editable" name="ssm_RoomAreaId"></select>
+    				    </div>
+    				</div>
+    			 </div>
+    			 <div class="containerRow">
+    				<div class="labelInputBlock">
+    				    <label>Quantity:</label>
+    				    <div>
+    					   <input class="small7 editable" type="text" value="<%=qty%>" maxlength="30" name="ssm_Qty" />
+    				    </div>
+    				</div>
+    				<div class="labelInputBlock">
+    				    <label>UM:</label>
+    				    <div class="ssm-styled-select w85 editable">
+    					   <select class="editable" name="ssm_UOM">
+    					   		<% 
+    					   		$j(uoms).each(function(i,o) {
+				        				if (uom != '' && uom == o.id) {
+				        		%>
+				        					<option value="<%=o.id %>" selected="selected"><%=o.id %></option>
+				        		 <% } else { %>
+				        					<option value="<%=o.id %>"><%=o.id %></option>
+				        		 <%	} %>
+				        	<% }); %>
+    					   </select>
+    				    </div>
+    				</div>
+    			 </div>
+    			 <div class="containerRow">
+    				<div class="labelInputBlock">
+    				    <label>Notes:</label>
+    				</div>
+    			 </div>
+    			 <div id="ssm_macroMessagesWrapper" class="containerRow">			
+    				<div class="containerRow">
+    				    <div class="commandButton float-left">
+    				        <div class="blocker"  />
+    				        <a href="#openMacroMessages" class="memo" title="Open Macro Messages">1</a>
+    				    </div>
+    				    <input type="text" class="macroNotes float-left editable" name="ssm_Note" maxlength="50" />
+    				    <div class="commandButton float-left editable-hidable"><a href="#clearSelectionItem_MessageLine/<%= id%>/<%= line%>/ssm_Note" class="ssm-clear ssm_clearMacroMessage"></a></div>
+    				</div>
+    				<div class="containerRow">
+    				    <div class="commandButton float-left">
+    				        <div class="blocker"  />
+    				        <a href="#openMacroMessages" class="memo" title="Open Macro Messages">2</a>
+                        </div>
+    				    <input type="text" class="macroNotes float-left editable" name="ssm_Note3" maxlength="50" />
+    				    <div class="commandButton float-left editable-hidable"><a href="#clearSelectionItem_MessageLine/<%= id%>/<%= line%>/ssm_Note3" class="ssm-clear ssm_clearMacroMessage"></a></div>
+    				</div>
+    				<div class="containerRow">
+    				    <div class="commandButton float-left">
+    				        <div class="blocker"  />
+    				        <a href="#openMacroMessages" class="memo" title="Open Macro Messages">3</a>
+                        </div>
+    				    <input type="text" class="macroNotes float-left editable" name="ssm_Note4" maxlength="50" />
+    				    <div class="commandButton float-left editable-hidable"><a href="#clearSelectionItem_MessageLine/<%= id%>/<%= line%>/ssm_Note4" class="ssm-clear ssm_clearMacroMessage"></a></div>
+    				</div>
+    				<div class="containerRow">
+    				    <div class="commandButton float-left">
+    				        <div class="blocker"  />
+    				        <a href="#openMacroMessages" class="memo" title="Open Macro Messages">4</a>
+                        </div>
+    				    <input type="text" class="macroNotes float-left editable" name="ssm_Note5" maxlength="50" />
+    				    <div class="commandButton float-left editable-hidable"><a href="#clearSelectionItem_MessageLine/<%= id%>/<%= line%>/ssm_Note5" class="ssm-clear ssm_clearMacroMessage"></a></div>
+    				</div>
+    				<div class="containerRow">
+    				    <div class="commandButton float-left">
+    				        <div class="blocker"  />
+    				        <a href="#openMacroMessages" class="memo" title="Open Macro Messages">5</a>
+                        </div>
+    				    <input type="text" class="macroNotes float-left editable" name="ssm_Note6" maxlength="50" />
+    				    <div class="commandButton float-left editable-hidable"><a href="#clearSelectionItem_MessageLine/<%= id%>/<%= line%>/ssm_Note6" class="ssm-clear ssm_clearMacroMessage"></a></div>
+    				</div>
+    				<div class="containerRow">
+    				    <div class="commandButton float-left">
+    				        <div class="blocker"  />
+    				        <a href="#openMacroMessages" class="memo" title="Open Macro Messages">6</a>
+                        </div>
+    				    <input type="text" class="macroNotes float-left editable" name="ssm_Note7" maxlength="50" />
+    				    <div class="commandButton float-left editable-hidable"><a href="#clearSelectionItem_MessageLine/<%= id%>/<%= line%>/ssm_Note7" class="ssm-clear ssm_clearMacroMessage"></a></div>
+    				</div>
+    				<div class="containerRow">
+    				    <div class="commandButton float-left">
+    				        <div class="blocker"  />
+    				        <a href="#openMacroMessages" class="memo" title="Open Macro Messages">7</a>
+                        </div>
+    				    <input type="text" class="macroNotes float-left editable" name="ssm_Note8" maxlength="50" />
+    				    <div class="commandButton float-left editable-hidable"><a href="#clearSelectionItem_MessageLine/<%= id%>/<%= line%>/ssm_Note8" class="ssm-clear ssm_clearMacroMessage"></a></div>
+    				</div>
+    				<div class="containerRow">
+    				    <div class="commandButton float-left">
+    				        <div class="blocker"  />
+    				        <a href="#openMacroMessages" class="memo" title="Open Macro Messages">8</a>
+                        </div>
+    				    <input type="text" class="macroNotes float-left editable" name="ssm_Note9" maxlength="50" />
+    				    <div class="commandButton float-left editable-hidable"><a href="#clearSelectionItem_MessageLine/<%= id%>/<%= line%>/ssm_Note9" class="ssm-clear ssm_clearMacroMessage"></a></div>
+    				</div>
+    			 </div>
+    			 <div class="containerRow">
+    				<div class="labelInputBlock">
+    				    <label>List Price:</label>
+    				    <div>
+    					   <input type="text" disabled="disabled" value="<%= (list_price) ? list_price + ' ' + uom : '' %>" class="mid upper"/>
+    				    </div>
+    				</div>
+    				<div class="labelInputBlock">
+    				    <label>Price Override:</label>
+    				    <div>
+    					   <input id="price-override-id" class="editable upper mid" type="text" value="<%=override_price%>" maxlength="30" name="ssm_PriceOverride" />
+    				    </div> 
+    				</div>
+    				<div class="labelInputBlock">
+    				    <label>Override Price List:</label>
+    				    <div class="ssm-styled-select w350 editable">
+    					   <select id = "selected-override-price-id" class="editable" name="ssm_PL_Override"></select>
+    				    </div>
+    				</div>
+    			 </div>
+    			 <div class="containerRow">
+    				<div class="labelInputBlock">
+    				    <label>Restriction Code:</label>
+    				    <div class="ssm-styled-select w350 editable">
+    					   <select class="editable" name="ssm_RestrictionCode"></select>
+    				    </div>
+    				</div>
+    			 </div>	
+    		  </div>
+    	   </div>		
+        </div>
+        <div id="ssm_modeFooter" class="detachedFooter modeGrey border-dark-grey">
+    	   <input type="submit" value="Update" class="greenButton editable-hidable" />
+    	   <span class="commandButton float-left"><a href="#Top" class="backToTop" title="Back to Top"></a></span>
+        </div>
+        <div class="bottom-padding-footer clear-both"></div>
+    </form>
+</div>	
+<!-- End Edit Mode Code -->

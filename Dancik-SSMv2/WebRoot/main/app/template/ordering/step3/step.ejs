@@ -1,0 +1,171 @@
+<div>
+		<div class="ssm_headerBarGray float-left">				
+			<div class="padding5">				
+				<div class="title float-left">Step 3: Complete Order Header</div>													
+			</div>			
+		</div>
+		<div class="ssm_orderingStepContainer">
+			<div class="padding10">
+				<!-- Customer Information Block -->
+				<div class="ssm_orderingBlueBorderBottomTitle float-left bottom-spacer-10">
+				    <div class="commandButton float-left icon"><a class="report"/></div>
+				    <div class="float-left" style="width:800px;">
+				        <div class="title bottom-spacer-10">Order Header</div>
+				        <form id="complete_order_header" action="#complete_order_header">
+					        <div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">PO Number:</label>
+									<div class="float-left upper"><input type="text" id="ssm_CustomerPONumber" name="ssm_CustomerPONumber" value="<%= po %>" class="mid-plus upper"/></div> <!--<span class="required">*Required</span>-->
+								</div>
+	                        	<div class="label-list bottom-spacer-5 float-left">
+	                                <label class="float-left colWidth-140">Job Name:</label>
+	                            	<div class="float-left upper"> <input type="text" name="ssm_JobName" class="mid-plus upper" value="<%= jobname %>"/>  </div>
+	                        	</div>
+	                        	<div class="label-list bottom-spacer-5 float-left">
+	                                <label class="float-left colWidth-140">Ship Date:</label>
+									<div class='date-wrapper float-left upper'>
+										<input type='text' id='ssm_ShipDate' maxlength='10' name='ssm_ShipDate' value="<%= ship_date %>"/>
+										<img class='ssm-dates editable' src='../images/clear.gif'/>
+									</div>
+									<!--<span class="required">*Required</span>-->
+	                        	</div>
+	                        	<div class="label-list bottom-spacer-5 float-left">
+	                                <label class="float-left colWidth-140">Ship Via:</label>
+	                            	<div class="float-left upper">
+	                            	
+	                            		<div class="ssm-styled-select w350 float-left">
+											<select id="ssm_ShipVia" class="upper" name="ssm_ShipVia">
+												<option>Customer Pick Up</option>
+											</select>
+										</div>
+	                            		
+	                            	</div>
+	                        	</div>
+	                        	<div class="label-list bottom-spacer-5 float-left">
+	                                <label class="float-left colWidth-140">Initials:</label>
+	                            	<div class="float-left"> <input type="text" name="ssm_Initials" id="ssm_Initials" class="small4 upper" value="<%= initials %>"/>  </div>
+	                        	</div>
+							</div>
+						
+							<!-- Sales People / Warehouse -->
+							<div class="dashedTopBorder float-left">
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Salesperson1:</label>
+					                <div class="float-left">
+					                	<div class="ssm-styled-select w350 float-left">
+											<select id="ssm_Salesperson1" name="ssm_Salesperson1" class="upper">
+												<option>BRW - Barry R Williams</option>	
+											</select>
+										</div>
+					                </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Salesperson2:</label>
+					                <div class="float-left">
+					                	<div class="ssm-styled-select w350 float-left">
+											<select id="ssm_Salesperson2" name="ssm_Salesperson2" class="upper">
+												
+											</select>
+										</div>
+					                </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Branch:</label>
+					                <div class="float-left">
+					                	<div class="ssm-styled-select w350 float-left">
+											<select id="ssm_Branch" name="ssm_Branch" class="upper">
+												<option>RAL - Dancik Intl / Raleigh</option>
+											</select>
+										</div>
+					                </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Warehouse:</label>
+					                <div class="float-left">
+					                	<div class="ssm-styled-select w350 float-left">
+											<select id="ssm_Warehouse" name="ssm_Warehouse" class="upper">
+												<option>RAL - Dancik Intl / Raleigh</option>									
+											</select>
+										</div>
+					                </div>
+								</div>
+							</div>
+						
+							<!-- Order Type / Handling / Reason / Truck Route / Stop Number -->
+							<div class="dashedTopBorder float-left">
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Order Type:</label>
+					                <div class="float-left">
+					                	<div class="ssm-styled-select w600 float-left">
+											<select id="ssm_Ordertype" name="ssm_Ordertype" class="upper">
+												
+											</select>
+										</div>
+					                </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Order Handling:</label>
+					                <div class="float-left">
+					                	<div class="ssm-styled-select w600 float-left">
+											<select id="ssm_Orderhandling" name="ssm_Orderhandling" class="upper">
+												<option>2 - Ship as Available</option>											
+											</select>
+										</div>
+					                </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Reason:</label>
+					                <div class="float-left">
+					                	<div class="ssm-styled-select w600 float-left">
+											<select id="ssm_Reason" name="ssm_Reason" class="upper">
+												
+											</select>
+										</div>
+					                </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Truck Route:</label>
+					                <div class="float-left">
+					                	<div class="ssm-styled-select w350 float-left">
+											<select id="ssm_TruckRoute" name="ssm_TruckRoute" class="upper">
+												
+											</select>
+										</div>
+					                </div>
+								</div>
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Stop Number:</label>
+					                <div class="float-left colWidth-100"><input type="text" name="stop_number" class="small4" value="<%= truckroute_run_id %>"/></div>
+					                <label class="float-left colWidth-100">Run Number:</label>
+					                <div class="float-left"><input type="text" name="stop_number" class="small4" value="<%= truckroute_stop_id %>"/></div>
+								</div>
+							</div>
+						
+							<!-- Measure / Install -->
+							<div class="dashedTopBorder float-left">
+								<div class="label-list bottom-spacer-5 float-left">
+									<label class="float-left colWidth-140">Measure:</label>
+					                <div class="float-left colWidth-100">
+					                	<div class="ssm-styled-select w85 float-left">
+											<select id="ssm_Measure" name="ssm_Measure" class="upper" value="<%= measure_flag %>">
+												<option></option>
+												<option>Y</option>
+											</select>
+										</div>		
+									</div>
+									 <label class="float-left colWidth-100">Install:</label>
+						                <div class="float-left">
+						                	<div class="ssm-styled-select w85 float-left">
+												<select id="ssm_Install" name="ssm_Install" class="upper" value="<%= install_flag %>">
+													<option></option>
+													<option>Y</option>
+												</select>
+											</div>
+						                </div>
+								</div>					
+					  	  	</div>		
+						</form>    				    				    				    				    				    
+				</div>				
+			</div>			
+		</div>		
+</div>

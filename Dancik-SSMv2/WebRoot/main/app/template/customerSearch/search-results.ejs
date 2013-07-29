@@ -1,0 +1,129 @@
+<div class='gradient-a heading'> Customers </div>
+
+<%
+	var klassname = 'even';
+	for (var i = 0; i < customers.length; i++) { 
+		klassname = (klassname == '') ? 'even' : '';
+	
+%>
+	<div class="row details_<%= customers[i][ 'id' ] %> <%= klassname %>">
+	    <div class="cell options">
+	        <div>
+	        	<% if (ssm_SelectionId == '') { %>
+		        	<a href='#createSelection/<%= customers[i][ 'id' ] %>'>
+		        		<img class='ssm-create-selection' src='../images/clear.gif' alt='Add Customer to Selection Sheet'/>
+		        	</a>
+		        <% } else { %>
+		        	<a href='#setSelectionCustomer_ReopenSelection/<%= ssm_SelectionId %>/<%= customers[i][ 'id' ] %>'>
+		        		<img class='ssm-swap-customer' src='../images/clear.gif' alt='Update Customer on Selection Sheet'/>
+		        	</a>
+		        <% } %>
+	        </div>
+	        <div>
+	        	<a href='#openEditCustomer/<%= customers[i][ 'id' ] %>'>
+	        		<img class='ssm-edit expand' src='../images/clear.gif' alt='Edit Customer'/>
+	        	</a>
+	        </div>
+	    </div>
+	
+	    <div class='cell data'>
+			<%= $App.Template("customerSearch/customer-table-view.ejs").render(customers[i]) %>
+	    </div>
+	</div>
+	
+	
+
+	<div class="row extended_<%= customers[i][ 'id' ] %> <%= klassname %>" style='display:none;'>
+	    <div class="cell options">
+	        <div>
+	        	<a href='#createSelection/<%= customers[i][ 'id' ] %>'>
+	        		<img class='ssm-create-selection' src='../images/clear.gif' alt='Add Customer to Selection Sheet'/>
+	        	</a>
+	        </div>
+	        <div>
+	        	<a href='#closeEditCustomer/<%= customers[i][ 'id' ] %>'>
+	        		<img class='ssm-edit collapse' src='../images/clear.gif' alt='Cancel Edit Customer'/>
+	        	</a>
+	        </div>
+	    </div>
+	
+	    <div class='cell record'>
+			<div class='input-form'>
+				<div class='title underlined_title'>
+					<span>Edit customer information</span>
+				</div>
+
+	            <form id="form-extended-customer_<%= customers[i][ 'id' ] %>" action="#updateCustomer" autocomplete="off">
+					<input type='hidden' name= "ssm_id" id="ssm-id_<%= customers[i][ 'id' ] %>" value = "<%=customers[i][ 'id' ]%>"/>
+	    
+					<div>
+						<span class="ssm-input-labels">Name:</span>
+						<input type="text" name="ssm_firstname" class="editable upper mid" maxlength='12' value ="<%=customers[i][ 'first_name' ]%>"/>
+						<input type="text" name="ssm_lastname" class="editable upper mid-plus" maxlength='18' value ="<%=customers[i][ 'last_name' ]%>"/>
+					</div>
+					<div>
+						<span class="ssm-input-labels">Address:</span>
+						<input type="text" name="ssm_address1" class="editable upper long" maxlength='30' value ="<%=customers[i][ 'address1' ]%>"/>
+					</div>
+					<div>
+						<span class="ssm-input-labels">&nbsp;</span>
+						<input type="text" name="ssm_address2" class="editable upper long" maxlength='30' value ="<%=customers[i][ 'address2' ]%>"/>
+					</div>
+					<div>
+						<span class="ssm-input-labels">City:</span>
+						<input type="text" name="ssm_city" class="editable upper long" maxlength='30' value ="<%=customers[i][ 'city' ] %>"/>
+					</div>
+					<div>
+						<span class="ssm-input-labels">State:</span>
+				          <div class="ssm-styled-select">
+							<select class="select" name="ssm_state">
+								<option value=""></option>				
+								<% for (var j = 0; j < states.length; j++) { %>
+									<% if ( customers[i][ 'state' ] == states[j].id) { %>
+											<option value="<%= states[j].id %>" selected='selected'><%= states[j].id %> - <%= states[j].description %></option>				
+									<% } else { %>
+											<option value="<%= states[j].id %>"><%= states[j].id %> - <%= states[j].description %></option>				
+									<%  } %>
+								<%  } %>
+							</select>
+						</div>
+					</div>
+					<div>
+						<span class="ssm-input-labels">Zip Code:</span>
+						<input type="text" id="ssm_zip5" name="ssm_zip5" class="editable small5" maxlength='5' value ="<%=customers[i][ 'zip1' ]%>"/>
+						<span class='ssm-input-symbols'>-</span>
+						<input type="text" id="ssm_zip4" name="ssm_zip4" class="editable small4" maxlength='4'  value ="<%=customers[i][ 'zip2' ]%>"/>
+					</div>
+					<div>
+						<span class="ssm-input-labels">Phone:</span>
+						<span class='ssm-input-symbols'>(</span>
+						<input type="text" name="ssm_areacode" id="ssm_areacode" class="editable small3" maxlength='3'  value ="<%=customers[i][ 'phone_areacode' ]%>"/>
+						<span class='ssm-input-symbols'>)</span>
+						<input type="text" name="ssm_phone" id="ssm_phone" class="editable small7" maxlength='7' value ="<%=customers[i]['phone_first3']%><%=customers[i]['phone_last4']%>"/>
+					</div>
+					<div>
+						<span class="ssm-input-labels">Email:</span>
+						<input type="text" name="ssm_email" class="editable long" maxlength='64' value ="<%=customers[i][ 'email' ]%>"/>
+					</div>
+				
+					<div>
+						<span class="ssm-input-labels">Customer Type:</span>
+						<div class="ssm-styled-select">
+							<select class="select" name="ssm_type">
+								<option value=""></option>				
+								<% for (var j = 0; j < customertypes.length; j++) { %>
+										<% if ( customers[i][ 'customer_type' ] == customertypes[j].id) { %>
+												<option value="<%= customertypes[j].id %>" selected='selected'><%= customertypes[j].id %> - <%= customertypes[j].description %></option>				
+										<% } else { %>
+												<option value="<%= customertypes[j].id %>"><%= customertypes[j].id %> - <%= customertypes[j].description %></option>				
+										<%  } %>
+								<%  } %>
+							</select>
+						</div>
+					</div>
+				</form>
+	        </div>
+        </div>
+	</div>
+	
+<% }%>

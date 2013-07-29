@@ -1,0 +1,12 @@
+<div class="ssm_availableOptionsBody">
+	<div class="float-left" style="width:100%">
+		<div class="padding5 ssm_availableOptionsRow openPDF">
+			<div class="float-left commandButton"><a class="pdf" target="_blank" title="Open PDF"/></div> Open 
+		</div>
+	</div>
+	<div class="float-left dashedTopBorder" style="width:100%">
+		<div class="padding5 ssm_availableOptionsRow delete">
+			<div class="float-left commandButton"><a class="deleteMode-sm" title="Delete"/></div> Delete	
+		</div>
+	</div>
+</div>

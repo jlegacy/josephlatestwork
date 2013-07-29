@@ -1,0 +1,31 @@
+<div class='cell'>
+	<div>
+		<span class="ssm-input-labels">Name:</span>
+	    <div class="ssm-data"><%= first_name %> <%= last_name %></div>
+	</div>
+	<div>
+		<span class="ssm-input-labels">Address:</span>
+	    <div class="ssm-data"><%= address1 %></div>
+	</div>
+	<% if (address2 != '') { %>
+		<div>
+			<span class="ssm-input-labels">&nbsp;</span>
+	    	<div class="ssm-data"><%= address2 %></div>
+		</div>
+	<% } %>
+	<div>
+		<span class="ssm-input-labels">&nbsp;</span>
+	    <div class="ssm-data"> <%= city %>, <%= state %> <%= zipcode %> </div>
+	</div>
+</div>
+
+<div class='cell'>
+	<div>
+		<span class="ssm-input-labels">Phone:</span>
+	    <div class="ssm-data"><%= phone %></div>
+	</div>
+	<div>
+		<span class="ssm-input-labels">Email:</span>
+	    <div class="ssm-data"><%= email %></div>
+	</div>
+</div>

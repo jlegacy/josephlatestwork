@@ -1,0 +1,4 @@
+<div class="float-left">
+	<img class="ssm-alert" src="../images/clear.gif"/>
+</div>
+<div class="float-left"><%= msg %></div>

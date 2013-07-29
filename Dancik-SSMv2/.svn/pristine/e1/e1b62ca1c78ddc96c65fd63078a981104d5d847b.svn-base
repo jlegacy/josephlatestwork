@@ -1,0 +1,22 @@
+<div>
+	<div class='title underlined_title'>
+		<span>Notepad</span>
+	</div>
+	
+	<div class="ssm-Box_A hide-on-closed">
+	    <form id="ssm_form" action="#addNotePad" autocomplete="off">
+	        <span class="ssm_SelectionLookup_Box4 ssm_newSelection_input">
+	            <input type="text" name="ssm_Data" id="ssm_Notepad_Data" maxlength="100"/>
+	            <input type="hidden" name="ssm_SelectionId" value='<%= ssm_SelectionId %>'/>
+	        </span>
+	
+	        <span id="button_result_g1">
+	            <input type="submit" value="Save" class="ssm_search_button_go2  greenButton">
+	        </span>
+	    </form>
+	</div>
+	
+	<div class="data-collection">
+		
+	</div>
+</div>

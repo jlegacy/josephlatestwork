@@ -1,0 +1,101 @@
+<div id="ssm_ODSContainer" >
+	<div class="widthControl">
+		
+		<div class="odsTitle">Output Distribution System</div>
+	
+		<div class="ssm_tabs">
+			<div class="commandButton float-right"><a href="#refresh" class="reload" title="Reload"/></div>
+			<ul class="tabListing">
+		        <li class="tab"><a href="#ssm_odsIFS">IFS</a></li>
+		    	<li class="tab"><a href="#ssm_odsSpoolfile">Spoolfile</a></li>
+		    </ul>
+
+		    <div id="ssm_odsIFS">		    	
+		    	
+		    		<div id="ssm_ifsTop" class="float-left bottom-spacer-10">
+			    		<div class="float-left colWidth-80" style="line-height:35px"><strong>Folder:</strong></div>
+			    		<div class="float-left ssm-styled-select w250">
+			    			<select id="ssm_folderSelect" name="ssm_folderSelect">
+			    				<!--option>Selection Sheet Manager</option-->
+			    			</select>
+			    		</div>
+		    		</div>
+		    		
+		    		<!-- Initial Loading Message -->
+					<div class="ssm_busy">
+						<div class="ssm_load_indicator_text">Loading results</div>
+						<div class="ssm_load_indicator"></div>
+					</div>
+		    		
+		    		<div class="ssmTableWrapper float-left">
+		    			<table class="ssmTable" id="ifs_table">
+		    				<thead>
+		    					<tr>
+		    						<th class="colWidth-40"></th>
+		    						<th>Name</th>
+		    						<th>Description</th>
+		    						<th>Size</th>
+		    						<th>Date</th>
+		    						<th>Time</th>
+		    					</tr>
+		    				</thead>
+		    				<tbody>
+		    					
+		    				</tbody>
+		    			</table>
+		    		</div>	    	
+		    		
+		    		<!-- Footer -->
+			    	<div class="detachedFooter roundedBottom float-left">
+						<span class="commandButton float-left">
+							<a class="backToTop" href="#Top" title="Back to Top"></a>
+						</span>
+					</div>
+				<div class="bottom-padding-footer clear-both"></div>
+								    				    		
+		    </div>
+			<div id="ssm_odsSpoolfile">
+			
+				<!-- Initial Loading Message -->
+				<div class="ssm_busy">
+					<div class="ssm_load_indicator_text">Loading results</div>
+					<div class="ssm_load_indicator"></div>
+				</div>
+			
+				<div class="ssmTableWrapper float-left">
+		    			<table class="ssmTable" id="spoolfile_table" width="100%">
+		    				<thead>
+		    					<tr>
+		    						<th class="colWidth-40"></th>
+		    						<th>Printer</th>
+		    						<th>Job Name</th>
+		    						<th>Job#</th>
+		    						<th>Splf#</th>
+		    						<th>Outq</th>
+		    						<th>Userdata</th>
+		    						<th>Status</th>
+		    						<th>Pages</th>
+		    						<th>Date</th>
+		    						<th>Time</th>
+		    					</tr>
+		    				</thead>
+		    				<tbody>
+		    					
+		    				</tbody>
+		    			</table>
+		    		</div>	    	
+		    		
+		    		<!-- Footer -->
+			    	<div class="detachedFooter roundedBottom float-left">
+						<span class="commandButton float-left">
+							<a class="backToTop" href="#Top" title="Back to Top"></a>
+						</span>
+					</div>
+				<div class="bottom-padding-footer clear-both"></div>
+			
+			</div>
+		</div>
+	
+		
+	</div>
+</div>

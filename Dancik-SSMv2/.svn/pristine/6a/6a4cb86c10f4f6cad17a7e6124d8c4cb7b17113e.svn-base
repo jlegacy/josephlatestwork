@@ -1,0 +1,24 @@
+<div>
+	<div class='title underlined_title'>
+		<a href='#refreshSelectionLogs/<%= ssm_id %>' title="Refresh Logs"><span class="ssm-refresh commandButton float-right"></span></a>
+		<span>Logs</span>
+	</div>
+	<div class="data-collection">
+	   	<% 
+			var klassname = 'even';	    
+			for (var i = 0; i < logs.length; i++) {
+				klassname = (klassname == '') ? 'even' : '';
+		%>
+			<div class="data <%= klassname %>">
+				<div>
+			     	<span><%=logs[i].date%></span>
+			     	<span><%=logs[i].time %></span>
+			     	<span><%=logs[i].user%></span>
+				</div>
+				<div>
+					<%=logs[i].data%>
+				</div>
+			</div>
+		<% }%>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<div class='ssm-subTitleBar_2'>
+	<% if (this.date) { %>
+		<div class = 'ssm-reminder-date'>
+			<%= date.day_name %>, <%= date.month_name %> <%=date.d %>, <%= date.y %>
+		</div>
+	<% } %>
+</div>
+
+<div id="ssm_Dashboard_Detail_Listing">
+<div class = 'ssm_reminders_detail_sizer'>
+  <div id="ssm_dashboard_data_column">
+    <div id="1" class="ssm_dashboard_day">
+      <div id="ssm_week_add_reminder1">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class = "ssm-Box_F">
+	<a href="#getReminderDayListing_Dashboard" id="ssm_reminders_forward_link" class="ssm_reminders_jump_link"></a>
+	<a href="#getReminderDayListing_Dashboard" id="ssm_reminders_backward_link" class="ssm_reminders_jump_link"></a>
+</div>
